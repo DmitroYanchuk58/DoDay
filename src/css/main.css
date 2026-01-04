@@ -1,0 +1,379 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+
+body {
+  line-height: 1;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+blockquote, q {
+  quotes: none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: "";
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+:root {
+  --text-color: #212427;
+  --focus-color: #ff6767;
+  --bg-color: #ffffff;
+  --primary-dark: #020e35;
+  --accent-blue: #008dda;
+}
+
+/* Montserrat Regular */
+@font-face {
+  font-family: "Montserrat";
+  src: url("../font/Montserrat-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+/* Montserrat Italic */
+@font-face {
+  font-family: "Montserrat";
+  src: url("../font/Montserrat-Italic.ttf") format("truetype");
+  font-weight: 400;
+  font-style: italic;
+}
+/* Montserrat Thin (100) */
+@font-face {
+  font-family: "Montserrat";
+  src: url("../font/Montserrat-Thin.ttf") format("truetype");
+  font-weight: 100;
+  font-style: normal;
+}
+/* Montserrat Light (300) */
+@font-face {
+  font-family: "Montserrat";
+  src: url("../font/Montserrat-Light.ttf") format("truetype");
+  font-weight: 300;
+  font-style: normal;
+}
+/* Montserrat Medium (500) */
+@font-face {
+  font-family: "Montserrat";
+  src: url("../font/Montserrat-Medium.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+}
+/* Montserrat SemiBold (600) */
+@font-face {
+  font-family: "Montserrat";
+  src: url("../font/Montserrat-SemiBold.ttf") format("truetype");
+  font-weight: 600;
+  font-style: normal;
+}
+/* Montserrat Bold (700) */
+@font-face {
+  font-family: "Montserrat";
+  src: url("../font/Montserrat-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+}
+/* Montserrat ExtraBold (800) */
+@font-face {
+  font-family: "Montserrat";
+  src: url("../font/Montserrat-ExtraBold.ttf") format("truetype");
+  font-weight: 800;
+  font-style: normal;
+}
+/* Montserrat Black (900) */
+@font-face {
+  font-family: "Montserrat";
+  src: url("../font/Montserrat-Black.ttf") format("truetype");
+  font-weight: 900;
+  font-style: normal;
+}
+* {
+  box-sizing: border-box;
+  font-family: "Montserrat" !important;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  cursor: default;
+}
+
+button {
+  cursor: pointer;
+}
+
+html {
+  height: 100vh;
+  width: 100vw;
+}
+
+.main {
+  width: 100vw;
+  height: 100vh;
+}
+
+#root {
+  width: 100%;
+  height: 100%;
+}
+
+.red-button {
+  width: 16%;
+  min-width: 120px;
+  max-width: 129px;
+  height: 8%;
+  min-height: 50px;
+  max-height: 60px;
+  border: 0;
+  background-color: var(--focus-color);
+  color: var(--bg-color);
+  border-radius: 5px;
+  font-size: 100%;
+}
+
+div.reg-log {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  background-color: var(--focus-color);
+  background-image: url("../images/authentication_background.png");
+  background-size: cover;
+  padding: 20px;
+}
+
+.auth-card {
+  display: flex;
+  background: var(--bg-color);
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  max-width: 1800px;
+  width: 86%;
+  min-width: 300px;
+  overflow: hidden;
+  min-height: 150px;
+  height: 75%;
+  max-height: 1200px;
+}
+.auth-card .auth-form-container {
+  flex: 1;
+  padding: 60px 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 50%;
+}
+.auth-card .auth-form-container h2 {
+  font-size: 2rem;
+  margin-bottom: 30px;
+  font-weight: 700;
+}
+.auth-card .auth-form-container form {
+  display: flex;
+  flex-direction: column;
+}
+
+.auth-footer {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 0.9rem;
+}
+.auth-footer a {
+  color: var(--accent-blue);
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.input-wrapper {
+  display: flex;
+  align-items: center;
+  width: 90%;
+  height: 70px;
+  border: 1px solid #565454;
+  border-radius: 8px;
+  padding: 0 15px;
+  background-color: var(--bg-color);
+  transition: border-color 0.3s ease;
+}
+.input-wrapper .input-icon-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 32px;
+  margin-right: 12px;
+}
+.input-wrapper .input-icon-container .input-icon {
+  width: 100%;
+  height: auto;
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+.input-wrapper .input-field-container {
+  flex: 1;
+}
+.input-wrapper .input-field-container .input-field {
+  width: 100%;
+  border: none;
+  outline: none;
+  font-family: "Montserrat", sans-serif;
+  font-size: 18px;
+  color: var(--text-color);
+  background: transparent;
+}
+.input-wrapper .input-field-container .input-field::-moz-placeholder {
+  color: #999999;
+  font-weight: 400;
+}
+.input-wrapper .input-field-container .input-field::placeholder {
+  color: #999999;
+  font-weight: 400;
+}
+
+.checkbox-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+}
+
+.custom-checkbox {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  accent-color: var(--primary-dark);
+}
+
+.checkbox-label {
+  font-family: "Merriweather", serif;
+  font-size: 18px;
+  color: var(--text-color);
+  cursor: pointer;
+  font-weight: 500;
+  text-transform: capitalize;
+}
+
+.social-auth-container {
+  display: flex;
+  flex-direction: column;
+  font-weight: 500;
+}
+
+.social-login-row {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  font-size: 16px;
+  color: var(--text-color);
+}
+
+.social-icons {
+  display: flex;
+  gap: 12px;
+}
+
+.social-icon {
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.social-icon:hover {
+  transform: scale(1.1);
+}
+
+.auth-footer {
+  font-size: 16px;
+  color: var(--text-color);
+  display: flex;
+  align-items: start;
+}
+
+.create-link {
+  color: var(--accent-blue);
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.create-link:hover {
+  text-decoration: underline;
+}
+
+.login .auth-card .auth-image {
+  flex: 1;
+  display: flex;
+  align-items: end;
+  justify-content: end;
+  background-color: var(--bg-color);
+  padding-right: 40px;
+  width: 50%;
+}
+.login .auth-card .auth-image img {
+  width: 100%;
+  height: auto;
+  max-width: 600px;
+}
+.login .auth-form-container form {
+  gap: 25px;
+}
+
+.registartion .auth-card .auth-image {
+  flex: 1;
+  display: flex;
+  align-items: end;
+  justify-content: start;
+  background-color: var(--bg-color);
+  padding-bottom: 5px;
+  width: 50%;
+}
+.registartion .auth-card .auth-image img {
+  width: 100%;
+  height: auto;
+  max-width: 450px;
+}
+.registartion .auth-form-container form {
+  gap: 15px;
+}/*# sourceMappingURL=main.css.map */

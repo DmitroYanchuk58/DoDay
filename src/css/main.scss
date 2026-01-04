@@ -1,0 +1,13 @@
+@import "./scss/utils/removes";
+@import "./scss/utils/variables";
+@import "./scss/utils/fonts";
+@import "./scss/utils/base";
+
+@import "./scss/components/reg-log-components/button";
+@import "./scss/components/reg-log-components/body";
+@import "./scss/components/reg-log-components/input";
+@import "./scss/components/reg-log-components/checkbox";
+@import "./scss/components/reg-log-components/text-row";
+
+@import "./scss/pages/login";
+@import "./scss/pages/registration";

@@ -1,0 +1,28 @@
+* {
+  box-sizing: border-box;
+  font-family: "Montserrat" !important;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  cursor: default;
+}
+button {
+  cursor: pointer;
+}
+html {
+  height: 100vh;
+  width: 100vw;
+}
+.main {
+  width: 100vw;
+  height: 100vh;
+}
+#root {
+  width: 100%;
+  height: 100%;
+}

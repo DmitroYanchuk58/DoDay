@@ -1,0 +1,23 @@
+.checkbox-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.custom-checkbox {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  accent-color: var(--primary-dark);
+}
+
+.checkbox-label {
+  font-family: "Merriweather", serif;
+  font-size: 18px;
+  color: var(--text-color);
+  cursor: pointer;
+  font-weight: 500;
+  text-transform: capitalize;
+}

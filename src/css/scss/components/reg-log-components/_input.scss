@@ -1,0 +1,44 @@
+.input-wrapper {
+  display: flex;
+  align-items: center;
+  width: 90%;
+  height: 70px;
+  border: 1px solid #565454;
+  border-radius: 8px;
+  padding: 0 15px;
+  background-color: var(--bg-color);
+  transition: border-color 0.3s ease;
+
+  .input-icon-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 32px;
+    margin-right: 12px;
+
+    .input-icon {
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+    }
+  }
+
+  .input-field-container {
+    flex: 1;
+
+    .input-field {
+      width: 100%;
+      border: none;
+      outline: none;
+      font-family: "Montserrat", sans-serif;
+      font-size: 18px;
+      color: var(--text-color);
+      background: transparent;
+
+      &::placeholder {
+        color: #999999;
+        font-weight: 400;
+      }
+    }
+  }
+}

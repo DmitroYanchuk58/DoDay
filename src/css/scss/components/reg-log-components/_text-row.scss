@@ -1,0 +1,46 @@
+.social-auth-container {
+  display: flex;
+  flex-direction: column;
+  font-weight: 500;
+}
+
+.social-login-row {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  font-size: 16px;
+  color: var(--text-color);
+}
+
+.social-icons {
+  display: flex;
+  gap: 12px;
+}
+
+.social-icon {
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.social-icon:hover {
+  transform: scale(1.1);
+}
+
+.auth-footer {
+  font-size: 16px;
+  color: var(--text-color);
+  display: flex;
+  align-items: start;
+}
+
+.create-link {
+  color: var(--accent-blue);
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.create-link:hover {
+  text-decoration: underline;
+}
