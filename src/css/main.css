@@ -57,6 +57,9 @@ table {
   --bg-color: #ffffff;
   --primary-dark: #020e35;
   --accent-blue: #008dda;
+  --date-blue: #00cec9;
+  --header-bg: #f8f8f8;
+  --border-light: #e0e0e0;
 }
 
 /* Montserrat Regular */
@@ -340,6 +343,109 @@ div.reg-log {
 
 .create-link:hover {
   text-decoration: underline;
+}
+
+.main-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0px 100px;
+  background-color: var(--header-bg);
+  box-shadow: 0 4px 12px var(--border-light);
+  color: var(--text-color);
+  height: 100px;
+}
+
+.header-logo {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--primary-dark);
+}
+
+.accent-text {
+  color: var(--focus-color);
+}
+
+.header-search {
+  display: flex;
+  align-items: center;
+  flex: 0 1 650px;
+  background-color: var(--bg-color);
+  border-radius: 12px;
+  border: 1px solid transparent;
+  transition: border-color 0.3s ease;
+  height: 40px;
+  padding-left: 10px;
+}
+
+.header-search:focus-within {
+  border-color: var(--focus-color);
+}
+
+.search-field {
+  width: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--text-color);
+  font-size: 0.9rem;
+}
+
+.search-submit {
+  background-color: var(--focus-color);
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 10px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  transition: opacity 0.2s;
+  height: 100%;
+}
+
+.search-submit:hover {
+  opacity: 0.9;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.action-icon {
+  background-color: var(--focus-color);
+  color: white;
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.header-date {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-left: 30px;
+  justify-content: space-between;
+  font-family: sans-serif;
+}
+
+.date-day {
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--primary-dark);
+}
+
+.date-full {
+  font-size: 0.85rem;
+  color: var(--date-blue);
+  font-weight: 500;
 }
 
 .login .auth-card .auth-image {
