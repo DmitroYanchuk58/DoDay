@@ -1,0 +1,60 @@
+.status-widget-card {
+  background: white;
+  border-radius: 20px;
+  border: 1px solid #e2e8f0;
+  margin-bottom: 24px;
+}
+
+.widget-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.charts-row {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 10px;
+}
+
+.status-chart-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Сама діаграма */
+.circular-chart {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Біле коло всередині, щоб зробити "бублик" */
+.chart-inner {
+  width: 90px;
+  height: 90px;
+  background: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.percent-text {
+  font-size: 14px;
+  font-weight: 700;
+  color: #212427;
+}
+
+.chart-label {
+  font-size: 12px;
+  color: #8a8d91;
+  font-weight: 500;
+  white-space: nowrap;
+}

@@ -1,3 +1,4 @@
+@charset "UTF-8";
 /* http://meyerweb.com/eric/tools/css/reset/ 
    v2.0 | 20110126
    License: none (public domain)
@@ -60,6 +61,7 @@ table {
   --date-blue: #00cec9;
   --header-bg: #f8f8f8;
   --border-light: #e0e0e0;
+  --content-bg: #f5f8ff;
 }
 
 /* Montserrat Regular */
@@ -540,6 +542,395 @@ div.reg-log {
   padding-top: 20px;
 }
 
+.dashboard-main {
+  padding: 50px;
+  width: 80%;
+  height: 100%;
+}
+
+.dashboard-grid {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  border: 1px solid #a1a3ab;
+  width: 100%;
+  height: 94%;
+}
+
+.task-card {
+  background: white;
+  border-radius: 16px;
+  padding: 20px;
+  margin-bottom: 20px;
+  border: 1px solid var(--border-light);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
+}
+
+.welcome-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 0;
+  margin-bottom: 10px;
+}
+
+.welcome-text h1 {
+  font-size: 32px;
+  font-weight: 600;
+  color: var(--primary-dark);
+  margin: 0;
+}
+
+.team-avatars {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.team-avatars img,
+.more-count {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  border: 2px solid var(--bg-color);
+  -o-object-fit: cover;
+     object-fit: cover;
+  margin-left: -10px;
+  transition: transform 0.2s ease;
+}
+
+.team-avatars img:first-child {
+  margin-left: 0;
+}
+
+.team-avatars img:hover {
+  transform: translateY(-5px);
+  z-index: 2;
+}
+
+.more-count {
+  background-color: var(--primary-dark);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 600;
+  z-index: 1;
+}
+
+.invite-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: transparent;
+  color: var(--focus-color);
+  border: 1px solid var(--focus-color);
+  padding: 8px 16px;
+  border-radius: 8px;
+  margin-left: 20px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.invite-btn:hover {
+  background-color: var(--focus-color);
+  color: white;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  background-color: var(--bg-color);
+  border-radius: 20px;
+  padding: 20px;
+}
+
+.todo {
+  height: 100%;
+  width: 49%;
+}
+
+.complete-tasks {
+  height: 69%;
+  width: 100%;
+}
+
+.task-status {
+  height: 29%;
+  width: 100%;
+}
+
+.aside {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 49%;
+  height: 100%;
+}
+
+.column-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.column-header div {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.icon-to-do {
+  width: 30px;
+  height: 30px;
+}
+
+.icon-status {
+  width: 22px;
+  height: 22px;
+}
+
+.icon-tasks {
+  width: 22px;
+  height: 22px;
+}
+
+.column-header h3 {
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--focus-color);
+  margin: 0;
+}
+
+.icon-plus {
+  width: 12px;
+  height: 12px;
+}
+
+.add-task-btn {
+  background: transparent;
+  border: none;
+  color: #a1a3ab;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: color 0.2s ease;
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+
+.add-task-btn:hover {
+  color: var(--focus-color);
+}
+
+.current-date {
+  font-size: 14px;
+  color: var(--text-color);
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.current-date span {
+  color: #a1a3ab;
+  font-weight: 400;
+}
+
+.status-column {
+  width: 50%;
+}
+
+.task-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 20px;
+  padding: 20px;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+  font-family: "Inter", sans-serif;
+  height: 170px;
+  display: flex;
+  flex-direction: column;
+}
+
+.task-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 12px;
+}
+
+.task-title-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.status-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 2px solid;
+}
+
+.icon {
+  height: 18px;
+  width: 24px;
+}
+
+.status-dot.not-started {
+  border-color: #ff4d4d;
+}
+
+.status-dot.in-progress {
+  border-color: #0052ff;
+}
+
+.status-dot.completed {
+  border-color: #00ca71;
+}
+
+.task-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-color);
+  margin: 0;
+}
+
+.task-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  gap: 20px;
+}
+
+.task-text-info {
+  flex: 1;
+}
+
+.task-description {
+  font-size: 14px;
+  color: #8a8d91;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.task-footer {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 15px;
+  font-size: 12px;
+  width: 100%;
+  margin-top: auto;
+}
+
+.meta-label {
+  color: #212427;
+  font-weight: 600;
+  margin-right: 5px;
+}
+
+.meta-value {
+  font-weight: 500;
+}
+
+.priority-moderate {
+  color: #56ccf2;
+}
+
+.status-text-not-started {
+  color: #ff4d4d;
+}
+
+.status-text-in-progress {
+  color: #0052ff;
+}
+
+.meta-date {
+  color: #a1a3ab;
+  margin-left: auto;
+}
+
+.task-image-container {
+  width: 80px;
+  height: 80px;
+}
+
+.task-card-img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 12px;
+}
+
+.status-widget-card {
+  background: white;
+  border-radius: 20px;
+  border: 1px solid #e2e8f0;
+  margin-bottom: 24px;
+}
+
+.widget-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.charts-row {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 10px;
+}
+
+.status-chart-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Сама діаграма */
+.circular-chart {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Біле коло всередині, щоб зробити "бублик" */
+.chart-inner {
+  width: 90px;
+  height: 90px;
+  background: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.percent-text {
+  font-size: 14px;
+  font-weight: 700;
+  color: #212427;
+}
+
+.chart-label {
+  font-size: 12px;
+  color: #8a8d91;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
 .login .auth-card .auth-image {
   flex: 1;
   display: flex;
@@ -581,4 +972,11 @@ div.reg-log {
   height: 100%;
   display: flex;
   flex-direction: column;
+  background-color: var(--content-bg);
+}
+
+.main-content {
+  width: 100%;
+  height: 100%;
+  display: flex;
 }/*# sourceMappingURL=main.css.map */
