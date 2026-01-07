@@ -8,12 +8,17 @@ const TaskCard = ({
   date = "",
   image,
   type = "full",
+  className = "",
 }) => {
   const statusClass = status ? status.toLowerCase().replace(/\s+/g, "-") : "";
   const priorityClass = priority ? priority.toLowerCase() : "";
 
   return (
-    <div className={`task-card ${type === "compact" ? "compact-card" : ""}`}>
+    <div
+      className={`task-card ${className} ${
+        type === "compact" ? "compact-card" : ""
+      }`}
+    >
       <div className="task-header">
         <div className="task-title-row">
           {status && <span className={`status-dot ${statusClass}`}></span>}
