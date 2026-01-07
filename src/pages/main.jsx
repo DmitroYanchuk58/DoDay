@@ -3,6 +3,7 @@ import Header from "./components/main/header";
 import Sidebar from "./components/main/sidebar";
 import DashboardContent from "./components/main/dashboard-content";
 import MyTask from "./components/main/my-task";
+import VitalTask from "./components/main/vitals-tasks";
 
 const testTask = {
   title: "Attend Nischal's Birthday Party",
@@ -27,6 +28,8 @@ const Main = () => {
     switch (activeId) {
       case 1:
         return <DashboardContent />;
+      case 2:
+        return <VitalTask />;
       case 3:
         return <MyTask selectedTask={testTask} />;
       default:

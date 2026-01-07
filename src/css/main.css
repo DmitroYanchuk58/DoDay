@@ -817,6 +817,11 @@ div.reg-log {
   color: #8a8d91;
   line-height: 1.6;
   margin-bottom: 20px;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
 }
 
 .task-footer {
@@ -931,6 +936,7 @@ div.reg-log {
 .task-details-page {
   padding: 30px;
   padding-top: 70px;
+  padding-bottom: 10px;
   width: 80%;
   height: 100%;
   display: flex;
@@ -943,6 +949,8 @@ div.reg-log {
   border-radius: 24px;
   padding: 24px;
   border: 1px solid #e2e8f0;
+  display: flex;
+  flex-direction: column;
 }
 
 .card.tasks {
@@ -1014,6 +1022,15 @@ div.reg-log {
 .additional-notes ul {
   padding-left: 20px;
   padding-bottom: 2px;
+}
+
+.additional-notes ol {
+  list-style-type: decimal !important;
+  padding-left: 25px;
+  margin-top: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .details-actions {
