@@ -1,8 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 
-const Sidebar = () => {
-  const [activeId, setActiveId] = useState(1);
-
+const Sidebar = ({ activeId, setActiveId }) => {
   const menuItems = [
     { id: 1, label: "Dashboard", iconId: "icon-dashboard" },
     { id: 2, label: "Vital Task", iconId: "icon-vital-task" },
@@ -41,8 +39,8 @@ const Sidebar = () => {
 
       <div className="sidebar-logout">
         <div className="nav-item">
-          <svg className={`nav-icon`}>
-            <use xlinkHref={`images/icons/sidebar-icons.svg#icon-logout`}></use>
+          <svg className="nav-icon">
+            <use xlinkHref="images/icons/sidebar-icons.svg#icon-logout"></use>
           </svg>
           <span>Logout</span>
         </div>
