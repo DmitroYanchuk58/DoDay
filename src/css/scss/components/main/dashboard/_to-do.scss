@@ -1,0 +1,99 @@
+.column {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  background-color: var(--bg-color);
+  border-radius: 20px;
+  padding: 20px;
+}
+
+.todo {
+  height: 100%;
+  width: 49%;
+}
+.complete-tasks {
+  height: 69%;
+  width: 100%;
+}
+.task-status {
+  height: 29%;
+  width: 100%;
+}
+
+.aside {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 49%;
+  height: 100%;
+}
+
+.column-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.column-header div {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.icon-to-do {
+  width: 30px;
+  height: 30px;
+}
+.icon-status {
+  width: 22px;
+  height: 22px;
+}
+.icon-tasks {
+  width: 22px;
+  height: 22px;
+}
+
+.column-header h3 {
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--focus-color);
+  margin: 0;
+}
+
+.icon-plus {
+  width: 12px;
+  height: 12px;
+}
+.add-task-btn {
+  background: transparent;
+  border: none;
+  color: #a1a3ab;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: color 0.2s ease;
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+
+.add-task-btn:hover {
+  color: var(--focus-color);
+}
+
+.current-date {
+  font-size: 14px;
+  color: var(--text-color);
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.current-date span {
+  color: #a1a3ab;
+  font-weight: 400;
+}
+
+.status-column {
+  width: 50%;
+}

@@ -1,8 +1,9 @@
 import { useState } from "react";
-import { Routes, Route, Navigate, useNavigate } from "react-router-dom"; // Router більше не потрібен тут
+import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
 import "./css/main.css";
 import RegisterPage from "./pages/register";
 import LoginPage from "./pages/login";
+import MainPage from "./pages/main";
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -18,11 +19,7 @@ function App() {
         <Route
           path="/"
           element={
-            isAuthenticated ? (
-              <div>Main Page</div>
-            ) : (
-              <Navigate to="/login" replace />
-            )
+            isAuthenticated ? <MainPage /> : <Navigate to="/login" replace />
           }
         />
 

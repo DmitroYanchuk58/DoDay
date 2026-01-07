@@ -9,5 +9,13 @@
 @import "./scss/components/reg-log-components/checkbox";
 @import "./scss/components/reg-log-components/text-row";
 
+@import "./scss/components/main/header";
+@import "./scss/components/main/sidebar";
+@import "./scss/components/main/dashboard";
+@import "./scss/components/main/dashboard/to-do";
+@import "./scss/components/main/dashboard/task-card";
+@import "./scss/components/main/dashboard/status-chart";
+
 @import "./scss/pages/login";
 @import "./scss/pages/registration";
+@import "./scss/pages/main";
