@@ -6,7 +6,10 @@ import VitalTask from "./components/main/vitals-tasks";
 import TaskCategories from "./components/main/categories";
 import CreateCategory from "./components/main/create-category";
 import CategoryModal from "./components/main/modal-category";
+import AccountInfo from "./components/main/account-info";
+
 import useCategories from "./components/hooks/useCategories";
+
 import { useState } from "react";
 
 const Main = () => {
@@ -31,8 +34,8 @@ const Main = () => {
         <TaskCategories
           categories={categories}
           onEditItem={actions.openEdit}
-          onDeleteItem={actions.deleteItem} // Тепер це миттєва функція
-          onAddItem={actions.openAdd} // Для плюсика в таблиці
+          onDeleteItem={actions.deleteItem}
+          onAddItem={actions.openAdd}
           onDeleteCategory={actions.deleteCategory}
           onAddCategoryClick={() => setIsCreatingCategory(true)}
           onGoBack={() => setActiveId(1)}
@@ -44,6 +47,7 @@ const Main = () => {
         />
       </>
     ),
+    5: <AccountInfo />,
   };
 
   return (
