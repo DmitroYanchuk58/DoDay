@@ -7,6 +7,7 @@ import TaskCategories from "./components/main/categories";
 import CreateCategory from "./components/main/create-category";
 import CategoryModal from "./components/main/modal-category";
 import AccountInfo from "./components/main/account-info";
+import ChangePassword from "./components/main/change-password";
 
 import useCategories from "./components/hooks/useCategories";
 
@@ -48,6 +49,7 @@ const Main = () => {
       </>
     ),
     5: <AccountInfo />,
+    6: <ChangePassword />,
   };
 
   return (
