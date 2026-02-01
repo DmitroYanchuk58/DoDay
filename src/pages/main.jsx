@@ -1,6 +1,7 @@
 import Header from "./components/main/header";
 import Sidebar from "./components/main/sidebar";
 import DashboardContent from "./components/main/dashboard-content";
+import DashboardOverlay from "./components/main/dashboard-overlay";
 import MyTask from "./components/main/my-task";
 import VitalTask from "./components/main/vitals-tasks";
 import TaskCategories from "./components/main/categories";
@@ -17,9 +18,21 @@ const Main = () => {
   const [activeId, setActiveId] = useState(1);
   const [isCreatingCategory, setIsCreatingCategory] = useState(false);
   const { categories, modalConfig, actions } = useCategories();
+  const [isInviteModalOpen, setIsInviteModalOpen] = useState(false);
+
+  const openInviteModal = () => setIsInviteModalOpen(true);
+  const closeInviteModal = () => setIsInviteModalOpen(false);
 
   const pages = {
-    1: <DashboardContent />,
+    1: (
+      <>
+        <DashboardContent onInviteClick={openInviteModal} />
+        <DashboardOverlay
+          isOpen={isInviteModalOpen}
+          onClose={closeInviteModal}
+        />
+      </>
+    ),
     2: <VitalTask />,
     3: <MyTask />,
     4: isCreatingCategory ? (

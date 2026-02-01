@@ -2,7 +2,7 @@ import React from "react";
 import TaskCard from "./task-card";
 import StatusChart from "./status-chart";
 
-const DashboardContent = () => {
+const DashboardContent = ({ onInviteClick }) => {
   return (
     <main className="dashboard-main">
       <section className="welcome-section">
@@ -15,7 +15,9 @@ const DashboardContent = () => {
           <img src="/images/list_img3.png" alt="team" />
           <img src="/images/list_img4.png" alt="team" />
           <div className="more-count">+4</div>
-          <button className="invite-btn">+ Invite</button>
+          <button className="invite-btn" onClick={onInviteClick}>
+            + Invite
+          </button>
         </div>
       </section>
 
