@@ -1,13 +1,18 @@
 import React, { useState } from "react";
 import CalendarOverlay from "./calendar-overlay";
+import NotificationOverlay from "./notification-overlay";
 
 const Header = () => {
   // Стан для відображення календаря
   const [isCalendarOpen, setIsCalendarOpen] = useState(false);
+  const [isNotificationOpen, setIsNotificationOpen] = useState(false);
 
-  // Функція для перемикання стану (показати/сховати)
   const toggleCalendar = () => {
     setIsCalendarOpen(!isCalendarOpen);
+  };
+
+  const toggleNotification = () => {
+    setIsNotificationOpen(!isNotificationOpen);
   };
 
   return (
@@ -33,7 +38,7 @@ const Header = () => {
       </div>
 
       <div className="header-actions">
-        <button className="action-icon">
+        <button className="action-icon" onClick={toggleNotification}>
           <img
             src="images/icons/notification.svg"
             alt="notification"
@@ -41,8 +46,6 @@ const Header = () => {
             height="20"
           />
         </button>
-
-        {/* Кнопка календаря з обробником кліку */}
         <button className="action-icon" onClick={toggleCalendar}>
           <img
             src="images/icons/calendar.svg"
@@ -58,10 +61,14 @@ const Header = () => {
         </div>
       </div>
 
-      {/* Рендеримо оверлей календаря */}
       <CalendarOverlay
         isOpen={isCalendarOpen}
         onClose={() => setIsCalendarOpen(false)}
+      />
+
+      <NotificationOverlay
+        isOpen={isNotificationOpen}
+        onClose={() => setIsNotificationOpen(false)}
       />
     </header>
   );
