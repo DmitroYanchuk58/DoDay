@@ -1,6 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
+import CalendarOverlay from "./calendar-overlay";
 
 const Header = () => {
+  // Стан для відображення календаря
+  const [isCalendarOpen, setIsCalendarOpen] = useState(false);
+
+  // Функція для перемикання стану (показати/сховати)
+  const toggleCalendar = () => {
+    setIsCalendarOpen(!isCalendarOpen);
+  };
+
   return (
     <header className="main-header">
       <div className="header-logo">
@@ -32,7 +41,9 @@ const Header = () => {
             height="20"
           />
         </button>
-        <button className="action-icon">
+
+        {/* Кнопка календаря з обробником кліку */}
+        <button className="action-icon" onClick={toggleCalendar}>
           <img
             src="images/icons/calendar.svg"
             alt="calendar"
@@ -46,6 +57,12 @@ const Header = () => {
           <span className="date-full">20/06/2023</span>
         </div>
       </div>
+
+      {/* Рендеримо оверлей календаря */}
+      <CalendarOverlay
+        isOpen={isCalendarOpen}
+        onClose={() => setIsCalendarOpen(false)}
+      />
     </header>
   );
 };
