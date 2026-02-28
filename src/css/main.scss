@@ -9,13 +9,20 @@
 @import "./scss/components/reg-log-components/checkbox";
 @import "./scss/components/reg-log-components/text-row";
 
+@import "./scss/components/main/calendar";
 @import "./scss/components/main/header";
 @import "./scss/components/main/sidebar";
 @import "./scss/components/main/dashboard";
 @import "./scss/components/main/dashboard/to-do";
 @import "./scss/components/main/dashboard/task-card";
 @import "./scss/components/main/dashboard/status-chart";
+@import "./scss/components/main/dashboard/dashboard-overlay";
 @import "./scss/components/main/my-task";
+@import "./scss/components/main/categories";
+@import "./scss/components/main/modal-category";
+@import "./scss/components/main/account-info";
+@import "./scss/components/main/notification";
+@import "./scss/components/main/edit-task";
 
 @import "./scss/pages/login";
 @import "./scss/pages/registration";

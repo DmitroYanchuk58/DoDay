@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 
 const TaskCard = ({
+  id,
   title = "",
   description = "",
   priority = "",
@@ -9,7 +10,12 @@ const TaskCard = ({
   image,
   type = "full",
   className = "",
+  onDelete,
+  isVitalPage = false,
+  openEditTask,
 }) => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
   const statusClass = status ? status.toLowerCase().replace(/\s+/g, "-") : "";
   const priorityClass = priority ? priority.toLowerCase() : "";
 
@@ -24,10 +30,46 @@ const TaskCard = ({
           {status && <span className={`status-dot ${statusClass}`}></span>}
           <h3 className="task-title">{title}</h3>
         </div>
-        <div className="more-options">
-          <svg className="icon icon-three-dots">
-            <use xlinkHref="images/icons/dashboard-icons.svg#icon-three-dots"></use>
-          </svg>
+
+        <div className="more-options-container">
+          <div
+            className="more-options"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+          >
+            <svg className="icon icon-three-dots">
+              <use xlinkHref="images/icons/dashboard-icons.svg#icon-three-dots"></use>
+            </svg>
+          </div>
+
+          {isMenuOpen && (
+            <div className="task-actions-dropdown">
+              <div className="action-item" onClick={() => setIsMenuOpen(false)}>
+                {isVitalPage ? "Remove from Vital" : "Vital"}
+              </div>
+
+              <div
+                className="action-item"
+                onClick={() => {
+                  openEditTask(true);
+                  setIsMenuOpen(false);
+                }}
+              >
+                Edit
+              </div>
+              <div
+                className="action-item"
+                onClick={() => {
+                  onDelete(id);
+                  setIsMenuOpen(false);
+                }}
+              >
+                Delete
+              </div>
+              <div className="action-item" onClick={() => setIsMenuOpen(false)}>
+                Finish
+              </div>
+            </div>
+          )}
         </div>
       </div>
 
@@ -35,7 +77,6 @@ const TaskCard = ({
         <div className="task-text-info">
           <p className="task-description">{description}</p>
         </div>
-
         {image && (
           <div className="task-image-container">
             <img src={image} alt="task visual" className="task-card-img" />
@@ -52,7 +93,6 @@ const TaskCard = ({
             </span>
           </div>
         )}
-
         {status && (
           <div className="meta-item">
             <span className="meta-label">Status:</span>
@@ -61,7 +101,6 @@ const TaskCard = ({
             </span>
           </div>
         )}
-
         {date && <div className="meta-date">Created on: {date}</div>}
       </div>
     </div>
