@@ -97,7 +97,6 @@ const useCategories = () => {
     },
   };
 
-  // 4. Повертаємо все необхідне для використання в компонентах
   return { categories, modalConfig, actions };
 };
 

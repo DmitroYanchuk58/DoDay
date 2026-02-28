@@ -2,47 +2,40 @@ import React, { useState } from "react";
 import TaskCard from "./task-card";
 
 const VitalTask = () => {
-  // Тестові дані для Vital Tasks
-  const [tasks] = useState([
+  const [tasks, setTasks] = useState([
     {
       id: 1,
       title: "Walk the dog",
-      fullTitle: "Walk the dog",
-      objective:
-        "Take Luffy and Jiro for a leisurely stroll around the neighborhood.",
-      description:
-        "Take the dog to the park and bring treats as well. Enjoy the fresh air and give them the exercise and mental stimulation they need for a happy and healthy day. Don't forget to bring along squeaky and fluffy for some extra fun along the way!",
+      description: "Take the dog to the park and bring treats as well...",
       priority: "Extreme",
       status: "Not Started",
       date: "20/06/2023",
-      deadline: "Today",
       image: "images/task_image4.png",
-      notes: [
-        "Listen to a podcast or audiobook",
-        "Practice mindfulness or meditation",
-        "Take photos of interesting sights along the way",
-        "Practice obedience training with your dog",
-        "Chat with neighbors or other dog walkers",
-        "Listen to music or an upbeat playlist",
-      ],
+      notes: ["Listen to a podcast", "Practice mindfulness"],
     },
     {
       id: 2,
       title: "Take grandma to hospital",
-      fullTitle: "Hospital Visit with Grandma",
-      objective: "Ensure grandma gets her routine checkup safely.",
       description: "Go back home and take grandma to the hosp....",
       priority: "Moderate",
       status: "In Progress",
       date: "20/06/2023",
-      deadline: "14:00 PM",
       image: "images/task_image5.png",
-      notes: ["Bring medical documents", "Check appointment time"],
+      notes: ["Bring medical documents"],
     },
   ]);
 
-  const [selectedId, setSelectedId] = useState(tasks[0].id);
+  const [selectedId, setSelectedId] = useState(tasks[0]?.id);
   const selectedTask = tasks.find((t) => t.id === selectedId);
+
+  const deleteTask = (id) => {
+    setTasks((prevTasks) => prevTasks.filter((task) => task.id !== id));
+
+    if (selectedId === id) {
+      const remainingTasks = tasks.filter((t) => t.id !== id);
+      setSelectedId(remainingTasks[0]?.id);
+    }
+  };
 
   return (
     <div className="task-details-page">
@@ -52,8 +45,11 @@ const VitalTask = () => {
           {tasks.map((task) => (
             <div key={task.id} onClick={() => setSelectedId(task.id)}>
               <TaskCard
+                id={task.id}
                 {...task}
+                onDelete={deleteTask}
                 type="compact"
+                isVitalPage={true}
                 className={selectedId === task.id ? "selected" : ""}
               />
             </div>
@@ -61,12 +57,12 @@ const VitalTask = () => {
         </div>
       </div>
 
-      {selectedTask && (
+      {selectedTask ? (
         <div className="details-main card details">
           <div className="details-header">
             <img
               src={selectedTask.image}
-              alt="Task large"
+              alt="Task"
               className="details-image"
             />
             <div className="details-title-block">
@@ -97,23 +93,10 @@ const VitalTask = () => {
               </div>
             )}
           </div>
-
-          <div className="details-actions">
-            <button className="action-btn">
-              <svg className="icon">
-                <use
-                  xlinkHref={`images/icons/my-task-icons.svg#icon-delete`}
-                ></use>
-              </svg>
-            </button>
-            <button className="action-btn">
-              <svg className="icon">
-                <use
-                  xlinkHref={`images/icons/my-task-icons.svg#icon-edit`}
-                ></use>
-              </svg>
-            </button>
-          </div>
+        </div>
+      ) : (
+        <div className="details-main card details empty">
+          <p>Select a task to see details or list is empty</p>
         </div>
       )}
     </div>

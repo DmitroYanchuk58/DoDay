@@ -1,3 +1,4 @@
+@charset "UTF-8";
 /* http://meyerweb.com/eric/tools/css/reset/ 
    v2.0 | 20110126
    License: none (public domain)
@@ -1024,6 +1025,50 @@ div.reg-log {
   border-radius: 12px;
 }
 
+.more-options-container {
+  position: relative;
+}
+
+.more-options {
+  cursor: pointer;
+  padding: 5px;
+  border-radius: 50%;
+  transition: background 0.2s;
+}
+
+.more-options:hover {
+  background: #f0f0f0;
+}
+
+.task-actions-dropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  z-index: 100;
+  min-width: 100px;
+  padding: 8px 0;
+  border: 1px solid #eee;
+}
+
+.action-item {
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #333;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.action-item:hover {
+  background-color: #f7f7f7;
+  color: #ff5a3d;
+}
+
 .status-widget-card {
   background: white;
   border-radius: 20px;
@@ -2014,6 +2059,252 @@ div.reg-log {
   -o-object-fit: cover;
      object-fit: cover;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.edit-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 3000;
+}
+.edit-overlay .edit-modal-container {
+  background: white;
+  position: fixed;
+  width: 70%;
+  height: 70%;
+  padding: 40px;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+.edit-overlay .edit-modal-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 30px;
+}
+.edit-overlay .edit-modal-title {
+  font-size: 22px;
+  font-weight: 700;
+  margin: 0;
+  position: fixed;
+}
+.edit-overlay .edit-modal-title::after {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 50px;
+  height: 3px;
+  background-color: #ff5a3d;
+  margin-top: 5px;
+}
+.edit-overlay .edit-go-back {
+  background: none;
+  border: none;
+  font-weight: 700;
+  cursor: pointer;
+  font-size: 14px;
+  position: relative;
+  right: 0;
+}
+.edit-overlay .edit-go-back::after {
+  content: "";
+  position: absolute;
+  bottom: 1px;
+  left: 5%;
+  width: 90%;
+  height: 1px;
+  background-color: black;
+  margin-top: 5px;
+}
+.edit-overlay .edit-modal-body {
+  display: flex;
+  gap: 40px;
+  border: 1px solid #e2e8f0;
+  padding: 25px;
+  border-radius: 10px;
+  height: 80%;
+}
+.edit-overlay .edit-form-left {
+  flex: 2;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.edit-overlay .edit-form-right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: end;
+}
+.edit-overlay .edit-input-group {
+  margin-bottom: 20px;
+}
+.edit-overlay .edit-input-group label {
+  display: block;
+  font-weight: 700;
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+.edit-overlay .edit-input-group input[type=text],
+.edit-overlay .edit-input-group textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #cbd5e0;
+  border-radius: 8px;
+  font-size: 14px;
+}
+.edit-overlay .edit-input-group textarea {
+  height: 240px;
+  resize: none;
+}
+.edit-overlay .date-input-wrapper {
+  width: 100% !important;
+  border: 1px solid #cbd5e0;
+  border-radius: 10px;
+  display: flex;
+}
+.edit-overlay .date-input {
+  width: 95% !important;
+  border: none !important;
+  outline: none !important;
+}
+.edit-overlay {
+  /* Priority Dots */
+}
+.edit-overlay .priority-radio-group {
+  display: flex !important;
+  gap: 80px;
+  align-items: center;
+}
+.edit-overlay .priority-option {
+  display: flex !important;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  cursor: pointer;
+}
+.edit-overlay .priority-text {
+  align-items: center;
+  color: gray;
+  font-weight: 400;
+}
+.edit-overlay .priority-box {
+  -moz-appearance: none;
+       appearance: none;
+  -webkit-appearance: none;
+  width: 18px;
+  height: 18px;
+  border: 2px solid #cbd5e0; /* Колір рамки */
+  border-radius: 4px; /* Робимо кути ледь закругленими (квадрат) */
+  background: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  margin: 0;
+}
+.edit-overlay {
+  /* Стиль при наведенні */
+}
+.edit-overlay .priority-box:hover {
+  border-color: #3333ff;
+}
+.edit-overlay {
+  /* Стиль, коли вибрано (Checked) */
+}
+.edit-overlay .priority-box:checked {
+  background-color: #3333ff; /* Твій синій колір */
+  border-color: #3333ff;
+}
+.edit-overlay {
+  /* Додаємо білу галочку або крапку всередину квадрата при виборі */
+}
+.edit-overlay .priority-box:checked::after {
+  content: "";
+  width: 10px;
+  height: 5px;
+  border-left: 2px solid white;
+  border-bottom: 2px solid white;
+  transform: rotate(-45deg);
+  margin-bottom: 2px; /* Трохи піднімаємо для центрування галочки */
+}
+.edit-overlay .dot {
+  width: 8px !important;
+  height: 8px !important;
+  border-radius: 50%;
+  display: inline-block;
+  align-items: center;
+}
+.edit-overlay .dot.extreme {
+  background: #ff4d4d;
+}
+.edit-overlay .dot.moderate {
+  background: #0052ff;
+}
+.edit-overlay .dot.low {
+  background: #00ca71;
+}
+.edit-overlay {
+  /* Upload Area */
+}
+.edit-overlay .upload-label {
+  display: block;
+  font-weight: 700;
+  margin-bottom: 8px;
+  font-size: 14px;
+  position: relative;
+  left: 0;
+  width: 80%;
+  margin-left: 10px;
+}
+.edit-overlay .upload-dropzone {
+  width: 80%;
+  margin-bottom: -10px;
+  height: 240px;
+  border: 1px solid #cbd5e0;
+  border-radius: 12px;
+  padding: 30px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  color: #a1a3ab;
+}
+.edit-overlay .upload-icon-box {
+  width: 80px;
+  height: 80px;
+}
+.edit-overlay .upload-icon-box img {
+  width: 100%;
+  height: 100%;
+}
+.edit-overlay .btn-browse {
+  background: white;
+  border: 1px solid #a1a3ab;
+  padding: 8px 20px;
+  color: #a1a3ab;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.edit-overlay .btn-done {
+  background: #ff5a3d;
+  color: white;
+  border: none;
+  padding: 12px 35px;
+  border-radius: 8px;
+  font-weight: 700;
+  margin-top: 3%;
+  cursor: pointer;
 }
 
 .login .auth-card .auth-image {

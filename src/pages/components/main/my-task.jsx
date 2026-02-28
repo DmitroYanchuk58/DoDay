@@ -47,9 +47,18 @@ const MyTask = () => {
     },
   ]);
 
-  const [selectedTaskId, setSelectedTaskId] = useState(tasks[0].id);
+  const [selectedTaskId, setSelectedTaskId] = useState(tasks[0]?.id);
 
   const selectedTask = tasks.find((t) => t.id === selectedTaskId);
+
+  const deleteTask = (id) => {
+    const updatedTasks = tasks.filter((task) => task.id !== id);
+    setTasks(updatedTasks);
+
+    if (selectedTaskId === id) {
+      setSelectedTaskId(updatedTasks[0]?.id || null);
+    }
+  };
 
   return (
     <div className="task-details-page">
@@ -63,7 +72,9 @@ const MyTask = () => {
               style={{ cursor: "pointer" }}
             >
               <TaskCard
+                id={task.id}
                 {...task}
+                onDelete={deleteTask}
                 type="compact"
                 className={selectedTaskId === task.id ? "selected" : ""}
               />
@@ -72,7 +83,7 @@ const MyTask = () => {
         </div>
       </div>
 
-      {selectedTask && (
+      {selectedTask ? (
         <div className="details-main card details">
           <div className="details-header">
             <img
@@ -122,7 +133,10 @@ const MyTask = () => {
           </div>
 
           <div className="details-actions">
-            <button className="action-btn">
+            <button
+              className="action-btn"
+              onClick={() => deleteTask(selectedTask.id)}
+            >
               <svg className="icon">
                 <use
                   xlinkHref={`images/icons/my-task-icons.svg#icon-delete`}
@@ -137,6 +151,10 @@ const MyTask = () => {
               </svg>
             </button>
           </div>
+        </div>
+      ) : (
+        <div className="details-main card details empty-state">
+          <p>Будь ласка, виберіть завдання або список порожній.</p>
         </div>
       )}
     </div>

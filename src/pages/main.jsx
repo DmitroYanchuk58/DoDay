@@ -9,6 +9,7 @@ import CreateCategory from "./components/main/create-category";
 import CategoryModal from "./components/main/modal-category";
 import AccountInfo from "./components/main/account-info";
 import ChangePassword from "./components/main/change-password";
+import EditTask from "./components/main/edit-task";
 
 import useCategories from "./components/hooks/useCategories";
 
@@ -19,6 +20,13 @@ const Main = () => {
   const [isCreatingCategory, setIsCreatingCategory] = useState(false);
   const { categories, modalConfig, actions } = useCategories();
   const [isInviteModalOpen, setIsInviteModalOpen] = useState(false);
+  const [isEditingTask, setIsEditingTask] = useState(false);
+  const [taskToEdit, setTaskToEdit] = useState(null);
+
+  const openEditOverlay = (task) => {
+    setTaskToEdit(task);
+    setIsEditingTask(true);
+  };
 
   const openInviteModal = () => setIsInviteModalOpen(true);
   const closeInviteModal = () => setIsInviteModalOpen(false);
@@ -26,10 +34,23 @@ const Main = () => {
   const pages = {
     1: (
       <>
-        <DashboardContent onInviteClick={openInviteModal} />
+        <DashboardContent
+          onInviteClick={openInviteModal}
+          onEditClick={openEditOverlay}
+        />
         <DashboardOverlay
           isOpen={isInviteModalOpen}
           onClose={closeInviteModal}
+        />
+
+        <EditTask
+          isOpen={isEditingTask}
+          task={taskToEdit}
+          onClose={() => setIsEditingTask(false)}
+          onSave={(updatedData) => {
+            console.log("Збережено:", updatedData);
+            setIsEditingTask(false);
+          }}
         />
       </>
     ),
