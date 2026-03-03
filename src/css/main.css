@@ -894,179 +894,152 @@ div.reg-log {
   width: 50%;
 }
 
-.task-card {
-  background: #ffffff;
+.task-card-container {
+  background: transparent;
   border: 1px solid #e2e8f0;
-  border-radius: 20px;
+  border-radius: 25px;
   padding: 20px;
-  padding-bottom: 10px;
-  margin-bottom: 20px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
-  font-family: "Inter", sans-serif;
-  height: 170px;
-  display: flex;
-  flex-direction: column;
+  margin-bottom: 15px;
+  position: relative;
+  width: 100%;
 }
 
-.task-header {
+.task-card-header {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  margin-bottom: 12px;
+  margin-bottom: 5px;
 }
 
-.task-title-row {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.status-dot {
-  width: 14px;
-  height: 14px;
+.status-indicator-dot {
+  width: 15px;
+  height: 15px;
   border-radius: 50%;
-  border: 2px solid;
+  border: 2px solid #ff4d4d;
 }
 
-.icon {
-  height: 18px;
-  width: 24px;
+.options-wrapper {
+  position: relative;
+  width: 35px;
+  height: 25px;
 }
 
-.status-dot.not-started {
-  border-color: #ff4d4d;
+.three-dots-trigger {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+  width: 100%;
+  height: 100%;
 }
 
-.status-dot.in-progress {
-  border-color: #0052ff;
+.icon-three-dots {
+  width: 100%;
+  height: 100%;
 }
 
-.status-dot.completed {
-  border-color: #00ca71;
+.actions-dropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  min-width: 130px;
+  z-index: 100;
+  padding: 8px 0;
+  border: 1px solid #edf2f7;
 }
 
-.task-title {
-  font-size: 18px;
+.action-item {
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: 500;
+  color: #1a202c;
+  cursor: pointer;
+}
+
+.action-item:hover {
+  background: #f7fafc;
+  color: #ff5a3d;
+}
+
+.finish-item {
+  border-top: 1px solid #edf2f7;
+  margin-top: 5px;
+}
+
+/* Content Styles */
+.task-card-body {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.task-main-title {
+  font-size: 20px;
   font-weight: 700;
-  color: var(--text-color);
+  margin: 0 0 10px 0;
+  color: #000;
+}
+
+.task-main-description {
+  color: #718096;
+  font-size: 15px;
+  line-height: 1.4;
   margin: 0;
 }
 
-.task-content {
+.task-card-image {
+  width: 90px;
+  height: 90px;
+  border-radius: 20px;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+/* Footer Meta */
+.task-card-footer {
   display: flex;
-  justify-content: space-between;
-  align-items: start;
   gap: 20px;
-}
-
-.task-text-info {
-  flex: 1;
-}
-
-.task-description {
-  font-size: 14px;
-  color: #8a8d91;
-  line-height: 1.6;
-  margin-bottom: 20px;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 3;
-  overflow: hidden;
-}
-
-.task-footer {
-  display: flex;
+  font-size: 13px;
+  color: #1a202c;
   align-items: center;
-  flex-wrap: wrap;
-  gap: 15px;
-  font-size: 12px;
-  width: 100%;
-  margin-top: auto;
 }
 
 .meta-label {
-  color: #212427;
   font-weight: 600;
   margin-right: 5px;
 }
 
-.meta-value {
-  font-weight: 500;
+.meta-value.p-moderate {
+  color: #00a3ff;
 }
 
-.priority-moderate {
-  color: #56ccf2;
-}
-
-.status-text-not-started {
+.meta-value.p-extreme {
   color: #ff4d4d;
 }
 
-.status-text-in-progress {
-  color: #0052ff;
+.meta-value-p-low {
+  color: #05a301;
 }
 
-.meta-date {
-  color: #a1a3ab;
+.meta-value.s-not-started {
+  color: #ff4d4d;
+}
+
+.meta-value.s-in-progress {
+  color: #0225ff;
+}
+
+.meta-value.s-completed {
+  color: #05a301;
+}
+
+.meta-date-stamp {
   margin-left: auto;
-}
-
-.task-image-container {
-  width: 80px;
-  height: 80px;
-}
-
-.task-card-img {
-  width: 100%;
-  height: 100%;
-  -o-object-fit: cover;
-     object-fit: cover;
-  border-radius: 12px;
-}
-
-.more-options-container {
-  position: relative;
-}
-
-.more-options {
-  cursor: pointer;
-  padding: 5px;
-  border-radius: 50%;
-  transition: background 0.2s;
-}
-
-.more-options:hover {
-  background: #f0f0f0;
-}
-
-.task-actions-dropdown {
-  position: absolute;
-  top: 100%;
-  right: 0;
-  background: #ffffff;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  z-index: 100;
-  min-width: 100px;
-  padding: 8px 0;
-  border: 1px solid #eee;
-}
-
-.action-item {
-  padding: 8px 16px;
-  font-size: 14px;
-  font-weight: 500;
-  color: #333;
-  cursor: pointer;
-  transition: all 0.2s;
-  text-align: left;
-  white-space: nowrap;
-}
-
-.action-item:hover {
-  background-color: #f7f7f7;
-  color: #ff5a3d;
+  color: #a0aec0;
 }
 
 .status-widget-card {
