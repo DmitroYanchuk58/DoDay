@@ -23,6 +23,8 @@ const Main = () => {
   const [isEditingTask, setIsEditingTask] = useState(false);
   const [taskToEdit, setTaskToEdit] = useState(null);
 
+  const isDashboardActive = activeId === 1;
+
   const openEditOverlay = (task) => {
     setTaskToEdit(task);
     setIsEditingTask(true);
@@ -88,10 +90,21 @@ const Main = () => {
 
   return (
     <div className="main-page">
-      <Header />
+      <div className="header-section">
+        <Header />
+      </div>
       <div className="main-content">
-        <Sidebar activeId={activeId} setActiveId={setActiveId} />
-        {pages[activeId] || <div>Сторінка в розробці</div>}
+        <div
+          className={`sidebar-section ${isDashboardActive ? "dashboard" : ""}`}
+        >
+          <Sidebar activeId={activeId} setActiveId={setActiveId} />
+        </div>
+
+        <div
+          className={`content-section ${isDashboardActive ? "dashboard" : ""}`}
+        >
+          {pages[activeId] || <div>Сторінка в розробці</div>}
+        </div>
       </div>
     </div>
   );

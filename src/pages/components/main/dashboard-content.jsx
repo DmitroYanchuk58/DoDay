@@ -56,6 +56,48 @@ const DashboardContent = ({ onInviteClick, onEditClick }) => {
       image: "images/task_image3.png",
       column: "completed",
     },
+    {
+      id: 6,
+      title: "Conduct meeting",
+      description: "Meet with the client and finalize requirements.",
+      status: "Completed",
+      date: "2 days ago",
+      image: "images/task_image3.png",
+      column: "completed",
+    },
+    {
+      id: 7,
+      title: "Presentation on Final Product",
+      description:
+        "Make sure everything is functioning and all the necessities are properly met. Prepare the team...",
+      priority: "Moderate",
+      status: "In Progress",
+      date: "19/06/2023",
+      image: "images/task_image3.png",
+      column: "todo",
+    },
+    {
+      id: 8,
+      title: "Presentation on Final Product",
+      description:
+        "Make sure everything is functioning and all the necessities are properly met. Prepare the team...",
+      priority: "Moderate",
+      status: "In Progress",
+      date: "19/06/2023",
+      image: "images/task_image3.png",
+      column: "todo",
+    },
+    {
+      id: 9,
+      title: "Presentation on Final Product",
+      description:
+        "Make sure everything is functioning and all the necessities are properly met. Prepare the team...",
+      priority: "Moderate",
+      status: "In Progress",
+      date: "19/06/2023",
+      image: "images/task_image3.png",
+      column: "todo",
+    },
   ]);
 
   const handleDeleteTask = (id) => {

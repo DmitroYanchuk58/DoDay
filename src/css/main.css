@@ -601,8 +601,8 @@ div.reg-log {
 }
 
 .sidebar {
-  width: 20%;
-  height: 950px;
+  width: 95%;
+  height: 93%;
   background-color: var(--focus-color);
   display: flex;
   margin-top: auto;
@@ -694,8 +694,8 @@ div.reg-log {
 
 .dashboard-main {
   padding: 50px;
-  width: 80%;
-  height: 100%;
+  width: 100%;
+  height: 94%;
 }
 
 .dashboard-grid {
@@ -704,7 +704,7 @@ div.reg-log {
   padding: 20px;
   border: 1px solid #a1a3ab;
   width: 100%;
-  height: 94%;
+  height: 100%;
 }
 
 .task-card {
@@ -892,6 +892,37 @@ div.reg-log {
 
 .status-column {
   width: 50%;
+}
+
+.task-list {
+  max-height: 90%;
+  overflow-y: auto;
+  padding-right: 8px;
+}
+.task-list::-webkit-scrollbar {
+  display: none;
+}
+.task-list {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.task-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.task-list::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+.task-list::-webkit-scrollbar-thumb {
+  background: #cbd5e0;
+  border-radius: 10px;
+}
+
+.task-list::-webkit-scrollbar-thumb:hover {
+  background: #a0aec0;
 }
 
 .task-card-container {
@@ -1267,7 +1298,7 @@ div.reg-log {
   padding: 30px;
   padding-top: 70px;
   padding-bottom: 10px;
-  width: 80%;
+  width: 100%;
   height: 100%;
   display: flex;
   justify-content: space-between;
@@ -1401,7 +1432,7 @@ div.reg-log {
   padding: 30px;
   padding-top: 70px;
   padding-bottom: 10px;
-  width: 80%;
+  width: 100%;
   height: 100%;
 }
 
@@ -1817,7 +1848,7 @@ div.reg-log {
   margin: 30px;
   margin-top: 70px;
   margin-bottom: 30px;
-  width: 77%;
+  width: 100%;
   border: 1px solid #a1a3ab;
   border-radius: 15px;
 }
@@ -2326,6 +2357,27 @@ div.reg-log {
 
 .main-content {
   width: 100%;
+  height: 100%;
+  display: flex;
+}
+
+.header-section {
+  width: 100%;
+  height: 10%;
+}
+
+.sidebar-section {
+  width: 20%;
+  height: 100%;
+  display: flex;
+}
+
+.dashboard {
+  height: 91% !important;
+}
+
+.content-section {
+  width: 80%;
   height: 100%;
   display: flex;
 }/*# sourceMappingURL=main.css.map */
