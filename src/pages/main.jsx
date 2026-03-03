@@ -11,6 +11,7 @@ import AccountInfo from "./components/main/account-info";
 import ChangePassword from "./components/main/change-password";
 import EditTask from "./components/main/edit-task";
 import TaskDetails from "./components/main/task-details";
+import CreateTask from "./components/main/create-task";
 
 import useCategories from "./components/hooks/useCategories";
 
@@ -23,6 +24,7 @@ const Main = () => {
   const { categories, modalConfig, actions } = useCategories();
   const [isInviteModalOpen, setIsInviteModalOpen] = useState(false);
   const [isEditingTask, setIsEditingTask] = useState(false);
+  const [isCreatingTask, setIsCreatingTask] = useState(false);
   const [taskToEdit, setTaskToEdit] = useState(null);
 
   const isDashboardActive = activeId === 1 && !selectedTask;
@@ -34,6 +36,10 @@ const Main = () => {
   const openEditOverlay = (task) => {
     setTaskToEdit(task);
     setIsEditingTask(true);
+  };
+
+  const openCreateOverlay = () => {
+    setIsCreatingTask(true);
   };
 
   const openInviteModal = () => setIsInviteModalOpen(true);
@@ -63,6 +69,7 @@ const Main = () => {
           onInviteClick={openInviteModal}
           onEditClick={openEditOverlay}
           onTaskClick={openTaskDetails}
+          onCreateClick={openCreateOverlay}
         />
         <DashboardOverlay
           isOpen={isInviteModalOpen}
@@ -77,6 +84,10 @@ const Main = () => {
             console.log("Збережено:", updatedData);
             setIsEditingTask(false);
           }}
+        />
+        <CreateTask
+          isOpen={isCreatingTask}
+          onClose={() => setIsCreatingTask(false)}
         />
       </>
     ),

@@ -2,7 +2,12 @@ import React, { useState } from "react";
 import TaskCard from "./task-card";
 import StatusChart from "./status-chart";
 
-const DashboardContent = ({ onInviteClick, onEditClick, onTaskClick }) => {
+const DashboardContent = ({
+  onInviteClick,
+  onEditClick,
+  onTaskClick,
+  onCreateClick,
+}) => {
   // Виносимо всі таски в єдиний масив стану
   const [tasks, setTasks] = useState([
     {
@@ -134,7 +139,7 @@ const DashboardContent = ({ onInviteClick, onEditClick, onTaskClick }) => {
               </svg>
               <h3>To-Do</h3>
             </div>
-            <button className="add-task-btn">
+            <button className="add-task-btn" onClick={() => onCreateClick()}>
               <svg className="icon icon-plus">
                 <use xlinkHref="images/icons/dashboard-icons.svg#icon-plus"></use>
               </svg>
