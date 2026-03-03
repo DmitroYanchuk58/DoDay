@@ -68,7 +68,7 @@
 }
 
 .form-group input {
-  width: 50%;
+  width: 100%;
   padding: 12px;
   border: 1px solid #a1a3ab;
   background-color: transparent;
@@ -97,4 +97,9 @@
 .btn-save:hover,
 .btn-cancel:hover {
   opacity: 0.9;
+}
+
+.icon {
+  width: 22px;
+  height: 22px;
 }

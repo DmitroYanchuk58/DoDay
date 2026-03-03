@@ -1,0 +1,130 @@
+.task-details {
+  padding: 30px;
+  padding-top: 70px;
+  padding-bottom: 10px;
+  width: 100%;
+  height: 100%;
+}
+.task-details-container {
+  background: #f8fafc;
+  border-radius: 25px;
+  padding: 30px;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+/* Header */
+.task-details-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 40px;
+}
+
+.header-left {
+  display: flex;
+  gap: 25px;
+}
+
+.header-main-img {
+  width: 180px;
+  height: 180px;
+  border-radius: 20px;
+  object-fit: cover;
+}
+
+.task-full-title {
+  font-size: 28px;
+  font-weight: 700;
+  margin: 0 0 15px 0;
+}
+
+.meta-info p {
+  margin: 5px 0;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.blue-text {
+  color: #00a3ff;
+}
+.red-text {
+  color: #ff4d4d;
+}
+.date-text {
+  color: #a0aec0;
+  margin-top: 10px !important;
+}
+
+/* Body Content */
+.task-details-content {
+  flex: 1;
+  color: #718096;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.main-desc-text {
+  margin-bottom: 25px;
+}
+
+.ordered-task-list,
+.unordered-task-list {
+  padding-left: 20px;
+  margin-bottom: 25px;
+}
+
+.ordered-task-list li,
+.unordered-task-list li {
+  margin-bottom: 10px;
+}
+
+.optional-section h3 {
+  font-size: 18px;
+  font-weight: 700;
+  color: #1a202c;
+  margin-bottom: 15px;
+}
+
+/* Action Buttons (image_565ac4.png) */
+.bottom-actions-row {
+  display: flex;
+  justify-content: flex-end;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.icon-action-btn {
+  width: 45px;
+  height: 45px;
+  border-radius: 12px;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.icon-action-btn:hover {
+  opacity: 0.8;
+}
+
+.icon-action-btn.delete {
+  background-color: #ff7171;
+}
+.icon-action-btn.edit {
+  background-color: #ff7171;
+} /* Згідно дизайну кнопки однакового кольору */
+.icon-action-btn.vital {
+  background-color: #ff7171;
+}
+
+.icon-action-btn img {
+  width: 24px;
+  height: 24px;
+}

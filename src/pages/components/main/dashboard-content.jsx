@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import TaskCard from "./task-card";
 import StatusChart from "./status-chart";
 
-const DashboardContent = ({ onInviteClick, onEditClick }) => {
+const DashboardContent = ({ onInviteClick, onEditClick, onTaskClick }) => {
   // Виносимо всі таски в єдиний масив стану
   const [tasks, setTasks] = useState([
     {
@@ -147,12 +147,21 @@ const DashboardContent = ({ onInviteClick, onEditClick }) => {
 
           <div className="task-list">
             {todoTasks.map((task) => (
-              <TaskCard
+              <div
                 key={task.id}
-                {...task}
-                onDelete={handleDeleteTask}
-                openEditTask={() => onEditClick(task)}
-              />
+                onClick={() => onTaskClick(task)}
+                style={{ cursor: "pointer" }}
+              >
+                <TaskCard
+                  key={task.id}
+                  {...task}
+                  onDelete={handleDeleteTask}
+                  openEditTask={(e) => {
+                    e.stopPropagation();
+                    onEditClick(task);
+                  }}
+                />
+              </div>
             ))}
           </div>
         </section>
@@ -185,13 +194,22 @@ const DashboardContent = ({ onInviteClick, onEditClick }) => {
             </div>
             <div className="task-list">
               {completedTasks.map((task) => (
-                <TaskCard
+                <div
                   key={task.id}
-                  {...task}
-                  type="compact"
-                  onDelete={handleDeleteTask}
-                  openEditTask={() => onEditClick(task)}
-                />
+                  onClick={() => onTaskClick(task)}
+                  style={{ cursor: "pointer" }}
+                >
+                  <TaskCard
+                    key={task.id}
+                    {...task}
+                    type="compact"
+                    onDelete={handleDeleteTask}
+                    openEditTask={(e) => {
+                      e.stopPropagation();
+                      onEditClick(task);
+                    }}
+                  />
+                </div>
               ))}
             </div>
           </div>

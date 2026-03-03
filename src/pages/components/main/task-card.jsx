@@ -26,7 +26,11 @@ const TaskCard = ({
           <div className="options-wrapper">
             <button
               className="three-dots-trigger"
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              onClick={(e) => {
+                // ВИПРАВЛЕНО: зупиняємо спливання події, щоб не відкрилися деталі таски
+                e.stopPropagation();
+                setIsMenuOpen(!isMenuOpen);
+              }}
             >
               <svg className="icon icon-three-dots">
                 <use xlinkHref="images/icons/dashboard-icons.svg#icon-three-dots"></use>
@@ -34,7 +38,11 @@ const TaskCard = ({
             </button>
 
             {isMenuOpen && (
-              <div className="actions-dropdown">
+              <div
+                className="actions-dropdown"
+                // Зупиняємо кліки всередині меню, щоб вони не прокидалися до картки
+                onClick={(e) => e.stopPropagation()}
+              >
                 <div
                   className="action-item"
                   onClick={() => setIsMenuOpen(false)}
@@ -43,8 +51,9 @@ const TaskCard = ({
                 </div>
                 <div
                   className="action-item"
-                  onClick={() => {
-                    openEditTask(true);
+                  onClick={(e) => {
+                    // Передаємо івент, щоб викликати stopPropagation всередині DashboardContent
+                    openEditTask(e);
                     setIsMenuOpen(false);
                   }}
                 >

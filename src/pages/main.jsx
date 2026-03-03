@@ -10,6 +10,7 @@ import CategoryModal from "./components/main/modal-category";
 import AccountInfo from "./components/main/account-info";
 import ChangePassword from "./components/main/change-password";
 import EditTask from "./components/main/edit-task";
+import TaskDetails from "./components/main/task-details";
 
 import useCategories from "./components/hooks/useCategories";
 
@@ -17,13 +18,18 @@ import { useState } from "react";
 
 const Main = () => {
   const [activeId, setActiveId] = useState(1);
+  const [selectedTask, setSelectedTask] = useState(null);
   const [isCreatingCategory, setIsCreatingCategory] = useState(false);
   const { categories, modalConfig, actions } = useCategories();
   const [isInviteModalOpen, setIsInviteModalOpen] = useState(false);
   const [isEditingTask, setIsEditingTask] = useState(false);
   const [taskToEdit, setTaskToEdit] = useState(null);
 
-  const isDashboardActive = activeId === 1;
+  const isDashboardActive = activeId === 1 && !selectedTask;
+
+  const openTaskDetails = (task) => {
+    setSelectedTask(task);
+  };
 
   const openEditOverlay = (task) => {
     setTaskToEdit(task);
@@ -34,11 +40,29 @@ const Main = () => {
   const closeInviteModal = () => setIsInviteModalOpen(false);
 
   const pages = {
-    1: (
+    1: selectedTask ? (
+      <>
+        <TaskDetails
+          task={selectedTask}
+          onGoBack={() => setSelectedTask(null)}
+          onEdit={() => setIsEditingTask(true)}
+        />
+        <EditTask
+          isOpen={isEditingTask}
+          task={taskToEdit}
+          onClose={() => setIsEditingTask(false)}
+          onSave={(updatedData) => {
+            console.log("Збережено:", updatedData);
+            setIsEditingTask(false);
+          }}
+        />
+      </>
+    ) : (
       <>
         <DashboardContent
           onInviteClick={openInviteModal}
           onEditClick={openEditOverlay}
+          onTaskClick={openTaskDetails}
         />
         <DashboardOverlay
           isOpen={isInviteModalOpen}
