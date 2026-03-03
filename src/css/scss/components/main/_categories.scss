@@ -322,6 +322,12 @@
   overflow: hidden;
 }
 .categories {
-  height: 88%;
+  height: 90%;
   overflow-y: auto;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }

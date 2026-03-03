@@ -1764,8 +1764,15 @@ div.reg-log {
 }
 
 .categories {
-  height: 88%;
+  height: 90%;
   overflow-y: auto;
+}
+.categories::-webkit-scrollbar {
+  display: none;
+}
+.categories {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 .modal-container {
