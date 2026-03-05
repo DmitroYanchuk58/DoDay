@@ -1,0 +1,35 @@
+E:\Code\VisualStudioCode\Front\Unfinished\DoDay\do_day(back-end)\DoDay\bin\Debug\net10.0\appsettings.Development.json
+E:\Code\VisualStudioCode\Front\Unfinished\DoDay\do_day(back-end)\DoDay\bin\Debug\net10.0\appsettings.json
+E:\Code\VisualStudioCode\Front\Unfinished\DoDay\do_day(back-end)\DoDay\bin\Debug\net10.0\API Layer.staticwebassets.endpoints.json
+E:\Code\VisualStudioCode\Front\Unfinished\DoDay\do_day(back-end)\DoDay\bin\Debug\net10.0\API Layer.exe
+E:\Code\VisualStudioCode\Front\Unfinished\DoDay\do_day(back-end)\DoDay\bin\Debug\net10.0\API Layer.deps.json
+E:\Code\VisualStudioCode\Front\Unfinished\DoDay\do_day(back-end)\DoDay\bin\Debug\net10.0\API Layer.runtimeconfig.json
+E:\Code\VisualStudioCode\Front\Unfinished\DoDay\do_day(back-end)\DoDay\bin\Debug\net10.0\API Layer.dll
+E:\Code\VisualStudioCode\Front\Unfinished\DoDay\do_day(back-end)\DoDay\bin\Debug\net10.0\API Layer.pdb
+E:\Code\VisualStudioCode\Front\Unfinished\DoDay\do_day(back-end)\DoDay\bin\Debug\net10.0\Microsoft.AspNetCore.OpenApi.dll
+E:\Code\VisualStudioCode\Front\Unfinished\DoDay\do_day(back-end)\DoDay\bin\Debug\net10.0\Microsoft.OpenApi.dll
+E:\Code\VisualStudioCode\Front\Unfinished\DoDay\do_day(back-end)\DoDay\obj\Debug\net10.0\API Layer.csproj.AssemblyReference.cache
+E:\Code\VisualStudioCode\Front\Unfinished\DoDay\do_day(back-end)\DoDay\obj\Debug\net10.0\rpswa.dswa.cache.json
+E:\Code\VisualStudioCode\Front\Unfinished\DoDay\do_day(back-end)\DoDay\obj\Debug\net10.0\API Layer.GeneratedMSBuildEditorConfig.editorconfig
+E:\Code\VisualStudioCode\Front\Unfinished\DoDay\do_day(back-end)\DoDay\obj\Debug\net10.0\API Layer.AssemblyInfoInputs.cache
+E:\Code\VisualStudioCode\Front\Unfinished\DoDay\do_day(back-end)\DoDay\obj\Debug\net10.0\API Layer.AssemblyInfo.cs
+E:\Code\VisualStudioCode\Front\Unfinished\DoDay\do_day(back-end)\DoDay\obj\Debug\net10.0\API Layer.csproj.CoreCompileInputs.cache
+E:\Code\VisualStudioCode\Front\Unfinished\DoDay\do_day(back-end)\DoDay\obj\Debug\net10.0\API Layer.MvcApplicationPartsAssemblyInfo.cs
+E:\Code\VisualStudioCode\Front\Unfinished\DoDay\do_day(back-end)\DoDay\obj\Debug\net10.0\API Layer.MvcApplicationPartsAssemblyInfo.cache
+E:\Code\VisualStudioCode\Front\Unfinished\DoDay\do_day(back-end)\DoDay\obj\Debug\net10.0\API Layer.sourcelink.json
+E:\Code\VisualStudioCode\Front\Unfinished\DoDay\do_day(back-end)\DoDay\obj\Debug\net10.0\rjimswa.dswa.cache.json
+E:\Code\VisualStudioCode\Front\Unfinished\DoDay\do_day(back-end)\DoDay\obj\Debug\net10.0\rjsmrazor.dswa.cache.json
+E:\Code\VisualStudioCode\Front\Unfinished\DoDay\do_day(back-end)\DoDay\obj\Debug\net10.0\rjsmcshtml.dswa.cache.json
+E:\Code\VisualStudioCode\Front\Unfinished\DoDay\do_day(back-end)\DoDay\obj\Debug\net10.0\scopedcss\bundle\API Layer.styles.css
+E:\Code\VisualStudioCode\Front\Unfinished\DoDay\do_day(back-end)\DoDay\obj\Debug\net10.0\staticwebassets.build.json
+E:\Code\VisualStudioCode\Front\Unfinished\DoDay\do_day(back-end)\DoDay\obj\Debug\net10.0\staticwebassets.build.json.cache
+E:\Code\VisualStudioCode\Front\Unfinished\DoDay\do_day(back-end)\DoDay\obj\Debug\net10.0\staticwebassets.development.json
+E:\Code\VisualStudioCode\Front\Unfinished\DoDay\do_day(back-end)\DoDay\obj\Debug\net10.0\staticwebassets.build.endpoints.json
+E:\Code\VisualStudioCode\Front\Unfinished\DoDay\do_day(back-end)\DoDay\obj\Debug\net10.0\swae.build.ex.cache
+E:\Code\VisualStudioCode\Front\Unfinished\DoDay\do_day(back-end)\DoDay\obj\Debug\net10.0\staticwebassets.upToDateCheck.txt
+E:\Code\VisualStudioCode\Front\Unfinished\DoDay\do_day(back-end)\DoDay\obj\Debug\net10.0\API Layer.csproj.Up2Date
+E:\Code\VisualStudioCode\Front\Unfinished\DoDay\do_day(back-end)\DoDay\obj\Debug\net10.0\API Layer.dll
+E:\Code\VisualStudioCode\Front\Unfinished\DoDay\do_day(back-end)\DoDay\obj\Debug\net10.0\refint\API Layer.dll
+E:\Code\VisualStudioCode\Front\Unfinished\DoDay\do_day(back-end)\DoDay\obj\Debug\net10.0\API Layer.pdb
+E:\Code\VisualStudioCode\Front\Unfinished\DoDay\do_day(back-end)\DoDay\obj\Debug\net10.0\API Layer.genruntimeconfig.cache
+E:\Code\VisualStudioCode\Front\Unfinished\DoDay\do_day(back-end)\DoDay\obj\Debug\net10.0\ref\API Layer.dll

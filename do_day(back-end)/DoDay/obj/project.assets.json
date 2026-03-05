@@ -89,9 +89,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\Code\\VisualStudioCode\\Front\\Unfinished\\DoDay\\do_day(back-end)\\DoDay\\DoDay.csproj",
-      "projectName": "DoDay",
-      "projectPath": "E:\\Code\\VisualStudioCode\\Front\\Unfinished\\DoDay\\do_day(back-end)\\DoDay\\DoDay.csproj",
+      "projectUniqueName": "E:\\Code\\VisualStudioCode\\Front\\Unfinished\\DoDay\\do_day(back-end)\\DoDay\\API Layer.csproj",
+      "projectName": "API Layer",
+      "projectPath": "E:\\Code\\VisualStudioCode\\Front\\Unfinished\\DoDay\\do_day(back-end)\\DoDay\\API Layer.csproj",
       "packagesPath": "C:\\Users\\dmitr\\.nuget\\packages\\",
       "outputPath": "E:\\Code\\VisualStudioCode\\Front\\Unfinished\\DoDay\\do_day(back-end)\\DoDay\\obj\\",
       "projectStyle": "PackageReference",

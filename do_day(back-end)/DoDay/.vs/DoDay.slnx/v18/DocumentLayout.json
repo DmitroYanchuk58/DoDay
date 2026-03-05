@@ -1,12 +1,56 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "E:\\Code\\VisualStudioCode\\Front\\Unfinished\\DoDay\\do_day(back-end)\\DoDay\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{C909131D-3B93-4858-A0BC-B2CC4E89780F}|..\\Data Access Layer\\Data Access Layer.csproj|e:\\code\\visualstudiocode\\front\\unfinished\\doday\\do_day(back-end)\\data access layer\\class1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2328C890-3DD4-484D-8E80-31198808051A}|..\\Business Logic Layer\\Business Logic Layer.csproj|e:\\code\\visualstudiocode\\front\\unfinished\\doday\\do_day(back-end)\\business logic layer\\class1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
       "VerticalTabListWidth": 256,
-      "DocumentGroups": []
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Class1.cs",
+              "DocumentMoniker": "E:\\Code\\VisualStudioCode\\Front\\Unfinished\\DoDay\\do_day(back-end)\\Data Access Layer\\Class1.cs",
+              "RelativeDocumentMoniker": "..\\Data Access Layer\\Class1.cs",
+              "ToolTip": "E:\\Code\\VisualStudioCode\\Front\\Unfinished\\DoDay\\do_day(back-end)\\Data Access Layer\\Class1.cs",
+              "RelativeToolTip": "..\\Data Access Layer\\Class1.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-05T16:19:24.788Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Class1.cs",
+              "DocumentMoniker": "E:\\Code\\VisualStudioCode\\Front\\Unfinished\\DoDay\\do_day(back-end)\\Business Logic Layer\\Class1.cs",
+              "RelativeDocumentMoniker": "..\\Business Logic Layer\\Class1.cs",
+              "ToolTip": "E:\\Code\\VisualStudioCode\\Front\\Unfinished\\DoDay\\do_day(back-end)\\Business Logic Layer\\Class1.cs",
+              "RelativeToolTip": "..\\Business Logic Layer\\Class1.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-05T16:18:51.659Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
     }
   ]
 }
