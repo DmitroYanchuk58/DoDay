@@ -27,7 +27,7 @@ const Main = () => {
   const [isCreatingTask, setIsCreatingTask] = useState(false);
   const [taskToEdit, setTaskToEdit] = useState(null);
 
-  const isDashboardActive = (activeId === 1 && !selectedTask) || activeId === 4;
+  const isDashboardActive = activeId === 1 && !selectedTask;
 
   const openTaskDetails = (task) => {
     setSelectedTask(task);
