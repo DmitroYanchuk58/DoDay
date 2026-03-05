@@ -1,0 +1,6 @@
+@DoDay_HostAddress = http://localhost:5167
+
+GET {{DoDay_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

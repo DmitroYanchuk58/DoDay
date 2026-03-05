@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "19kYeO7opJc=",
+  "success": true,
+  "projectFilePath": "E:\\Code\\VisualStudioCode\\Front\\Unfinished\\DoDay\\do_day(back-end)\\DoDay\\DoDay.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\dmitr\\.nuget\\packages\\microsoft.aspnetcore.openapi\\10.0.3\\microsoft.aspnetcore.openapi.10.0.3.nupkg.sha512",
+    "C:\\Users\\dmitr\\.nuget\\packages\\microsoft.openapi\\2.0.0\\microsoft.openapi.2.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}
