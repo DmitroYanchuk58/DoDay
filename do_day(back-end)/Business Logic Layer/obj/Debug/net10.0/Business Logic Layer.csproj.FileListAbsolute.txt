@@ -10,3 +10,7 @@ E:\Code\VisualStudioCode\Front\Unfinished\DoDay\do_day(back-end)\Business Logic 
 E:\Code\VisualStudioCode\Front\Unfinished\DoDay\do_day(back-end)\Business Logic Layer\obj\Debug\net10.0\refint\Business Logic Layer.dll
 E:\Code\VisualStudioCode\Front\Unfinished\DoDay\do_day(back-end)\Business Logic Layer\obj\Debug\net10.0\Business Logic Layer.pdb
 E:\Code\VisualStudioCode\Front\Unfinished\DoDay\do_day(back-end)\Business Logic Layer\obj\Debug\net10.0\ref\Business Logic Layer.dll
+E:\Code\VisualStudioCode\Front\Unfinished\DoDay\do_day(back-end)\Business Logic Layer\bin\Debug\net10.0\Data Access Layer.dll
+E:\Code\VisualStudioCode\Front\Unfinished\DoDay\do_day(back-end)\Business Logic Layer\bin\Debug\net10.0\Data Access Layer.pdb
+E:\Code\VisualStudioCode\Front\Unfinished\DoDay\do_day(back-end)\Business Logic Layer\obj\Debug\net10.0\Business Logic Layer.csproj.AssemblyReference.cache
+E:\Code\VisualStudioCode\Front\Unfinished\DoDay\do_day(back-end)\Business Logic Layer\obj\Debug\net10.0\Business.6AB683E1.Up2Date
