@@ -6,16 +6,25 @@
       "AbsoluteMoniker": "D:0:0:{C909131D-3B93-4858-A0BC-B2CC4E89780F}|..\\Data Access Layer\\Data Access Layer.csproj|e:\\code\\visualstudiocode\\front\\unfinished\\doday\\do_day(back-end)\\data access layer\\databasecontext\\dodaydbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{C909131D-3B93-4858-A0BC-B2CC4E89780F}|..\\Data Access Layer\\Data Access Layer.csproj|e:\\code\\visualstudiocode\\front\\unfinished\\doday\\do_day(back-end)\\data access layer\\entities\\categoryoption.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C909131D-3B93-4858-A0BC-B2CC4E89780F}|..\\Data Access Layer\\Data Access Layer.csproj|e:\\code\\visualstudiocode\\front\\unfinished\\doday\\do_day(back-end)\\data access layer\\entities\\category.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|E:\\Code\\VisualStudioCode\\Front\\Unfinished\\DoDay\\do_day(back-end)\\Data Access Layer\\Migrations\\20260309180316_AddCategory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C909131D-3B93-4858-A0BC-B2CC4E89780F}|..\\Data Access Layer\\Data Access Layer.csproj|e:\\code\\visualstudiocode\\front\\unfinished\\doday\\do_day(back-end)\\data access layer\\migrations\\20260305230042_addtask.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{C909131D-3B93-4858-A0BC-B2CC4E89780F}|..\\Data Access Layer\\Data Access Layer.csproj|e:\\code\\visualstudiocode\\front\\unfinished\\doday\\do_day(back-end)\\data access layer\\entities\\task.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|E:\\Code\\VisualStudioCode\\Front\\Unfinished\\DoDay\\do_day(back-end)\\Data Access Layer\\Migrations\\20260305224318_AddUser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{C909131D-3B93-4858-A0BC-B2CC4E89780F}|..\\Data Access Layer\\Data Access Layer.csproj|e:\\code\\visualstudiocode\\front\\unfinished\\doday\\do_day(back-end)\\data access layer\\entities\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{C909131D-3B93-4858-A0BC-B2CC4E89780F}|..\\Data Access Layer\\Data Access Layer.csproj|e:\\code\\visualstudiocode\\front\\unfinished\\doday\\do_day(back-end)\\data access layer\\entities\\entity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C909131D-3B93-4858-A0BC-B2CC4E89780F}|..\\Data Access Layer\\Data Access Layer.csproj|e:\\code\\visualstudiocode\\front\\unfinished\\doday\\do_day(back-end)\\data access layer\\entities\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{C909131D-3B93-4858-A0BC-B2CC4E89780F}|..\\Data Access Layer\\Data Access Layer.csproj|e:\\code\\visualstudiocode\\front\\unfinished\\doday\\do_day(back-end)\\data access layer\\migrations\\20260305212906_initialcreate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
@@ -40,6 +49,9 @@
     },
     {
       "AbsoluteMoniker": "D:0:0:{2328C890-3DD4-484D-8E80-31198808051A}|..\\Business Logic Layer\\Business Logic Layer.csproj|e:\\code\\visualstudiocode\\front\\unfinished\\doday\\do_day(back-end)\\business logic layer\\class1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C909131D-3B93-4858-A0BC-B2CC4E89780F}|..\\Data Access Layer\\Data Access Layer.csproj|e:\\code\\visualstudiocode\\front\\unfinished\\doday\\do_day(back-end)\\data access layer\\migrations\\20260305224318_adduser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -53,12 +65,64 @@
           "Children": [
             {
               "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "20260309180316_AddCategory.cs",
+              "DocumentMoniker": "E:\\Code\\VisualStudioCode\\Front\\Unfinished\\DoDay\\do_day(back-end)\\Data Access Layer\\Migrations\\20260309180316_AddCategory.cs",
+              "RelativeDocumentMoniker": "..\\Data Access Layer\\Migrations\\20260309180316_AddCategory.cs",
+              "ToolTip": "E:\\Code\\VisualStudioCode\\Front\\Unfinished\\DoDay\\do_day(back-end)\\Data Access Layer\\Migrations\\20260309180316_AddCategory.cs",
+              "RelativeToolTip": "..\\Data Access Layer\\Migrations\\20260309180316_AddCategory.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-09T18:03:16.687Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 1,
+              "Title": "CategoryOption.cs",
+              "DocumentMoniker": "E:\\Code\\VisualStudioCode\\Front\\Unfinished\\DoDay\\do_day(back-end)\\Data Access Layer\\Entities\\CategoryOption.cs",
+              "RelativeDocumentMoniker": "..\\Data Access Layer\\Entities\\CategoryOption.cs",
+              "ToolTip": "E:\\Code\\VisualStudioCode\\Front\\Unfinished\\DoDay\\do_day(back-end)\\Data Access Layer\\Entities\\CategoryOption.cs",
+              "RelativeToolTip": "..\\Data Access Layer\\Entities\\CategoryOption.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-09T18:00:44.474Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Category.cs",
+              "DocumentMoniker": "E:\\Code\\VisualStudioCode\\Front\\Unfinished\\DoDay\\do_day(back-end)\\Data Access Layer\\Entities\\Category.cs",
+              "RelativeDocumentMoniker": "..\\Data Access Layer\\Entities\\Category.cs",
+              "ToolTip": "E:\\Code\\VisualStudioCode\\Front\\Unfinished\\DoDay\\do_day(back-end)\\Data Access Layer\\Entities\\Category.cs",
+              "RelativeToolTip": "..\\Data Access Layer\\Entities\\Category.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-09T18:00:30.027Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "20260305230042_AddTask.cs",
+              "DocumentMoniker": "E:\\Code\\VisualStudioCode\\Front\\Unfinished\\DoDay\\do_day(back-end)\\Data Access Layer\\Migrations\\20260305230042_AddTask.cs",
+              "RelativeDocumentMoniker": "..\\Data Access Layer\\Migrations\\20260305230042_AddTask.cs",
+              "ToolTip": "E:\\Code\\VisualStudioCode\\Front\\Unfinished\\DoDay\\do_day(back-end)\\Data Access Layer\\Migrations\\20260305230042_AddTask.cs",
+              "RelativeToolTip": "..\\Data Access Layer\\Migrations\\20260305230042_AddTask.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-05T23:00:42.816Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
               "Title": "Task.cs",
               "DocumentMoniker": "E:\\Code\\VisualStudioCode\\Front\\Unfinished\\DoDay\\do_day(back-end)\\Data Access Layer\\Entities\\Task.cs",
               "RelativeDocumentMoniker": "..\\Data Access Layer\\Entities\\Task.cs",
-              "ToolTip": "E:\\Code\\VisualStudioCode\\Front\\Unfinished\\DoDay\\do_day(back-end)\\Data Access Layer\\Entities\\Task.cs*",
-              "RelativeToolTip": "..\\Data Access Layer\\Entities\\Task.cs*",
+              "ToolTip": "E:\\Code\\VisualStudioCode\\Front\\Unfinished\\DoDay\\do_day(back-end)\\Data Access Layer\\Entities\\Task.cs",
+              "RelativeToolTip": "..\\Data Access Layer\\Entities\\Task.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-03-05T22:43:35.596Z",
@@ -66,20 +130,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "20260305224318_AddUser.cs",
-              "DocumentMoniker": "E:\\Code\\VisualStudioCode\\Front\\Unfinished\\DoDay\\do_day(back-end)\\Data Access Layer\\Migrations\\20260305224318_AddUser.cs",
-              "RelativeDocumentMoniker": "..\\Data Access Layer\\Migrations\\20260305224318_AddUser.cs",
-              "ToolTip": "E:\\Code\\VisualStudioCode\\Front\\Unfinished\\DoDay\\do_day(back-end)\\Data Access Layer\\Migrations\\20260305224318_AddUser.cs",
-              "RelativeToolTip": "..\\Data Access Layer\\Migrations\\20260305224318_AddUser.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-05T22:43:18.263Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 6,
               "Title": "User.cs",
               "DocumentMoniker": "E:\\Code\\VisualStudioCode\\Front\\Unfinished\\DoDay\\do_day(back-end)\\Data Access Layer\\Entities\\User.cs",
               "RelativeDocumentMoniker": "..\\Data Access Layer\\Entities\\User.cs",
@@ -92,20 +143,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "Entity.cs",
-              "DocumentMoniker": "E:\\Code\\VisualStudioCode\\Front\\Unfinished\\DoDay\\do_day(back-end)\\Data Access Layer\\Entities\\Entity.cs",
-              "RelativeDocumentMoniker": "..\\Data Access Layer\\Entities\\Entity.cs",
-              "ToolTip": "E:\\Code\\VisualStudioCode\\Front\\Unfinished\\DoDay\\do_day(back-end)\\Data Access Layer\\Entities\\Entity.cs",
-              "RelativeToolTip": "..\\Data Access Layer\\Entities\\Entity.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAkAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-05T21:37:14.271Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 8,
               "Title": "20260305212906_InitialCreate.cs",
               "DocumentMoniker": "E:\\Code\\VisualStudioCode\\Front\\Unfinished\\DoDay\\do_day(back-end)\\Data Access Layer\\Migrations\\20260305212906_InitialCreate.cs",
               "RelativeDocumentMoniker": "..\\Data Access Layer\\Migrations\\20260305212906_InitialCreate.cs",
@@ -117,7 +155,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 9,
               "Title": "API Layer.csproj",
               "DocumentMoniker": "E:\\Code\\VisualStudioCode\\Front\\Unfinished\\DoDay\\do_day(back-end)\\DoDay\\API Layer.csproj",
               "RelativeDocumentMoniker": "API Layer.csproj",
@@ -129,7 +167,44 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "DoDayDBContext.cs",
+              "DocumentMoniker": "E:\\Code\\VisualStudioCode\\Front\\Unfinished\\DoDay\\do_day(back-end)\\Data Access Layer\\DatabaseContext\\DoDayDBContext.cs",
+              "RelativeDocumentMoniker": "..\\Data Access Layer\\DatabaseContext\\DoDayDBContext.cs",
+              "ToolTip": "E:\\Code\\VisualStudioCode\\Front\\Unfinished\\DoDay\\do_day(back-end)\\Data Access Layer\\DatabaseContext\\DoDayDBContext.cs",
+              "RelativeToolTip": "..\\Data Access Layer\\DatabaseContext\\DoDayDBContext.cs",
+              "ViewState": "AgIAADQAAAAAAAAAAAAowFwAAAAeAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-05T17:19:29.409Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 7,
+              "Title": "Entity.cs",
+              "DocumentMoniker": "E:\\Code\\VisualStudioCode\\Front\\Unfinished\\DoDay\\do_day(back-end)\\Data Access Layer\\Entities\\Entity.cs",
+              "RelativeDocumentMoniker": "..\\Data Access Layer\\Entities\\Entity.cs",
+              "ToolTip": "E:\\Code\\VisualStudioCode\\Front\\Unfinished\\DoDay\\do_day(back-end)\\Data Access Layer\\Entities\\Entity.cs",
+              "RelativeToolTip": "..\\Data Access Layer\\Entities\\Entity.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-05T21:37:14.271Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "20260305224318_AddUser.cs",
+              "DocumentMoniker": "E:\\Code\\VisualStudioCode\\Front\\Unfinished\\DoDay\\do_day(back-end)\\Data Access Layer\\Migrations\\20260305224318_AddUser.cs",
+              "RelativeDocumentMoniker": "..\\Data Access Layer\\Migrations\\20260305224318_AddUser.cs",
+              "ToolTip": "E:\\Code\\VisualStudioCode\\Front\\Unfinished\\DoDay\\do_day(back-end)\\Data Access Layer\\Migrations\\20260305224318_AddUser.cs",
+              "RelativeToolTip": "..\\Data Access Layer\\Migrations\\20260305224318_AddUser.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-05T22:43:18.263Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
               "Title": "Program.cs",
               "DocumentMoniker": "E:\\Code\\VisualStudioCode\\Front\\Unfinished\\DoDay\\do_day(back-end)\\DoDay\\Program.cs",
               "RelativeDocumentMoniker": "Program.cs",
@@ -141,7 +216,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 11,
               "Title": "appsettings.json",
               "DocumentMoniker": "E:\\Code\\VisualStudioCode\\Front\\Unfinished\\DoDay\\do_day(back-end)\\DoDay\\appsettings.json",
               "RelativeDocumentMoniker": "appsettings.json",
@@ -153,20 +228,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "DoDayDBContext.cs",
-              "DocumentMoniker": "E:\\Code\\VisualStudioCode\\Front\\Unfinished\\DoDay\\do_day(back-end)\\Data Access Layer\\DatabaseContext\\DoDayDBContext.cs",
-              "RelativeDocumentMoniker": "..\\Data Access Layer\\DatabaseContext\\DoDayDBContext.cs",
-              "ToolTip": "E:\\Code\\VisualStudioCode\\Front\\Unfinished\\DoDay\\do_day(back-end)\\Data Access Layer\\DatabaseContext\\DoDayDBContext.cs*",
-              "RelativeToolTip": "..\\Data Access Layer\\DatabaseContext\\DoDayDBContext.cs*",
-              "ViewState": "AgIAABcAAAAAAAAAAAAowD4AAAAjAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-05T17:19:29.409Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 12,
               "Title": "Data Access Layer.csproj",
               "DocumentMoniker": "E:\\Code\\VisualStudioCode\\Front\\Unfinished\\DoDay\\do_day(back-end)\\Data Access Layer\\Data Access Layer.csproj",
               "RelativeDocumentMoniker": "..\\Data Access Layer\\Data Access Layer.csproj",
@@ -178,7 +240,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 13,
               "Title": "Class1.cs",
               "DocumentMoniker": "E:\\Code\\VisualStudioCode\\Front\\Unfinished\\DoDay\\do_day(back-end)\\Data Access Layer\\Class1.cs",
               "RelativeDocumentMoniker": "..\\Data Access Layer\\Class1.cs",
@@ -190,7 +252,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 14,
               "Title": "Class1.cs",
               "DocumentMoniker": "E:\\Code\\VisualStudioCode\\Front\\Unfinished\\DoDay\\do_day(back-end)\\Business Logic Layer\\Class1.cs",
               "RelativeDocumentMoniker": "..\\Business Logic Layer\\Class1.cs",

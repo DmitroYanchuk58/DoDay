@@ -11,6 +11,10 @@ namespace Data_Access_Layer.DatabaseContext
 
         public DbSet<Task> Tasks { get; set; }
 
+        public DbSet<Category> Categories { get; set; }
+
+        public DbSet<CategoryOption> CategoryOpinions { get; set; }
+
         public DoDayDBContext(DbContextOptions<DoDayDBContext> options) : base(options)
         {
         }
@@ -61,6 +65,35 @@ namespace Data_Access_Layer.DatabaseContext
                 .Property(b => b.Description)
                 .HasMaxLength(3000)
                 .IsRequired(false);
+
+            //Categories configuration
+
+            modelBuilder.Entity<Category>().ToTable("Categories");
+
+            modelBuilder.Entity<Category>().HasKey(b => b.Id);
+
+            modelBuilder.Entity<Category>().
+              Property(b => b.Name)
+              .HasMaxLength(200)
+              .IsRequired();
+
+            //Category options configuration
+
+            modelBuilder.Entity<CategoryOption>().ToTable("CategoryOptions");
+
+            modelBuilder.Entity<CategoryOption>().HasKey(b => b.Id);
+
+            modelBuilder.Entity<CategoryOption>()
+                .Property(b => b.Value)
+                .HasMaxLength(200)
+                .IsRequired();
+
+            modelBuilder.Entity<CategoryOption>()
+                .Property(b => b.Key)
+                .IsRequired();
+
+            modelBuilder.Entity<CategoryOption>()
+                .ToTable(t => t.HasCheckConstraint("CK_CategoryOption_ValueKey_Positive", "[Key] >= 0"));
         }
     }
 }
