@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Data_Access_Layer.Entities
+﻿namespace Data_Access_Layer.Entities
 {
     public class User : Entity
     {
@@ -27,6 +23,12 @@ namespace Data_Access_Layer.Entities
         public string? Position { get; set; }   
 
         public byte[]? ProfilePicture { get; set; }
+
+        #endregion
+
+        #region Relaptionships
+
+        public List<Task> Tasks { get; set; } = new List<Task>();
 
         #endregion
 

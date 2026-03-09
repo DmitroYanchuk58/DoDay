@@ -15,13 +15,15 @@ namespace Data_Access_Layer.DatabaseContext
 
         public DbSet<CategoryOption> CategoryOpinions { get; set; }
 
+        public DbSet<CategoryTask> CategoryTasks { get; set; }
+
         public DoDayDBContext(DbContextOptions<DoDayDBContext> options) : base(options)
         {
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            //Users configuration
+            #region Users configuration
             modelBuilder.Entity<User>().ToTable("Users");
 
             modelBuilder.Entity<User>().HasKey(b => b.Id);
@@ -45,8 +47,9 @@ namespace Data_Access_Layer.DatabaseContext
                 .Property(b => b.Email)
                 .IsRequired();
 
-            //Tasks configuration
+            #endregion
 
+            #region Tasks configuration
             modelBuilder.Entity<Task>().ToTable("Tasks");
 
             modelBuilder.Entity<Task>().HasKey(b => b.Id);
@@ -65,9 +68,9 @@ namespace Data_Access_Layer.DatabaseContext
                 .Property(b => b.Description)
                 .HasMaxLength(3000)
                 .IsRequired(false);
+            #endregion
 
-            //Categories configuration
-
+            #region Categories configuration
             modelBuilder.Entity<Category>().ToTable("Categories");
 
             modelBuilder.Entity<Category>().HasKey(b => b.Id);
@@ -76,8 +79,9 @@ namespace Data_Access_Layer.DatabaseContext
               Property(b => b.Name)
               .HasMaxLength(200)
               .IsRequired();
+            #endregion
 
-            //Category options configuration
+            #region CategoryOptions configuration
 
             modelBuilder.Entity<CategoryOption>().ToTable("CategoryOptions");
 
@@ -94,6 +98,41 @@ namespace Data_Access_Layer.DatabaseContext
 
             modelBuilder.Entity<CategoryOption>()
                 .ToTable(t => t.HasCheckConstraint("CK_CategoryOption_ValueKey_Positive", "[Key] >= 0"));
+
+            #endregion
+
+            #region CategoryTasks configuration
+            modelBuilder.Entity<CategoryTask>().ToTable("CategoryTasks");
+
+            modelBuilder.Entity<CategoryTask>().HasKey(b => b.Id);
+            #endregion
+
+            #region Relationships configuration
+
+            modelBuilder.Entity<Task>()
+                .HasOne(co => co.User)          
+                .WithMany(c => c.Tasks)         
+                .HasForeignKey(co => co.UserId) 
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<CategoryTask>()
+                .HasOne(co => co.Task)
+                .WithMany(c => c.CategoryTasks)
+                .HasForeignKey(co => co.TaskId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<CategoryTask>()
+                .HasOne(co => co.Category)
+                .WithMany(c => c.CategoryTasks)
+                .HasForeignKey(co => co.CategoryId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<CategoryOption>()
+                .HasOne(co => co.Category)
+                .WithMany(c => c.CategoryOptions)
+                .HasForeignKey(co => co.CategoryId)
+                .OnDelete(DeleteBehavior.Cascade);
+            #endregion
         }
     }
 }

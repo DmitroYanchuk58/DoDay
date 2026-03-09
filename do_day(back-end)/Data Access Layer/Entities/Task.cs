@@ -6,7 +6,7 @@ namespace Data_Access_Layer.Entities
 {
     public class Task : Entity
     {
-        #region
+        #region Properties
         public required string Name { get; set; }
 
         public required DateTime DateCreated { get; set; }
@@ -14,6 +14,28 @@ namespace Data_Access_Layer.Entities
         public string? Description { get; set; }
 
         public byte[]? Image {  get; set; }
+        #endregion
+
+        #region Relationships
+        public Guid UserId { get; set; }
+
+        public User User { get; set; }
+
+        public List<CategoryTask> CategoryTasks { get; set; }
+        #endregion
+
+        #region Constructors
+        public Task(Guid id, string name, DateTime dateCreated, string? description, byte[]? image)
+        {
+            this.Id = id;
+            this.Name = name;
+            this.DateCreated = dateCreated;
+            this.Description = description;
+            this.Image = image;
+        }
+        public Task(Guid id, string name, DateTime dateCreated) : this(id, name, dateCreated, null, null)
+        {
+        }
         #endregion
     }
 }

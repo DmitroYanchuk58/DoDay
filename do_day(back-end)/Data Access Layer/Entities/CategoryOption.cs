@@ -5,5 +5,9 @@
         public required int Key { get; set; }
 
         public required string Value { get; set; }
+
+        public Guid CategoryId { get; set; }
+
+        public Category Category { get; set; }  
     }
 }
