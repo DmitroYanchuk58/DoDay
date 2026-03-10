@@ -1,4 +1,6 @@
-﻿namespace Data_Access_Layer.Entities
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace Data_Access_Layer.Entities
 {
     public class User : Entity
     {
@@ -39,6 +41,7 @@
             string firstName, string lastName,
             string? number, string? position, byte[]? profilePicture)
         {
+
             this.Id = id;
             this.Username = username;
             this.Email = email;
@@ -50,6 +53,7 @@
             this.ProfilePicture = profilePicture;
         }
 
+        [SetsRequiredMembers]
         public User(Guid id,
             string username, string email, string password,
             string firstName, string lastName) 
