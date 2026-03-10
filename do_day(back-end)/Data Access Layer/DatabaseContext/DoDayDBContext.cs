@@ -47,6 +47,10 @@ namespace Data_Access_Layer.DatabaseContext
                 .Property(b => b.Email)
                 .IsRequired();
 
+            modelBuilder.Entity<User>()
+                .HasIndex(u => u.Email) 
+                .IsUnique();
+
             #endregion
 
             #region Tasks configuration

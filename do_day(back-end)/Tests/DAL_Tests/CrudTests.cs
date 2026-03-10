@@ -54,23 +54,37 @@ namespace DoDay.Tests
         [Fact]
         public async Task CreateAsync_ShouldThrowException_WhenEmailIsNotUnique()
         {
-            // Arrange
-            using (var context = GetDbContext())
+            // 1. Створюємо з'єднання з SQLite в пам'яті
+            var connection = new Microsoft.Data.Sqlite.SqliteConnection("DataSource=:memory:");
+            connection.Open();
+
+            try
             {
-                await context.Database.EnsureCreatedAsync(); // Створюємо таблиці згідно з вашим Fluent API
+                var options = new DbContextOptionsBuilder<DoDayDBContext>()
+                    .UseSqlite(connection) // SQLite розуміє унікальність!
+                    .Options;
 
-                var repository = new CrudRepository<User>(context);
+                using (var context = new DoDayDBContext(options))
+                {
+                    // Створюємо схему таблиць
+                    await context.Database.EnsureCreatedAsync();
 
-                var user1 = new User(Guid.NewGuid(), "user1", "same@email.com", "123", "Al", "Bibek");
-                await repository.CreateAsync(user1);
+                    var repository = new CrudRepository<User>(context);
 
-                // Act & Assert
-                var user2 = new User(Guid.NewGuid(), "user2", "same@email.com", "456", "John", "Doe");
+                    var user1 = new User(Guid.NewGuid(), "user1", "same@email.com", "123", "Al", "Bibek");
+                    await repository.CreateAsync(user1);
 
-                // Очікуємо DbUpdateException від Entity Framework
-                await Assert.ThrowsAsync<DbUpdateException>(() =>
-                    repository.CreateAsync(user2)
-                );
+                    var user2 = new User(Guid.NewGuid(), "user2", "same@email.com", "456", "John", "Doe");
+
+                    // Тепер SQLite реально викине помилку
+                    await Assert.ThrowsAsync<DbUpdateException>(() =>
+                        repository.CreateAsync(user2)
+                    );
+                }
+            }
+            finally
+            {
+                connection.Close();
             }
         }
 
@@ -91,6 +105,50 @@ namespace DoDay.Tests
             // Assert
             Assert.NotNull(result);
             Assert.Equal("Alice", result.Username);
+        }
+
+        [Fact]
+        public async Task GetByIdAsync_NonExistentId_ShouldReturnNull()
+        {
+            // Arrange
+            using var context = GetDbContext();
+            var repository = new CrudRepository<User>(context);
+            var nonExistentId = Guid.NewGuid();
+            // Act
+            var result = await repository.GetByIdAsync(nonExistentId);
+            // Assert
+            Assert.Null(result);
+        }
+
+        [Fact]
+        public async Task GetAllAsync_ShouldReturnAllEntities()
+        {
+            // Arrange
+            using var context = GetDbContext();
+
+            // Створюємо список тестових користувачів
+            var users = new List<User>
+            {
+                new User(Guid.NewGuid(), "Bob", "bob@test.com", "pass123", "Bob", "Smith"),
+                new User(Guid.NewGuid(), "Alice", "alice@test.com", "pass456", "Alice", "Brown"),
+                new User(Guid.NewGuid(), "Charlie", "charlie@test.com", "pass789", "Charlie", "Davis")
+            };
+
+            // Додаємо їх безпосередньо в контекст для підготовки тесту
+            context.Users.AddRange(users);
+            await context.SaveChangesAsync();
+
+            var repository = new CrudRepository<User>(context);
+
+            // Act
+            var result = await repository.GetAllAsync();
+
+            // Assert
+            Assert.NotNull(result);
+            Assert.Equal(3, result.Count); // Перевіряємо кількість
+            Assert.Contains(result, u => u.Username == "Bob"); // Перевіряємо наявність конкретних даних
+            Assert.Contains(result, u => u.Username == "Alice");
+            Assert.Contains(result, u => u.Username == "Charlie");
         }
 
         [Fact]
@@ -115,6 +173,47 @@ namespace DoDay.Tests
         }
 
         [Fact]
+        public async Task UpdateAsync_ShouldThrowException_WhenUpdatingToExistingEmail()
+        {
+            // Arrange
+            var connection = new Microsoft.Data.Sqlite.SqliteConnection("DataSource=:memory:");
+            connection.Open();
+
+            try
+            {
+                var options = new DbContextOptionsBuilder<DoDayDBContext>()
+                    .UseSqlite(connection)
+                    .Options;
+
+                using (var context = new DoDayDBContext(options))
+                {
+                    await context.Database.EnsureCreatedAsync();
+                    var repository = new CrudRepository<User>(context);
+
+                    // 1. Створюємо двох різних користувачів
+                    var user1 = new User(Guid.NewGuid(), "UserOne", "one@test.com", "123", "Al", "Bibek");
+                    var user2 = new User(Guid.NewGuid(), "UserTwo", "two@test.com", "456", "John", "Doe");
+
+                    await repository.CreateAsync(user1);
+                    await repository.CreateAsync(user2);
+
+                    // 2. Спробуємо змінити Email другого користувача на Email першого
+                    user2.Email = "one@test.com";
+
+                    // Act & Assert
+                    // Очікуємо DbUpdateException через порушення унікального індексу (Unique Constraint)
+                    await Assert.ThrowsAsync<DbUpdateException>(() =>
+                        repository.UpdateAsync(user2)
+                    );
+                }
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
+
+        [Fact]
         public async Task DeleteAsync_ShouldRemoveEntity()
         {
             // Arrange
@@ -132,6 +231,26 @@ namespace DoDay.Tests
             // Assert
             var result = await context.Users.FindAsync(userId);
             Assert.Null(result);
+        }
+
+        [Fact]
+        public async Task DeleteAsync_ShouldNotThrowException_WhenEntityDoesNotExist()
+        {
+            // Arrange
+            using var context = GetDbContext();
+            var repository = new CrudRepository<User>(context);
+
+            // Створюємо випадковий ID, якого точно немає в базі
+            var nonExistentId = Guid.NewGuid();
+
+            // Act
+            var exception = await Record.ExceptionAsync(() => repository.DeleteAsync(nonExistentId));
+
+            // Assert
+            Assert.Null(exception);
+
+            var count = await context.Users.CountAsync();
+            Assert.Equal(0, count);
         }
     }
 }
