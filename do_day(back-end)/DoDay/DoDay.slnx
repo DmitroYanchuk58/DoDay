@@ -1,5 +1,6 @@
 <Solution>
   <Project Path="../Business Logic Layer/Business Logic Layer.csproj" Id="2328c890-3dd4-484d-8e80-31198808051a" />
   <Project Path="../Data Access Layer/Data Access Layer.csproj" Id="c909131d-3b93-4858-a0bc-b2cc4e89780f" />
+  <Project Path="../Tests/Tests.csproj" Id="6e25d5ce-2da9-44ad-9292-9dba288281fd" />
   <Project Path="API Layer.csproj" />
 </Solution>
