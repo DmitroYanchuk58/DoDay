@@ -3,7 +3,7 @@ using Data_Access_Layer.Entities;
 
 namespace Business_Logic_Layer.DTO
 {
-    public class UserDTO
+    public class TaskDto
     {
         [Required]
         public Guid Id { get; set; }
@@ -36,9 +36,9 @@ namespace Business_Logic_Layer.DTO
 
         public byte[]? ProfilePicture { get; set; }
 
-        public UserDTO() { }
+        public TaskDto() { }
 
-        public UserDTO(User user)
+        public TaskDto(User user)
         {
             Id = user.Id;
             Username = user.Username;

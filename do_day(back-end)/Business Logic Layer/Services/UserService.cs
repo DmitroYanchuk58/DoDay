@@ -41,7 +41,7 @@ namespace Business_Logic_Layer.Services
 
         public async Task Register(string username, string password, string email, string firstName, string lastName)
         {
-            var userDto = new UserDTO()
+            var userDto = new TaskDto()
             {
                 Id = Guid.NewGuid(),
                 Username = username,
@@ -112,7 +112,7 @@ namespace Business_Logic_Layer.Services
             {
                 throw new Exception("User not found");
             }
-            var userDto = new UserDTO(user);
+            var userDto = new TaskDto(user);
             userDto.Position = newPosition;
             user.Position = userDto.Position;
             await _userRepository.UpdateAsync(user);
@@ -125,7 +125,7 @@ namespace Business_Logic_Layer.Services
             {
                 throw new Exception("User not found");
             }
-            var userDto = new UserDTO(user);
+            var userDto = new TaskDto(user);
             userDto.Number = newNumber;
             user.Number = userDto.Number;
             await _userRepository.UpdateAsync(user);
@@ -136,14 +136,14 @@ namespace Business_Logic_Layer.Services
             await _userRepository.DeleteAsync(idUser);
         }
 
-        public async Task<UserDTO> GetUserById(Guid idUser)
+        public async Task<TaskDto> GetUserById(Guid idUser)
         {            
             var user = await _userRepository.GetByIdAsync(idUser);
             if (user == null)
             {
                 throw new Exception("User not found");
             }
-            return new UserDTO(user);
+            return new TaskDto(user);
         }
     }
 }

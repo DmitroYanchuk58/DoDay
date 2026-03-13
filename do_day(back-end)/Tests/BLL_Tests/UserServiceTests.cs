@@ -578,7 +578,7 @@ namespace Tests.BLL_Tests
 
             // Assert
             Assert.NotNull(result);
-            Assert.IsType<UserDTO>(result);
+            Assert.IsType<TaskDto>(result);
             Assert.Equal(expectedUsername, result.Username);
         }
 

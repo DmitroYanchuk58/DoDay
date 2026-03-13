@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Text;
 
 namespace Data_Access_Layer.Entities
@@ -25,6 +26,7 @@ namespace Data_Access_Layer.Entities
         #endregion
 
         #region Constructors
+        [SetsRequiredMembers]
         public Task(Guid id, string name, DateTime dateCreated, string? description, byte[]? image)
         {
             this.Id = id;
@@ -33,6 +35,7 @@ namespace Data_Access_Layer.Entities
             this.Description = description;
             this.Image = image;
         }
+        [SetsRequiredMembers]
         public Task(Guid id, string name, DateTime dateCreated) : this(id, name, dateCreated, null, null)
         {
         }
