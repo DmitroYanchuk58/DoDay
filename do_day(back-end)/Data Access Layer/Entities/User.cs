@@ -36,6 +36,7 @@ namespace Data_Access_Layer.Entities
 
         #region Constructor
 
+        [SetsRequiredMembers]
         public User(Guid id, 
             string username, string email, string password,
             string firstName, string lastName,
