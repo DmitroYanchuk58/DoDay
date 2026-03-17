@@ -16,6 +16,7 @@ namespace Business_Logic_Layer.DTO
         [MaxLength(200), MinLength(1)]
         public string Value { get; set; }
 
+        public CategoryOptionDTO() { }
         public CategoryOptionDTO(Guid id, int key, string value)
         { 
             this.Id = id;

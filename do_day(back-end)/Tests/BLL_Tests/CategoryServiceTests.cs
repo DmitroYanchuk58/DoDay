@@ -1,5 +1,7 @@
-﻿using Business_Logic_Layer.Services;
+﻿using Business_Logic_Layer.DTO;
+using Business_Logic_Layer.Services;
 using Data_Access_Layer.Entities;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -10,6 +12,7 @@ namespace Tests.BLL_Tests
     public class CategoryServiceTests : ServiceTests
     {
         [Fact]
+        [Trait("Category", "GetCategory")]
         public async Task GetCategory_ShouldReturnCategoryDTO_WhenExists()
         {
             // Arrange
@@ -31,6 +34,7 @@ namespace Tests.BLL_Tests
         }
 
         [Fact]
+        [Trait("Category", "GetCategory")]
         public async Task GetCategory_ShouldThrowArgumentException_WhenIdIsEmpty()
         {
             // Arrange
@@ -46,6 +50,7 @@ namespace Tests.BLL_Tests
         }
 
         [Fact]
+        [Trait("Category", "GetCategory")]
         public async Task GetCategory_ShouldThrowKeyNotFoundException_WhenCategoryDoesNotExist()
         {
             // Arrange
@@ -62,6 +67,7 @@ namespace Tests.BLL_Tests
         }
 
         [Fact]
+        [Trait("Category", "GetCategory")]
         public async Task GetCategory_ShouldIncludeOptions_InResultDTO()
         {
             // Arrange
@@ -87,6 +93,95 @@ namespace Tests.BLL_Tests
             // Assert
             Assert.Single(result.CategoryOptions);
             Assert.Equal("action", result.CategoryOptions.First().Value);
+        }
+
+        [Fact]
+        [Trait("Category", "CreateCategory")]
+        public async Task CreateCategory_ShouldSaveToDatabase_WhenDataIsValid()
+        {
+            // Arrange
+            using var context = GetDbContext();
+            var service = new CategoryService(context);
+            var categoryDto = new CategoryDTO
+            {
+                Id = Guid.NewGuid(),
+                Name = "Manga Genres"
+            };
+
+            // Act
+            await service.CreateCategory(categoryDto);
+
+            // Assert
+            var categoryInDb = await context.Categories.FirstOrDefaultAsync(c => c.Name == "Manga Genres");
+            Assert.NotNull(categoryInDb);
+            Assert.Equal(categoryDto.Id, categoryInDb.Id);
+        }
+
+        [Fact]
+        [Trait("Category", "CreateCategory")]
+        public async Task CreateCategory_ShouldThrowArgumentNullException_WhenDtoIsNull()
+        {
+            // Arrange
+            using var context = GetDbContext();
+            var service = new CategoryService(context);
+
+            // Act & Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(() => service.CreateCategory(null));
+        }
+
+        [Fact]
+        [Trait("Category", "CreateCategory")]
+        public async Task CreateCategory_ShouldCorrectlyMapCategoryOptions()
+        {
+            // Arrange
+            using var context = GetDbContext();
+            var service = new CategoryService(context);
+            var categoryDto = new CategoryDTO
+            {
+                Id = Guid.NewGuid(),
+                Name = "Format",
+                CategoryOptions = new List<CategoryOptionDTO>
+                {
+                    new CategoryOptionDTO { Id = Guid.NewGuid(), Key = 10, Value = "Digital" },
+                    new CategoryOptionDTO { Id = Guid.NewGuid(), Key = 20, Value = "Physical" }
+                }
+            };
+
+            // Act
+            await service.CreateCategory(categoryDto);
+
+            // Assert
+            var categoryInDb = await context.Categories
+                .Include(c => c.CategoryOptions)
+                .FirstOrDefaultAsync(c => c.Id == categoryDto.Id);
+
+            Assert.NotNull(categoryInDb);
+            Assert.Equal(2, categoryInDb.CategoryOptions.Count);
+            Assert.Contains(categoryInDb.CategoryOptions, co => co.Value == "Digital" && co.Key == 10);
+            Assert.Contains(categoryInDb.CategoryOptions, co => co.Value == "Physical" && co.Key == 20);
+        }
+
+        [Fact]
+        [Trait("Category", "CreateCategory")]
+        public async Task CreateCategory_ShouldWork_WhenCategoryOptionsAreNull()
+        {
+            // Arrange
+            using var context = GetDbContext();
+            var service = new CategoryService(context);
+            var categoryDto = new CategoryDTO
+            {
+                Id = Guid.NewGuid(),
+                Name = "Empty Category",
+                CategoryOptions = null 
+            };
+
+            // Act
+            await service.CreateCategory(categoryDto);
+
+            // Assert
+            var categoryInDb = await context.Categories.FindAsync(categoryDto.Id);
+            Assert.NotNull(categoryInDb);
+            Assert.Null(categoryInDb.CategoryOptions);
         }
     }
 }

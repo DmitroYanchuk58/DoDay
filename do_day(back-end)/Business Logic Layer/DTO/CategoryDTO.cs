@@ -17,6 +17,7 @@ namespace Business_Logic_Layer.DTO
 
         public List<CategoryOptionDTO>? CategoryOptions { get; set; }
 
+        public CategoryDTO() { }
         public CategoryDTO(Guid id, string name)
         { 
             this.Id = id;
