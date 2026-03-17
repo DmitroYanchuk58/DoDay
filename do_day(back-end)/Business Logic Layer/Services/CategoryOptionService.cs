@@ -29,5 +29,14 @@ namespace Business_Logic_Layer.Services
             };
             await _categoryOptionRepository.CreateAsync(categoryOption);
         }
+
+        public async Task DeleteCategoryOption(Guid id)
+        {
+            if(id == Guid.Empty)
+            {
+                throw new ArgumentNullException(nameof(id));
+            }
+            await _categoryOptionRepository.DeleteAsync(id);
+        }
     }
 }
