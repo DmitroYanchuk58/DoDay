@@ -73,55 +73,6 @@ namespace Business_Logic_Layer.Services
             await _categoryRepository.UpdateAsync(categoryEntity);
         }
 
-        public async Task AddCategoryOption(CategoryDTO categoryDTO, CategoryOptionDTO categoryOptionDTO)
-        {
-            if (categoryDTO == null)
-            {
-                throw new ArgumentNullException(nameof(categoryDTO), "CategoryDTO cannot be null.");
-            }
-            if (categoryOptionDTO == null)
-            {
-                throw new ArgumentNullException(nameof(categoryOptionDTO), "CategoryOptionDTO cannot be null.");
-            }
-            var categoryEntity = await _categoryRepository.GetByIdAsync(categoryDTO.Id);
-            if (categoryEntity == null)
-            {
-                throw new KeyNotFoundException($"Category with id {categoryDTO.Id} was not found.");
-            }
-            var categoryOptionEntity = new CategoryOption()
-            {
-                Id = categoryOptionDTO.Id,
-                Key = categoryOptionDTO.Key,
-                Value = categoryOptionDTO.Value
-            };
-            categoryEntity.CategoryOptions.Add(categoryOptionEntity);
-            await _categoryRepository.UpdateAsync(categoryEntity);
-        }
-
-        public async Task RemoveCategoryOption(CategoryDTO categoryDTO, CategoryOptionDTO categoryOptionDTO)
-        {
-            if (categoryDTO == null)
-            {
-                throw new ArgumentNullException(nameof(categoryDTO), "CategoryDTO cannot be null.");
-            }
-            if (categoryOptionDTO == null)
-            {
-                throw new ArgumentNullException(nameof(categoryOptionDTO), "CategoryOptionDTO cannot be null.");
-            }
-            var categoryEntity = await _categoryRepository.GetByIdAsync(categoryDTO.Id);
-            if (categoryEntity == null)
-            {
-                throw new KeyNotFoundException($"Category with id {categoryDTO.Id} was not found.");
-            }
-            var categoryOptionEntity = categoryEntity.CategoryOptions.FirstOrDefault(co => co.Id == categoryOptionDTO.Id);
-            if (categoryOptionEntity == null)
-            {
-                throw new KeyNotFoundException($"Category option with id {categoryOptionDTO.Id} was not found in category with id {categoryDTO.Id}.");
-            }
-            categoryEntity.CategoryOptions.Remove(categoryOptionEntity);
-            await _categoryRepository.UpdateAsync(categoryEntity);
-        }
-
         public async Task DeleteCategory(Guid id)
         {
             if (id == Guid.Empty)
