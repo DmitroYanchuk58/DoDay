@@ -254,5 +254,60 @@ namespace Tests.BLL_Tests
                 service.ChangeName(fakeId, "New Name")
             );
         }
+
+        [Fact]
+        [Trait("Category", "DeleteCategory")]
+        public async Task DeleteCategory_ShouldRemoveCategory_WhenCategoryExists()
+        {
+            // Arrange
+            using var context = GetDbContext();
+            var categoryId = Guid.NewGuid();
+            var category = new Category { Id = categoryId, Name = "ToDelete" };
+            context.Categories.Add(category);
+            await context.SaveChangesAsync();
+
+            var service = new CategoryService(context);
+
+            // Act
+            await service.DeleteCategory(categoryId);
+
+            // Assert
+            var categoryInDb = await context.Categories.FindAsync(categoryId);
+            Assert.Null(categoryInDb); 
+        }
+
+        [Fact]
+        [Trait("Category", "DeleteCategory")]
+        public async Task DeleteCategory_ShouldThrowArgumentException_WhenIdIsEmpty()
+        {
+            // Arrange
+            using var context = GetDbContext();
+            var service = new CategoryService(context);
+
+            // Act & Assert
+            var exception = await Assert.ThrowsAsync<ArgumentException>(() =>
+                service.DeleteCategory(Guid.Empty)
+            );
+
+            Assert.Equal("Id cannot be empty.", exception.Message);
+        }
+
+        [Fact]
+        [Trait("Category", "DeleteCategory")]
+        public async Task DeleteCategory_ShouldNotThrow_WhenCategoryDoesNotExist()
+        {
+            // Arrange
+            using var context = GetDbContext();
+            var service = new CategoryService(context);
+            var fakeId = Guid.NewGuid();
+
+            // Act
+            var exception = await Record.ExceptionAsync(() =>
+                service.DeleteCategory(fakeId)
+            );
+
+            // Assert
+            Assert.Null(exception); 
+        }
     }
 }
