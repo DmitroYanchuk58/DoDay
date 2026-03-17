@@ -25,7 +25,8 @@ namespace Business_Logic_Layer.Services
             { 
                 Id = categoryOptionDTO.Id,
                 Key = categoryOptionDTO.Key,
-                Value = categoryOptionDTO.Value
+                Value = categoryOptionDTO.Value,
+                CategoryId = categoryOptionDTO.CategoryId    
             };
             await _categoryOptionRepository.CreateAsync(categoryOption);
         }
@@ -37,6 +38,23 @@ namespace Business_Logic_Layer.Services
                 throw new ArgumentNullException(nameof(id));
             }
             await _categoryOptionRepository.DeleteAsync(id);
+        }
+
+        public async Task<CategoryOptionDTO> GetCategoryOption(Guid id)
+        {
+            if(id == Guid.Empty) 
+            {
+                throw new ArgumentNullException(nameof(id));
+            }
+            var categoryOption = await _categoryOptionRepository.GetByIdAsync(id);
+            var categoryOptionDto = new CategoryOptionDTO()
+            {
+                Id = categoryOption.Id,
+                Key = categoryOption.Key,
+                Value = categoryOption.Value,
+                CategoryId=categoryOption.CategoryId
+            };
+            return categoryOptionDto;
         }
     }
 }

@@ -49,6 +49,11 @@ namespace Business_Logic_Layer.Services
             await _categoryRepository.CreateAsync(categoryEntity);
         }
 
+        public async Task AddCategoryOptionToCategory(Guid idCategory)
+        {
+
+        }
+
         public async Task ChangeName(Guid id, string newName)
         {
             if (id == Guid.Empty)
