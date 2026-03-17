@@ -2,9 +2,6 @@
 using Data_Access_Layer.DatabaseContext;
 using Data_Access_Layer.Entities;
 using Data_Access_Layer.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using Task = System.Threading.Tasks.Task;
 
 namespace Business_Logic_Layer.Services
