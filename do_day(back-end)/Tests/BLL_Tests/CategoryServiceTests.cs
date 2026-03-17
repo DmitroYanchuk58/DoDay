@@ -183,5 +183,76 @@ namespace Tests.BLL_Tests
             Assert.NotNull(categoryInDb);
             Assert.Null(categoryInDb.CategoryOptions);
         }
+
+        [Fact]
+        [Trait("Category", "ChangeName")]
+        public async Task ChangeName_ShouldUpdateNameInDatabase_WhenDataIsValid()
+        {
+            // Arrange
+            using var context = GetDbContext();
+            var categoryId = Guid.NewGuid();
+            var category = new Category { Id = categoryId, Name = "Old Name" };
+            context.Categories.Add(category);
+            await context.SaveChangesAsync();
+
+            var service = new CategoryService(context);
+            string newName = "New Manga Name";
+
+            // Act
+            await service.ChangeName(categoryId, newName);
+
+            // Assert
+            var updatedCategory = await context.Categories.FindAsync(categoryId);
+            Assert.Equal(newName, updatedCategory.Name);
+        }
+
+        [Theory]
+        [InlineData("")]
+        [InlineData("   ")]
+        [InlineData(null)]
+        [Trait("Category", "ChangeName")]
+        public async Task ChangeName_ShouldThrowArgumentException_WhenNameIsInvalid(string invalidName)
+        {
+            // Arrange
+            using var context = GetDbContext();
+            var service = new CategoryService(context);
+            var categoryId = Guid.NewGuid();
+
+            // Act & Assert
+            var exception = await Assert.ThrowsAsync<ArgumentException>(() =>
+                service.ChangeName(categoryId, invalidName)
+            );
+
+            Assert.Equal("New name cannot be null or whitespace.", exception.Message);
+        }
+
+        [Fact]
+        [Trait("Category", "ChangeName")]
+        public async Task ChangeName_ShouldThrowArgumentException_WhenIdIsEmpty()
+        {
+            // Arrange
+            using var context = GetDbContext();
+            var service = new CategoryService(context);
+
+            // Act & Assert
+            await Assert.ThrowsAsync<ArgumentException>(() =>
+                service.ChangeName(Guid.Empty, "Valid Name")
+            );
+        }
+
+        [Fact]
+        [Trait("Category", "ChangeName")]
+        public async Task ChangeName_ShouldThrowKeyNotFoundException_WhenCategoryDoesNotExist()
+        {
+            // Arrange
+            using var context = GetDbContext();
+            var service = new CategoryService(context);
+            var fakeId = Guid.NewGuid();
+
+            // Act & Assert
+            await Assert.ThrowsAsync<KeyNotFoundException>(() =>
+                service.ChangeName(fakeId, "New Name")
+            );
+        }
     }
 }
