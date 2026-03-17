@@ -10,17 +10,8 @@ using TaskEntity = Data_Access_Layer.Entities.Task;
 
 namespace Tests.BLL_Tests
 {
-    public class TaskServiceTests
+    public class TaskServiceTests : ServiceTests
     {
-        private DoDayDBContext GetDbContext()
-        {
-            var options = new DbContextOptionsBuilder<DoDayDBContext>()
-                .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString())
-                .Options;
-
-            return new DoDayDBContext(options);
-        }
-
         [Fact]
         public async Task GetTask_ShouldReturnTaskDTO_WhenTaskExists()
         {

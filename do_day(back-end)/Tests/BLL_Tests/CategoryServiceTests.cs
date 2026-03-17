@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Tests.BLL_Tests
 {
-    public class CategoryServiceTests
+    public class CategoryServiceTests : ServiceTests
     {
     }
 }

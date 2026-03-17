@@ -8,17 +8,8 @@ using Task = System.Threading.Tasks.Task;
 
 namespace Tests.BLL_Tests
 {
-    public class UserServiceTests
+    public class UserServiceTests : ServiceTests
     {
-        private DoDayDBContext GetDbContext()
-        {
-            var options = new DbContextOptionsBuilder<DoDayDBContext>()
-                .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()) 
-                .Options;
-
-            return new DoDayDBContext(options);
-        }
-
         [Fact]
         public async Task Login_ShouldReturnTrue_WhenCredentialsAreCorrect()
         {
