@@ -1,4 +1,5 @@
 ﻿using Business_Logic_Layer.DTO;
+using Business_Logic_Layer.Services.Interfaces;
 using Data_Access_Layer.DatabaseContext;
 using Data_Access_Layer.Entities;
 using Data_Access_Layer.Repositories;
@@ -6,7 +7,7 @@ using Task = System.Threading.Tasks.Task;
 
 namespace Business_Logic_Layer.Services
 {
-    public class CategoryOptionService
+    public class CategoryOptionService : ICategoryOptionService
     {
         CrudRepository<CategoryOption> _categoryOptionRepository;
 
