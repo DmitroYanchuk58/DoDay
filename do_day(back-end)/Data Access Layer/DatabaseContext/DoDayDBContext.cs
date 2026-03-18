@@ -13,7 +13,7 @@ namespace Data_Access_Layer.DatabaseContext
 
         public DbSet<Category> Categories { get; set; }
 
-        public DbSet<CategoryOption> CategoryOpinions { get; set; }
+        public DbSet<CategoryOption> CategoryOptions { get; set; }
 
         public DbSet<CategoryTask> CategoryTasks { get; set; }
 

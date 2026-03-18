@@ -40,7 +40,7 @@ namespace Tests.BLL_Tests
             await service.CreateCategoryOption(optionDto);
 
             // Assert
-            var optionInDb = context.CategoryOpinions.FirstOrDefault(co => co.Id == optionId);
+            var optionInDb = context.CategoryOptions.FirstOrDefault(co => co.Id == optionId);
 
             Assert.NotNull(optionInDb);
             Assert.Equal("Action", optionInDb.Value);
@@ -91,11 +91,74 @@ namespace Tests.BLL_Tests
             await service.CreateCategoryOption(optionDto);
 
             // Assert
-            var result = context.CategoryOpinions.FirstOrDefault(co => co.Id == optionDto.Id);
+            var result = context.CategoryOptions.FirstOrDefault(co => co.Id == optionDto.Id);
             Assert.NotNull(result);
             Assert.Equal(optionDto.Key, result.Key);
             Assert.Equal(optionDto.Value, result.Value);
             Assert.Equal(optionDto.CategoryId, result.CategoryId);
         }
+
+        [Fact]
+        [Trait("Category", "DeleteCategoryOption")]
+        public async Task DeleteCategoryOption_ShouldRemoveFromDatabase_WhenExists()
+        {
+            // Arrange
+            using var context = GetDbContext();
+            var service = new CategoryOptionService(context);
+
+            var category = new Category { Id = Guid.NewGuid(), Name = "Genres" };
+            var optionId = Guid.NewGuid();
+            var option = new CategoryOption
+            {
+                Id = optionId,
+                Value = "Action",
+                CategoryId = category.Id,
+                Key = 3
+            };
+
+            context.Categories.Add(category);
+            context.CategoryOptions.Add(option);
+            await context.SaveChangesAsync();
+
+            // Act
+            await service.DeleteCategoryOption(optionId);
+
+            // Assert
+            var deletedOption = await context.CategoryOptions.FindAsync(optionId);
+            Assert.Null(deletedOption); 
+        }
+
+        [Fact]
+        [Trait("Category", "DeleteCategoryOption")]
+        public async Task DeleteCategoryOption_ShouldThrowArgumentNullException_WhenIdIsEmpty()
+        {
+            // Arrange
+            using var context = GetDbContext();
+            var service = new CategoryOptionService(context);
+
+            // Act & Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(() =>
+                service.DeleteCategoryOption(Guid.Empty)
+            );
+        }
+
+        [Fact]
+        [Trait("Category", "DeleteCategoryOption")]
+        public async Task DeleteCategoryOption_ShouldNotThrow_WhenOptionDoesNotExist()
+        {
+            // Arrange
+            using var context = GetDbContext();
+            var service = new CategoryOptionService(context);
+            var fakeId = Guid.NewGuid();
+
+            // Act
+            var exception = await Record.ExceptionAsync(() =>
+                service.DeleteCategoryOption(fakeId)
+            );
+
+            // Assert
+            Assert.Null(exception); 
+        }
     }
 }
+
