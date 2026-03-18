@@ -48,6 +48,10 @@ namespace Business_Logic_Layer.Services
                 throw new ArgumentNullException(nameof(id));
             }
             var categoryOption = await _categoryOptionRepository.GetByIdAsync(id);
+            if (categoryOption == null)
+            {
+                throw new KeyNotFoundException($"Option with id {id} not found.");
+            }
             var categoryOptionDto = new CategoryOptionDTO()
             {
                 Id = categoryOption.Id,

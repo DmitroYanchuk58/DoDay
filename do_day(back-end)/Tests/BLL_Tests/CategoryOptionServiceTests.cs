@@ -159,6 +159,66 @@ namespace Tests.BLL_Tests
             // Assert
             Assert.Null(exception); 
         }
+
+        [Fact]
+        [Trait("Category", "GetCategoryOption")]
+        public async Task GetCategoryOption_ShouldReturnDto_WhenExists()
+        {
+            // Arrange
+            using var context = GetDbContext();
+            var service = new CategoryOptionService(context);
+
+            var categoryId = Guid.NewGuid();
+            var optionId = Guid.NewGuid();
+            var option = new CategoryOption
+            {
+                Id = optionId,
+                Key = 5,
+                Value = "Fantasy",
+                CategoryId = categoryId
+            };
+
+            context.CategoryOptions.Add(option);
+            await context.SaveChangesAsync();
+
+            // Act
+            var result = await service.GetCategoryOption(optionId);
+
+            // Assert
+            Assert.NotNull(result);
+            Assert.Equal("Fantasy", result.Value);
+            Assert.Equal(5, result.Key);
+            Assert.Equal(categoryId, result.CategoryId);
+        }
+
+        [Fact]
+        [Trait("Category", "GetCategoryOption")]
+        public async Task GetCategoryOption_ShouldThrowArgumentNullException_WhenIdIsEmpty()
+        {
+            // Arrange
+            using var context = GetDbContext();
+            var service = new CategoryOptionService(context);
+
+            // Act & Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(() =>
+                service.GetCategoryOption(Guid.Empty)
+            );
+        }
+
+        [Fact]
+        [Trait("Category", "GetCategoryOption")]
+        public async Task GetCategoryOption_ShouldThrowException_WhenNotFound()
+        {
+            // Arrange
+            using var context = GetDbContext();
+            var service = new CategoryOptionService(context);
+            var fakeId = Guid.NewGuid();
+
+            // Act & Assert
+            await Assert.ThrowsAsync<KeyNotFoundException>(() =>
+                service.GetCategoryOption(fakeId)
+            );
+        }
     }
 }
 
