@@ -306,5 +306,159 @@ namespace Tests.BLL_Tests
             // Assert
             Assert.Null(exception); 
         }
+        [Fact]
+        [Trait("Category", "AddCategoryOptionToCategory")]
+        public async Task AddCategoryOptionToCategory_ShouldSetCategoryIdAndAddToList()
+        {
+            // Arrange
+            using var context = GetDbContext();
+            var categoryService = new CategoryService(context);
+            var optionService = new CategoryOptionService(context);
+
+            var categoryId = Guid.NewGuid();
+            var categoryDto = new CategoryDTO { Id = categoryId, Name = "Manga" };
+            var categoryOptionId = Guid.NewGuid();
+
+            var optionDto = new CategoryOptionDTO
+            {
+                Id = categoryOptionId,
+                Key = 1,
+                Value = "Digital"
+            };
+
+            // Act
+            var result = await categoryService.AddCategoryOptionToCategory(categoryDto, optionDto, optionService);
+
+            // Assert
+            Assert.Equal(categoryId, optionDto.CategoryId);
+
+            Assert.NotNull(result.CategoryOptions);
+            Assert.Single(result.CategoryOptions);
+            Assert.Contains(result.CategoryOptions, o => o.Id == categoryOptionId);
+
+            var optionInDb = await context.CategoryOptions.FindAsync(categoryOptionId);
+            Assert.NotNull(optionInDb);
+            Assert.Equal(categoryId, optionInDb.CategoryId);
+        }
+
+        [Fact]
+        [Trait("Category", "AddCategoryOptionToCategory")]
+        public async Task AddCategoryOptionToCategory_ShouldWork_WhenListStartsAsNull()
+        {
+            // Arrange
+            using var context = GetDbContext();
+            var categoryService = new CategoryService(context);
+            var optionService = new CategoryOptionService(context);
+
+            var categoryDto = new CategoryDTO { Id = Guid.NewGuid(), CategoryOptions = null };
+            var optionDto = new CategoryOptionDTO { Id = Guid.NewGuid(), Key = 2, Value = "Important" };
+
+            // Act
+            var result = await categoryService.AddCategoryOptionToCategory(categoryDto, optionDto, optionService);
+
+            // Assert
+            Assert.NotNull(result.CategoryOptions);
+            Assert.Single(result.CategoryOptions);
+        }
+
+        [Theory]
+        [InlineData(true, false)]
+        [InlineData(false, true)]
+        [Trait("Category", "AddCategoryOptionToCategory")]
+        public async Task AddCategoryOptionToCategory_ShouldThrowException_WhenArgumentsAreNull(bool catIsNull, bool optIsNull)
+        {
+            // Arrange
+            using var context = GetDbContext();
+            var categoryService = new CategoryService(context);
+            var optionService = new CategoryOptionService(context);
+
+            var category = catIsNull ? null : new CategoryDTO();
+            var option = optIsNull ? null : new CategoryOptionDTO();
+
+            // Act & Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(() =>
+                categoryService.AddCategoryOptionToCategory(category, option, optionService)
+            );
+        }
+
+        [Fact]
+        [Trait("Category", "RemoveCategoryOptionFromCategory")]
+        public async Task RemoveCategoryOptionFromCategory_ShouldRemoveFromListAndDatabase()
+        {
+            // Arrange
+            using var context = GetDbContext();
+            var categoryService = new CategoryService(context);
+            var optionService = new CategoryOptionService(context);
+
+            var optionId = Guid.NewGuid();
+            var categoryId = Guid.NewGuid();
+
+            var categoryEntity = new Category { Id = categoryId, Name = "Genres" };
+            var optionEntity = new CategoryOption { Id = optionId, CategoryId = categoryId, Value = "Action", Key = 10 };
+
+            context.Categories.Add(categoryEntity);
+            context.CategoryOptions.Add(optionEntity);
+            await context.SaveChangesAsync();
+
+            var categoryDto = new CategoryDTO
+            {
+                Id = categoryId,
+                CategoryOptions = new List<CategoryOptionDTO>
+                {
+                    new CategoryOptionDTO { Id = optionId }
+                }
+            };
+            var optionDto = new CategoryOptionDTO { Id = optionId };
+
+            // Act
+            var result = await categoryService.RemoveCategoryOptionFromCategory(categoryDto, optionDto, optionService);
+
+            // Assert
+            Assert.Empty(result.CategoryOptions);
+
+            var optionInDb = await context.CategoryOptions.FindAsync(optionId);
+            Assert.Null(optionInDb);
+        }
+
+        [Fact]
+        [Trait("Category", "RemoveCategoryOptionFromCategory")]
+        public async Task RemoveCategoryOptionFromCategory_ShouldNotThrow_WhenListIsNull()
+        {
+            // Arrange
+            using var context = GetDbContext();
+            var categoryService = new CategoryService(context);
+            var optionService = new CategoryOptionService(context);
+
+            var categoryDto = new CategoryDTO { Id = Guid.NewGuid(), CategoryOptions = null };
+            var optionDto = new CategoryOptionDTO { Id = Guid.NewGuid() };
+
+            // Act
+            var exception = await Record.ExceptionAsync(() =>
+                categoryService.RemoveCategoryOptionFromCategory(categoryDto, optionDto, optionService)
+            );
+
+            // Assert
+            Assert.Null(exception);
+        }
+
+        [Theory]
+        [InlineData(true, false)]
+        [InlineData(false, true)]
+        [Trait("Category", "RemoveCategoryOptionFromCategory")]
+        public async Task RemoveCategoryOptionFromCategory_ShouldThrowException_WhenArgumentsAreNull(bool catIsNull, bool optIsNull)
+        {
+            // Arrange
+            using var context = GetDbContext();
+            var categoryService = new CategoryService(context);
+            var optionService = new CategoryOptionService(context);
+
+            var category = catIsNull ? null : new CategoryDTO();
+            var option = optIsNull ? null : new CategoryOptionDTO();
+
+            // Act & Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(() =>
+                categoryService.RemoveCategoryOptionFromCategory(category, option, optionService)
+            );
+        }
     }
 }
