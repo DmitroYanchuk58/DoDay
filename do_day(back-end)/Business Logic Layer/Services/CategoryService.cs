@@ -66,6 +66,21 @@ namespace Business_Logic_Layer.Services
             return category;
         }
 
+        public async Task<CategoryDTO> RemoveCategoryOptionFromCategory(CategoryDTO category, CategoryOptionDTO categoryOption, CategoryOptionService categoryOptionService)
+        {
+            if (categoryOption == null)
+            {
+                throw new ArgumentNullException(nameof(categoryOption), "CategoryOptionDTO cannot be null.");
+            }
+            if (category == null)
+            {
+                throw new ArgumentNullException(nameof(category), "CategoryDTO cannot be null.");
+            }
+            await categoryOptionService.DeleteCategoryOption(categoryOption.Id);
+            category.CategoryOptions?.RemoveAll(co => co.Id == categoryOption.Id);
+            return category;
+        }
+
         public async Task ChangeName(Guid id, string newName)
         {
             if (id == Guid.Empty)
