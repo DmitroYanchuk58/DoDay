@@ -1,44 +1,30 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Data_Access_Layer.Entities;
+﻿using Data_Access_Layer.Entities;
 
 namespace Business_Logic_Layer.DTO
 {
-    public class TaskDto
+    public class UserDTO
     {
-        [Required]
         public Guid Id { get; set; }
 
-        [Required(ErrorMessage = "Username is required")]
-        [StringLength(100, ErrorMessage = "Username cannot exceed 100 characters")]
-        [MinLength(3, ErrorMessage = "Username is too short")]
         public string Username { get; set; }
 
-        [Required(ErrorMessage = "Email is required")]
-        [EmailAddress(ErrorMessage = "Invalid email format")]
         public string Email { get; set; }
 
-        [Required]
-        [StringLength(100, MinimumLength = 8, ErrorMessage = "Password must be at least 8 characters")]
         public string Password { get; set; }
 
-        [Required]
-        [MaxLength(100)]
         public string FirstName { get; set; }
 
-        [Required]
-        [MaxLength(100)]
         public string LastName { get; set; }
 
-        [Phone(ErrorMessage = "Invalid phone number")]
         public string? Number { get; set; }
 
         public string? Position { get; set; }
 
         public byte[]? ProfilePicture { get; set; }
 
-        public TaskDto() { }
+        public UserDTO() { }
 
-        public TaskDto(User user)
+        public UserDTO(User user)
         {
             Id = user.Id;
             Username = user.Username;

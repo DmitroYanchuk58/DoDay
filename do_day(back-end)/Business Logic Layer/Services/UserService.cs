@@ -1,5 +1,6 @@
 ﻿using Business_Logic_Layer.DTO;
 using Business_Logic_Layer.Services.Interfaces;
+using Business_Logic_Layer.Validation;
 using Data_Access_Layer.DatabaseContext;
 using Data_Access_Layer.Entities;
 using Data_Access_Layer.Repositories;
@@ -7,7 +8,7 @@ using Task = System.Threading.Tasks.Task;
 
 namespace Business_Logic_Layer.Services
 {
-    public class UserService : IAuthorization, IUserService
+    public class UserService : IAuthorizationService, IUserService
     {
         CrudRepository<User> _userRepository;
 
@@ -26,7 +27,7 @@ namespace Business_Logic_Layer.Services
             }
             catch (Exception ex)
             {
-                throw new ArgumentException("User not found", ex);
+                throw new ArgumentException("User doesn't exist", ex);
             }
             if (findUser == null)
             {
@@ -41,7 +42,7 @@ namespace Business_Logic_Layer.Services
 
         public async Task Register(string username, string password, string email, string firstName, string lastName)
         {
-            var userDto = new TaskDto()
+            var userDto = new UserDTO()
             {
                 Id = Guid.NewGuid(),
                 Username = username,
@@ -50,6 +51,13 @@ namespace Business_Logic_Layer.Services
                 FirstName = firstName,
                 LastName = lastName
             };
+            var validator = new UserDTOValidator();
+            var result = validator.Validate(userDto);
+            if (!result.IsValid)
+            {
+                var errors = string.Join(", ", result.Errors.Select(e => e.ErrorMessage));
+                throw new ArgumentException(errors);
+            }
 
             var user = userDto.ToEntity();
 
@@ -112,7 +120,7 @@ namespace Business_Logic_Layer.Services
             {
                 throw new Exception("User not found");
             }
-            var userDto = new TaskDto(user);
+            var userDto = new UserDTO(user);
             userDto.Position = newPosition;
             user.Position = userDto.Position;
             await _userRepository.UpdateAsync(user);
@@ -125,7 +133,7 @@ namespace Business_Logic_Layer.Services
             {
                 throw new Exception("User not found");
             }
-            var userDto = new TaskDto(user);
+            var userDto = new UserDTO(user);
             userDto.Number = newNumber;
             user.Number = userDto.Number;
             await _userRepository.UpdateAsync(user);
@@ -136,14 +144,14 @@ namespace Business_Logic_Layer.Services
             await _userRepository.DeleteAsync(idUser);
         }
 
-        public async Task<TaskDto> GetUserById(Guid idUser)
+        public async Task<UserDTO> GetUserById(Guid idUser)
         {            
             var user = await _userRepository.GetByIdAsync(idUser);
             if (user == null)
             {
                 throw new Exception("User not found");
             }
-            return new TaskDto(user);
+            return new UserDTO(user);
         }
     }
 }

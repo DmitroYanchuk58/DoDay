@@ -19,7 +19,7 @@ namespace Tests.BLL_Tests
             context.Users.Add(user);
             await context.SaveChangesAsync();
 
-            IAuthorization userService = new UserService(context);
+            IAuthorizationService userService = new UserService(context);
 
             // Act
             var result = await userService.Login("test@test.com", "correct_pass");
@@ -37,7 +37,7 @@ namespace Tests.BLL_Tests
             context.Users.Add(user);
             await context.SaveChangesAsync();
 
-            IAuthorization userService = new UserService(context);
+            IAuthorizationService userService = new UserService(context);
 
             // Act
             var result = await userService.Login("test@test.com", "wrong_password");
@@ -52,7 +52,7 @@ namespace Tests.BLL_Tests
             // Arrange
             using var context = GetDbContext();
             // База порожня
-            IAuthorization userService = new UserService(context);
+            IAuthorizationService userService = new UserService(context);
 
             // Act & Assert
             await Assert.ThrowsAsync<ArgumentException>(() =>
@@ -69,7 +69,7 @@ namespace Tests.BLL_Tests
             context.Users.Add(user);
             await context.SaveChangesAsync();
 
-            IAuthorization userService = new UserService(context);
+            IAuthorizationService userService = new UserService(context);
 
             // Act
             // Передаємо Email великими літерами
@@ -84,7 +84,7 @@ namespace Tests.BLL_Tests
         {
             // Arrange
             using var context = GetDbContext();
-            IAuthorization userService = new UserService(context);
+            IAuthorizationService userService = new UserService(context);
             string email = "newuser@test.com";
 
             // Act
@@ -108,7 +108,7 @@ namespace Tests.BLL_Tests
             using var context = new DoDayDBContext(options);
             await context.Database.EnsureCreatedAsync();
 
-            IAuthorization userService = new UserService(context);
+            IAuthorizationService userService = new UserService(context);
             await userService.Register("user1", "pass", "same@test.com", "A", "B");
 
             // Act & Assert
@@ -122,7 +122,7 @@ namespace Tests.BLL_Tests
         {
             // Arrange
             using var context = GetDbContext();
-            IAuthorization userService = new UserService(context);
+            IAuthorizationService userService = new UserService(context);
 
             // Act
             await userService.Register("user", "pass", "id-test@test.com", "A", "B");
@@ -569,7 +569,7 @@ namespace Tests.BLL_Tests
 
             // Assert
             Assert.NotNull(result);
-            Assert.IsType<TaskDto>(result);
+            Assert.IsType<UserDTO>(result);
             Assert.Equal(expectedUsername, result.Username);
         }
 
