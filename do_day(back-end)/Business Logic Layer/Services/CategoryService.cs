@@ -1,4 +1,5 @@
 ﻿using Business_Logic_Layer.DTO;
+using Business_Logic_Layer.Validators;
 using Data_Access_Layer.DatabaseContext;
 using Data_Access_Layer.Entities;
 using Data_Access_Layer.Repositories;
@@ -46,6 +47,13 @@ namespace Business_Logic_Layer.Services
                     Value = co.Value
                 }).ToList()
             };
+            CategoryDTOValidator validator = new CategoryDTOValidator();
+            var result = validator.Validate(categoryDto);
+            if (!result.IsValid)
+            {
+                var errors = string.Join(", ", result.Errors.Select(e => e.ErrorMessage));
+                throw new ArgumentException(errors);
+            }
             await _categoryRepository.CreateAsync(categoryEntity);
         }
 

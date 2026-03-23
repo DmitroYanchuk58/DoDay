@@ -6,11 +6,8 @@ namespace Business_Logic_Layer.DTO
 {
     public class CategoryDTO
     {
-        [Required]
         public Guid Id { get; set; } = Guid.NewGuid();
 
-        [Required]
-        [MaxLength(200), MinLength(1)]
         public string Name { get; set; }
 
         public List<TaskDTO>? Tasks{ get; set;  }

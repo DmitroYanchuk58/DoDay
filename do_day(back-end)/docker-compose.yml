@@ -1,0 +1,28 @@
+services:
+  db:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: doday_db
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_SA_PASSWORD=YourStrongPassword123!
+    ports:
+      - "1433:1433"
+    volumes:
+      - sql_data:/var/opt/mssql
+
+  backend:
+    image: doday_backend
+    build:
+      context: .
+      dockerfile: DoDay/Dockerfile
+    container_name: doday_api
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__DoDayDBConnection=Server=db;Database=DoDayDB;User Id=sa;Password=YourStrongPassword123!;TrustServerCertificate=True
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+
+volumes:
+  sql_data:
