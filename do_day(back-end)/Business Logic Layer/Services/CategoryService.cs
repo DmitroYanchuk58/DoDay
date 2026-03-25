@@ -1,4 +1,5 @@
 ﻿using Business_Logic_Layer.DTO;
+using Business_Logic_Layer.Services.Interfaces;
 using Business_Logic_Layer.Validators;
 using Data_Access_Layer.DatabaseContext;
 using Data_Access_Layer.Entities;
@@ -57,7 +58,7 @@ namespace Business_Logic_Layer.Services
             await _categoryRepository.CreateAsync(categoryEntity);
         }
 
-        public async Task<CategoryDTO> AddCategoryOptionToCategory(CategoryDTO category,CategoryOptionDTO categoryOption, CategoryOptionService categoryOptionService)
+        public async Task<CategoryDTO> AddCategoryOptionToCategory(CategoryDTO category,CategoryOptionDTO categoryOption, ICategoryOptionService categoryOptionService)
         {
             if(categoryOption == null)
             {
@@ -74,7 +75,7 @@ namespace Business_Logic_Layer.Services
             return category;
         }
 
-        public async Task<CategoryDTO> RemoveCategoryOptionFromCategory(CategoryDTO category, CategoryOptionDTO categoryOption, CategoryOptionService categoryOptionService)
+        public async Task<CategoryDTO> RemoveCategoryOptionFromCategory(CategoryDTO category, CategoryOptionDTO categoryOption, ICategoryOptionService categoryOptionService)
         {
             if (categoryOption == null)
             {

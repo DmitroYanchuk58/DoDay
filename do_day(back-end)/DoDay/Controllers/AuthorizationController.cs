@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Business_Logic_Layer.Services.Interfaces;
+using Business_Logic_Layer.DTO;
 
 namespace API_Layer.Controllers
 {
@@ -15,13 +16,13 @@ namespace API_Layer.Controllers
         }
 
 
-        [HttpPost("register")]
-        public async Task Register(string username, string password, string email, string firstName, string lastName)
+        [HttpPost("Register")]
+        public async Task Register(UserDTO user)
         {
-            await _service.Register(username, password, email, firstName, lastName);
+            await _service.Register(user);
         }
 
-        [HttpPost("login")]
+        [HttpGet("Login")]
         public async Task<bool> Login(string email, string password)
         {
             return await _service.Login(email, password);

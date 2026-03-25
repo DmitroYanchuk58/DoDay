@@ -17,13 +17,33 @@ builder.Services.AddSwaggerGen();
 
 //Database configuration
 builder.Services.AddDbContext<DoDayDBContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DoDayDBConnection")));
-
+    options.UseSqlServer(
+        builder.Configuration.GetConnectionString("DoDayDBConnection"),
+        sqlServerOptionsAction: sqlOptions =>
+        {
+            sqlOptions.EnableRetryOnFailure(
+                maxRetryCount: 5,
+                maxRetryDelay: TimeSpan.FromSeconds(30),
+                errorNumbersToAdd: null);
+        }
+    )
+);
 
 builder.Services.AddScoped<IAuthorizationService, UserService>();
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowReact", policy =>
+    {
+        policy.AllowAnyOrigin()
+              .AllowAnyMethod()
+              .AllowAnyHeader();
+    });
+});
+
 var app = builder.Build();
 
+app.UseCors("AllowReact");
 app.UseMiddleware<ExceptionHandlingMiddleware>();
 
 // Configure the HTTP request pipeline.

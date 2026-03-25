@@ -1,11 +1,12 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { AuthService } from "../apiClient/AuthorizationService";
 
 import Checkbox from "./components/reg-log-components/checkbox";
 import Input from "./components/reg-log-components/input";
 import Button from "./components/reg-log-components/button";
 
-const Register = ({ onRegister, changeOnLoginPage }) => {
+const Register = ({ changeOnLoginPage }) => {
+  // 1. Усі стейти на верхньому рівні
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [username, setUsername] = useState("");
@@ -13,56 +14,78 @@ const Register = ({ onRegister, changeOnLoginPage }) => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [agree, setAgree] = useState(false);
+  const [message, setMessage] = useState("");
+
+  const handleRegister = async (e) => {
+    if (e) e.preventDefault();
+
+    if (!agree) {
+      setMessage("Ви повинні погодитися з умовами.");
+      return;
+    }
+
+    if (password !== confirmPassword) {
+      setMessage("Паролі не збігаються!");
+      return;
+    }
+
+    try {
+      const data = await AuthService.register(
+        username,
+        password,
+        email,
+        firstName,
+        lastName,
+      );
+
+      setMessage("Реєстрація успішна!");
+      console.log("Дані від сервера:", data);
+    } catch (err) {
+      const errorDetail = err.response?.data?.detail;
+      setMessage("Помилка: " + errorDetail);
+    }
+  };
 
   return (
     <div className="reg-log registartion">
       <div className="auth-card">
         <div className="auth-image">
-          <img
-            src="/images/register.png"
-            alt="Illustration of a man interacting with floating digital documents and a mobile interface"
-          />
+          <img src="/images/register.png" alt="Registration Illustration" />
         </div>
 
         <div className="auth-form-container">
           <h2>Sign Up</h2>
-          <form
-            onSubmit={(e) => {
-              e.preventDefault();
-              onRegister();
-            }}
-          >
+
+          {/* Виводимо повідомлення про статус (успіх або помилка) */}
+          {message && <p className="auth-message">{message}</p>}
+
+          <form onSubmit={handleRegister}>
             <Input
               icon="/images/icons/first_name.svg"
-              alt="first name"
               placeholder="Enter First Name"
               value={firstName}
               onChange={(e) => setFirstName(e.target.value)}
             />
             <Input
               icon="/images/icons/last_name.svg"
-              alt="last name"
               placeholder="Enter Last Name"
               value={lastName}
               onChange={(e) => setLastName(e.target.value)}
             />
             <Input
               icon="/images/icons/username.svg"
-              alt="username"
               placeholder="Enter Username"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
             />
             <Input
               icon="/images/icons/email.svg"
-              alt="email"
               placeholder="Enter Email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
             <Input
               icon="/images/icons/password.svg"
-              alt="password"
               placeholder="Enter Password"
               type="password"
               value={password}
@@ -70,17 +93,21 @@ const Register = ({ onRegister, changeOnLoginPage }) => {
             />
             <Input
               icon="/images/icons/white_password.svg"
-              alt="confirm password"
               placeholder="Confirm Password"
               type="password"
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
             />
 
-            <Checkbox text="I agree to all terms" />
+            <Checkbox
+              text="I agree to all terms"
+              checked={agree}
+              onChange={(e) => setAgree(e.target.checked)}
+            />
 
-            <Button text="Register" onClick={onRegister} disabled={!agree} />
+            <Button text="Register" type="submit" disabled={!agree} />
           </form>
+
           <div className="social-auth-container">
             <div className="auth-footer">
               <span>Already have an account?</span>

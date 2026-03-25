@@ -4,7 +4,7 @@ services:
     container_name: doday_db
     environment:
       - ACCEPT_EULA=Y
-      - MSSQL_SA_PASSWORD=YourStrongPassword123!
+      - MSSQL_SA_PASSWORD=OO__JOjo12germanic!
     ports:
       - "1433:1433"
     volumes:
@@ -18,11 +18,21 @@ services:
     container_name: doday_api
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - ConnectionStrings__DoDayDBConnection=Server=db;Database=DoDayDB;User Id=sa;Password=YourStrongPassword123!;TrustServerCertificate=True
+      - ConnectionStrings__DoDayDBConnection=Server=db;Database=DoDayDB;User Id=sa;Password=OO__JOjo12germanic!;TrustServerCertificate=True
     ports:
       - "8080:8080"
     depends_on:
       - db
+
+  frontend:
+    container_name: doday_front
+    build:
+      context: ../do_day(front-end)
+      dockerfile: Dockerfile
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
 
 volumes:
   sql_data:

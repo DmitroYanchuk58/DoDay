@@ -40,17 +40,8 @@ namespace Business_Logic_Layer.Services
             return false;
         }
 
-        public async Task Register(string username, string password, string email, string firstName, string lastName)
+        public async Task Register(UserDTO userDto)
         {
-            var userDto = new UserDTO()
-            {
-                Id = Guid.NewGuid(),
-                Username = username,
-                Password = password,
-                Email = email,
-                FirstName = firstName,
-                LastName = lastName
-            };
             var validator = new UserDTOValidator();
             var result = validator.Validate(userDto);
             if (!result.IsValid)
