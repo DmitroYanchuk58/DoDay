@@ -1,13 +1,14 @@
 ﻿using Business_Logic_Layer.DTO;
 using Business_Logic_Layer.Services.Interfaces;
+using Business_Logic_Layer.Validators;
 using Data_Access_Layer.DatabaseContext;
 using Data_Access_Layer.Entities;
 using Data_Access_Layer.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Text;
-using TaskEntity = Data_Access_Layer.Entities.Task;
 using Task = System.Threading.Tasks.Task;
+using TaskEntity = Data_Access_Layer.Entities.Task;
 
 namespace Business_Logic_Layer.Services
 {
@@ -43,6 +44,13 @@ namespace Business_Logic_Layer.Services
             if (taskDto == null)
             {
                 throw new ArgumentNullException(nameof(taskDto), "TaskDTO cannot be null.");
+            }
+            var validator = new TaskDTOValidator();
+            var result = validator.Validate(taskDto);
+            if (!result.IsValid)
+            {
+                var errors = string.Join(", ", result.Errors.Select(e => e.ErrorMessage));
+                throw new ArgumentException(errors);
             }
             var taskEntity = taskDto.ToEntity(idUser);
             await _taskRepository.CreateAsync(taskEntity);
