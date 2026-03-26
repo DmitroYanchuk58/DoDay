@@ -13,5 +13,12 @@ namespace API_Layer.Controllers
         {
             _service = service;
         }
+
+        [HttpPost("ChangePassword")]
+        public async Task<IActionResult> ChangePassword(string oldPassword,string newPassword, Guid idUser)
+        {
+            await _service.ChangePassword(idUser, oldPassword, newPassword);
+            return Ok();
+        }
     }
 }
