@@ -17,16 +17,27 @@ namespace API_Layer.Controllers
 
 
         [HttpPost("Register")]
-        public async Task<UserDTO> Register(UserDTO user)
+        public async Task<IActionResult> Register(UserDTO user)
         {
             await _service.Register(user);
-            return user;
+            return Ok(user);
         }
 
         [HttpGet("Login")]
-        public async Task<(bool,UserDTO)> Login(string email, string password)
+        public async Task<IActionResult> Login(string email, string password)
         {
-            return await _service.Login(email, password);
+            var (isSuccess, user) = await _service.Login(email, password);
+
+            if (!isSuccess)
+            {
+                return Unauthorized(new { message = "Invalid email or password" });
+            }
+
+            return Ok(new
+            {
+                isSuccess = isSuccess,
+                user = user
+            });
         }
     }
 }

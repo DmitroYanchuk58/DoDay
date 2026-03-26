@@ -1,32 +1,34 @@
 import { useState } from "react";
+import { AuthService } from "../apiClient/AuthorizationService";
 
 import Input from "./components/reg-log-components/input";
 import Checkbox from "./components/reg-log-components/checkbox";
 import Button from "./components/reg-log-components/button";
 
 const Login = ({ onLogin, changeOnRegisterPage }) => {
-  const [username, setUsername] = useState("");
-
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [message, setMessage] = useState("");
 
   const handleLogin = async () => {
     try {
-      const result = await AuthService.login(email, password);
+      const response = await AuthService.login(email, password);
 
-      const isSuccess = result.item1;
-      const userData = result.item2;
+      const { isSuccess, user } = response;
 
-      if (isSuccess && userData) {
-        localStorage.setItem("user", JSON.stringify(userData));
-
+      if (isSuccess && user) {
+        localStorage.setItem("user", JSON.stringify(user));
+        console.log("Успішний вхід:", user.firstName);
         onLogin();
       } else {
-        setMessage("Неправильний логін або пароль");
+        setMessage("Incorrect email or password");
       }
     } catch (err) {
-      setMessage("Помилка підключення до сервера");
+      const errorMsg = err.response?.data?.message || "User doesn't exist";
+      setMessage(errorMsg);
     }
   };
+
   return (
     <div className="reg-log login">
       <div className="auth-card">
@@ -39,11 +41,11 @@ const Login = ({ onLogin, changeOnRegisterPage }) => {
             }}
           >
             <Input
-              icon="/images/icons/username.svg"
-              alt="user"
-              placeholder="Enter Username"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
+              icon="/images/icons/email.svg"
+              alt="email"
+              placeholder="Enter Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
             />
 
             <Input
@@ -54,6 +56,8 @@ const Login = ({ onLogin, changeOnRegisterPage }) => {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
+
+            {message && <p className="auth-message">{message}</p>}
 
             <Checkbox text="Remember me" />
 

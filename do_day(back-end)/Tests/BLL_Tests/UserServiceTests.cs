@@ -25,7 +25,7 @@ namespace Tests.BLL_Tests
             var result = await userService.Login("test@test.com", "correct_pass");
 
             // Assert
-            Assert.True(result);
+            Assert.True(result.Item1);
         }
 
         [Fact]
@@ -43,7 +43,7 @@ namespace Tests.BLL_Tests
             var result = await userService.Login("test@test.com", "wrong_password");
 
             // Assert
-            Assert.False(result);
+            Assert.False(result.Item1);
         }
 
         [Fact]
@@ -76,7 +76,7 @@ namespace Tests.BLL_Tests
             var result = await userService.Login("USER@TEST.COM", "123");
 
             // Assert
-            Assert.True(result);
+            Assert.True(result.Item1);
         }
 
         [Fact]
@@ -87,8 +87,17 @@ namespace Tests.BLL_Tests
             IAuthorizationService userService = new UserService(context);
             string email = "newuser@test.com";
 
+            var user = new UserDTO
+            {
+                Username = "CoolUser",
+                Password = "password123",
+                Email = email,
+                FirstName = "Ivan",
+                LastName = "Ivanov"
+            };
+
             // Act
-            await userService.Register("CoolUser", "password123", email, "Ivan", "Ivanov");
+            await userService.Register(user);
 
             // Assert
             var savedUser = await context.Users.FirstOrDefaultAsync(u => u.Email == email);
@@ -109,11 +118,23 @@ namespace Tests.BLL_Tests
             await context.Database.EnsureCreatedAsync();
 
             IAuthorizationService userService = new UserService(context);
-            await userService.Register("user1", "pass", "same@test.com", "A", "B");
+
+            var user = new UserDTO
+            {
+                Username = "user1",
+                Password = "pass",
+                Email = "same@test.com",
+                FirstName = "A",
+                LastName = "B"
+            };
+            await userService.Register(user);
+            user.Username = "user2";
+            user.FirstName = "C";
+            user.LastName = "D";
 
             // Act & Assert
             await Assert.ThrowsAsync<DbUpdateException>(() =>
-                userService.Register("user2", "pass", "same@test.com", "C", "D")
+                userService.Register(user)
             );
         }
 
@@ -123,13 +144,21 @@ namespace Tests.BLL_Tests
             // Arrange
             using var context = GetDbContext();
             IAuthorizationService userService = new UserService(context);
+            var user = new UserDTO
+            {
+                Username = "user",
+                Password = "pass",
+                Email = "id-test@test.com",
+                FirstName = "A",
+                LastName = "B"
+            };
 
             // Act
-            await userService.Register("user", "pass", "id-test@test.com", "A", "B");
+            await userService.Register(user);
 
             // Assert
-            var user = await context.Users.FirstAsync(u => u.Email == "id-test@test.com");
-            Assert.NotEqual(Guid.Empty, user.Id);
+            var userDB = await context.Users.FirstAsync(u => u.Email == "id-test@test.com");
+            Assert.NotEqual(Guid.Empty, userDB.Id);
         }
 
         [Fact]
@@ -149,10 +178,19 @@ namespace Tests.BLL_Tests
 
                 string longUsername = new string('A', 200);
 
+                var user = new UserDTO
+                {
+                    Username = longUsername,
+                    Password = "pass123",
+                    Email = "test@test.com",
+                    FirstName = "Ivan",
+                    LastName = "Ivanov"
+                };
+
                 // Act & Assert
                 await Assert.ThrowsAsync<DbUpdateException>(async () =>
                 {
-                    await userService.Register(longUsername, "pass123", "test@test.com", "Ivan", "Ivanov");
+                    await userService.Register(user);
                 });
             }
         }

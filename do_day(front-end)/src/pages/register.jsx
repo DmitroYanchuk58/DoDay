@@ -18,13 +18,8 @@ const Register = ({ changeOnMainPage, changeOnLoginPage }) => {
   const registrateUser = async (e) => {
     if (e) e.preventDefault();
 
-    if (!agree) {
-      setMessage("Ви повинні погодитися з умовами.");
-      return;
-    }
-
     if (password !== confirmPassword) {
-      setMessage("Паролі не збігаються!");
+      setMessage("Passwords should be same");
       return;
     }
 
@@ -37,7 +32,7 @@ const Register = ({ changeOnMainPage, changeOnLoginPage }) => {
         lastName,
       );
 
-      console.log("Повна відповідь сервера:", result);
+      console.log("Server responce:", result);
 
       const userData = result?.user || result;
 
@@ -46,8 +41,8 @@ const Register = ({ changeOnMainPage, changeOnLoginPage }) => {
       changeOnMainPage();
     } catch (err) {
       const errorDetail =
-        err.response?.data?.detail || err.message || "Невідома помилка";
-      setMessage("Помилка: " + errorDetail);
+        err.response?.data?.detail || err.message || "Undefited error";
+      setMessage("Error: " + errorDetail);
     }
   };
 

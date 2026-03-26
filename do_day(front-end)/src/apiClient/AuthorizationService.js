@@ -30,7 +30,10 @@ export const AuthService = {
   async login(email, password) {
     try {
       const response = await apiClient.get("/Authorization/Login", {
-        params: { email, password },
+        params: {
+          email: email,
+          password: password,
+        },
       });
 
       return response.data;
