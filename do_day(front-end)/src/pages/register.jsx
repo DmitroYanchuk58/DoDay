@@ -5,8 +5,7 @@ import Checkbox from "./components/reg-log-components/checkbox";
 import Input from "./components/reg-log-components/input";
 import Button from "./components/reg-log-components/button";
 
-const Register = ({ changeOnLoginPage }) => {
-  // 1. Усі стейти на верхньому рівні
+const Register = ({ changeOnMainPage, changeOnLoginPage }) => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [username, setUsername] = useState("");
@@ -16,7 +15,7 @@ const Register = ({ changeOnLoginPage }) => {
   const [agree, setAgree] = useState(false);
   const [message, setMessage] = useState("");
 
-  const handleRegister = async (e) => {
+  const registrateUser = async (e) => {
     if (e) e.preventDefault();
 
     if (!agree) {
@@ -30,7 +29,7 @@ const Register = ({ changeOnLoginPage }) => {
     }
 
     try {
-      const data = await AuthService.register(
+      const result = await AuthService.register(
         username,
         password,
         email,
@@ -38,10 +37,16 @@ const Register = ({ changeOnLoginPage }) => {
         lastName,
       );
 
-      setMessage("Реєстрація успішна!");
-      console.log("Дані від сервера:", data);
+      console.log("Повна відповідь сервера:", result);
+
+      const userData = result?.user || result;
+
+      localStorage.setItem("user", JSON.stringify(userData));
+
+      changeOnMainPage();
     } catch (err) {
-      const errorDetail = err.response?.data?.detail;
+      const errorDetail =
+        err.response?.data?.detail || err.message || "Невідома помилка";
       setMessage("Помилка: " + errorDetail);
     }
   };
@@ -56,10 +61,7 @@ const Register = ({ changeOnLoginPage }) => {
         <div className="auth-form-container">
           <h2>Sign Up</h2>
 
-          {/* Виводимо повідомлення про статус (успіх або помилка) */}
-          {message && <p className="auth-message">{message}</p>}
-
-          <form onSubmit={handleRegister}>
+          <form onSubmit={registrateUser}>
             <Input
               icon="/images/icons/first_name.svg"
               placeholder="Enter First Name"
@@ -104,6 +106,8 @@ const Register = ({ changeOnLoginPage }) => {
               checked={agree}
               onChange={(e) => setAgree(e.target.checked)}
             />
+
+            {message && <p className="auth-message">{message}</p>}
 
             <Button text="Register" type="submit" disabled={!agree} />
           </form>

@@ -11,7 +11,7 @@ function App() {
 
   const goToRegister = () => navigate("/register");
   const goToLogin = () => navigate("/login");
-  const loginUser = () => setIsAuthenticated(true);
+  const authenticateUser = () => setIsAuthenticated(true);
 
   return (
     <div className="main">
@@ -30,7 +30,7 @@ function App() {
               <Navigate to="/" replace />
             ) : (
               <RegisterPage
-                onRegister={() => setIsAuthenticated(true)}
+                changeOnMainPage={authenticateUser}
                 changeOnLoginPage={goToLogin}
               />
             )
@@ -44,7 +44,7 @@ function App() {
               <Navigate to="/" replace />
             ) : (
               <LoginPage
-                onLogin={loginUser}
+                onLogin={authenticateUser}
                 changeOnRegisterPage={goToRegister}
               />
             )

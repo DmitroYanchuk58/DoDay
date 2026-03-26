@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
 
 import Input from "./components/reg-log-components/input";
 import Checkbox from "./components/reg-log-components/checkbox";
