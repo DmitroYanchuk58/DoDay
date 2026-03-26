@@ -30,6 +30,7 @@ builder.Services.AddDbContext<DoDayDBContext>(options =>
 );
 
 builder.Services.AddScoped<IAuthorizationService, UserService>();
+builder.Services.AddScoped<IUserService, UserService>();    
 
 builder.Services.AddCors(options =>
 {
