@@ -7,8 +7,8 @@ const DashboardContent = ({
   onEditClick,
   onTaskClick,
   onCreateClick,
+  user,
 }) => {
-  // Виносимо всі таски в єдиний масив стану
   const [tasks, setTasks] = useState([
     {
       id: 1,
@@ -116,7 +116,7 @@ const DashboardContent = ({
     <main className="dashboard-main">
       <section className="welcome-section">
         <div className="welcome-text">
-          <h1>Welcome back, Sundar 👋</h1>
+          <h1>Welcome back, {user?.username ?? ""} 👋</h1>
         </div>
         <div className="team-avatars">
           <img src="/images/list_img1.png" alt="team" />

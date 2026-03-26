@@ -1,12 +1,12 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
-const AccountInfo = ({ onGoBack }) => {
+const AccountInfo = ({ onGoBack, user }) => {
   const [formData, setFormData] = useState({
-    firstName: "Sundar",
-    lastName: "Gurung",
-    email: "sundargurung360@gmail.com",
-    contactNumber: "",
-    position: "",
+    firstName: user?.firstName ?? "",
+    lastName: user?.lastName ?? "",
+    email: user?.email ?? "",
+    contactNumber: user?.contactNumber ?? "",
+    position: user?.position ?? "",
   });
 
   const handleChange = (e) => {

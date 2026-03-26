@@ -27,6 +27,11 @@ const Main = () => {
   const [isCreatingTask, setIsCreatingTask] = useState(false);
   const [taskToEdit, setTaskToEdit] = useState(null);
 
+  const [user, setUser] = useState(() => {
+    const stickyValue = localStorage.getItem("user");
+    return stickyValue !== null ? JSON.parse(stickyValue) : null;
+  });
+
   const isDashboardActive = activeId === 1 && !selectedTask;
 
   const openTaskDetails = (task) => {
@@ -70,6 +75,7 @@ const Main = () => {
           onEditClick={openEditOverlay}
           onTaskClick={openTaskDetails}
           onCreateClick={openCreateOverlay}
+          user={user}
         />
         <DashboardOverlay
           isOpen={isInviteModalOpen}
@@ -119,7 +125,7 @@ const Main = () => {
         />
       </>
     ),
-    5: <AccountInfo />,
+    5: <AccountInfo user={user} />,
     6: <ChangePassword />,
   };
 
@@ -132,7 +138,7 @@ const Main = () => {
         <div
           className={`sidebar-section ${isDashboardActive ? "dashboard" : ""}`}
         >
-          <Sidebar activeId={activeId} setActiveId={setActiveId} />
+          <Sidebar activeId={activeId} setActiveId={setActiveId} user={user} />
         </div>
 
         <div

@@ -1,6 +1,4 @@
-import React from "react";
-
-const Sidebar = ({ activeId, setActiveId }) => {
+const Sidebar = ({ activeId, setActiveId, user }) => {
   const menuItems = [
     { id: 1, label: "Dashboard", iconId: "icon-dashboard" },
     { id: 2, label: "Vital Task", iconId: "icon-vital-task" },
@@ -16,8 +14,8 @@ const Sidebar = ({ activeId, setActiveId }) => {
         <div className="profile-avatar">
           <img src="images/profile_image.jpg" alt="Sundar Gurung" />
         </div>
-        <h3 className="profile-name">Sundar Gurung</h3>
-        <p className="profile-email">sundargurung360@gmail.com</p>
+        <h3 className="profile-name">{user?.username ?? ""}</h3>
+        <p className="profile-email">{user?.email ?? ""}</p>
       </div>
 
       <nav className="sidebar-nav">
