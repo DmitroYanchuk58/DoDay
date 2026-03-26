@@ -9,6 +9,24 @@ const Login = ({ onLogin, changeOnRegisterPage }) => {
 
   const [password, setPassword] = useState("");
 
+  const handleLogin = async () => {
+    try {
+      const result = await AuthService.login(email, password);
+
+      const isSuccess = result.item1;
+      const userData = result.item2;
+
+      if (isSuccess && userData) {
+        localStorage.setItem("user", JSON.stringify(userData));
+
+        onLogin();
+      } else {
+        setMessage("Неправильний логін або пароль");
+      }
+    } catch (err) {
+      setMessage("Помилка підключення до сервера");
+    }
+  };
   return (
     <div className="reg-log login">
       <div className="auth-card">
@@ -17,7 +35,7 @@ const Login = ({ onLogin, changeOnRegisterPage }) => {
           <form
             onSubmit={(e) => {
               e.preventDefault();
-              onLogin();
+              handleLogin();
             }}
           >
             <Input

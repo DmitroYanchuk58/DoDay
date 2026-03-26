@@ -24,7 +24,7 @@ namespace API_Layer.Controllers
         }
 
         [HttpGet("Login")]
-        public async Task<bool> Login(string email, string password)
+        public async Task<(bool,UserDTO)> Login(string email, string password)
         {
             return await _service.Login(email, password);
         }

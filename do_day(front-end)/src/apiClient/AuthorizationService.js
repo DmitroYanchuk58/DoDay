@@ -27,4 +27,16 @@ export const AuthService = {
       throw error;
     }
   },
+  async login(email, password) {
+    try {
+      const response = await apiClient.get("/Authorization/Login", {
+        params: { email, password },
+      });
+
+      return response.data;
+    } catch (error) {
+      console.error("Login error:", error.response?.data || error.message);
+      throw error;
+    }
+  },
 };

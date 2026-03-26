@@ -17,7 +17,7 @@ namespace Business_Logic_Layer.Services
             _userRepository = new CrudRepository<User>(context);
         }
 
-        public async Task<bool> Login(string email, string password)
+        public async Task<(bool,UserDTO)> Login(string email, string password)
         {
             var users = await _userRepository.GetAllAsync();
             User? findUser;
@@ -35,9 +35,10 @@ namespace Business_Logic_Layer.Services
             }
             if (string.Equals(findUser.Password, password))
             {
-                return true;
+                var userDto = new UserDTO(findUser);
+                return (true, userDto);
             }
-            return false;
+            return (false,null!);
         }
 
         public async Task Register(UserDTO userDto)

@@ -6,6 +6,6 @@ namespace Business_Logic_Layer.Services.Interfaces
     {
         public Task Register(UserDTO user);
 
-        public Task<bool> Login(string email, string password);
+        public Task<(bool, UserDTO)> Login(string email, string password);
     }
 }
