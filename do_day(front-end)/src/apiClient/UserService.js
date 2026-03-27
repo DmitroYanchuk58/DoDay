@@ -24,4 +24,14 @@ export const UserService = {
       throw error;
     }
   },
+
+  async updateUser(userData) {
+    try {
+      const response = await apiClient.post("/User/UpdateUser", userData);
+      return response.data;
+    } catch (error) {
+      console.error("Error:", error.response?.data || error.message);
+      throw error;
+    }
+  },
 };

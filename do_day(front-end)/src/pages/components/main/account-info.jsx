@@ -1,17 +1,61 @@
 import { useState } from "react";
+import { UserService } from "../../../apiClient/UserService";
 
-const AccountInfo = ({ onGoBack, user }) => {
+const AccountInfo = ({ onGoBack, user, setUser }) => {
   const [formData, setFormData] = useState({
     firstName: user?.firstName ?? "",
     lastName: user?.lastName ?? "",
     email: user?.email ?? "",
-    contactNumber: user?.contactNumber ?? "",
+    contactNumber: user?.number ?? "",
     position: user?.position ?? "",
   });
+
+  const [message, setMessage] = useState("");
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setMessage("Saving...");
+
+    try {
+      const dataToSend = {
+        id: user.id,
+        firstName: formData.firstName,
+        lastName: formData.lastName,
+        email: formData.email,
+        position: formData.position,
+        number: formData.number,
+      };
+
+      await UserService.updateUser(dataToSend);
+
+      setMessage("Account information updated successfully!");
+
+      const updatedUser = {
+        ...user,
+        firstName: formData.firstName || user?.firstName || "",
+        lastName: formData.lastName || user?.lastName || "",
+        email: formData.email || user?.email || "",
+        position: formData.position || user?.position || "",
+        number: formData.number || user?.number || "",
+      };
+
+      if (!updatedUser.id) {
+        console.error("Помилка: Спроба зберегти користувача без ID!");
+        return;
+      }
+
+      localStorage.setItem("user", JSON.stringify(updatedUser));
+      setUser(updatedUser);
+    } catch (err) {
+      const errorDetail =
+        err.response?.data?.detail || err.message || "Update error";
+      setMessage("Error: " + errorDetail);
+    }
   };
 
   return (
@@ -37,7 +81,7 @@ const AccountInfo = ({ onGoBack, user }) => {
       </div>
 
       <div className="account-card">
-        <form className="account-form" onSubmit={(e) => e.preventDefault()}>
+        <form className="account-form" onSubmit={handleSubmit}>
           <div className="form-grid">
             <div className="form-group">
               <label>First Name</label>
@@ -74,7 +118,7 @@ const AccountInfo = ({ onGoBack, user }) => {
               <input
                 type="text"
                 name="contactNumber"
-                value={formData.contactNumber}
+                value={formData.number}
                 onChange={handleChange}
               />
             </div>
@@ -88,6 +132,7 @@ const AccountInfo = ({ onGoBack, user }) => {
                 onChange={handleChange}
               />
             </div>
+            {message && <p className="auth-message">{message}</p>}
           </div>
 
           <div className="account-form-actions">

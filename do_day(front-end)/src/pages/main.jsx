@@ -125,7 +125,7 @@ const Main = () => {
         />
       </>
     ),
-    5: <AccountInfo user={user} />,
+    5: <AccountInfo user={user} setUser={setUser} />,
     6: <ChangePassword user={user} changeOnDashboard={() => setActiveId(1)} />,
   };
 

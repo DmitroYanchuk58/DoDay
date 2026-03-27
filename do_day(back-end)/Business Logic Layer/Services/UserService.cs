@@ -101,11 +101,11 @@ namespace Business_Logic_Layer.Services
             {
                 throw new Exception("User not found");
             }
-            user.FirstName = userDTO.FirstName;
-            user.LastName = userDTO.LastName;
-            user.Email = userDTO.Email;
-            user.Position = userDTO.Position;
-            user.Number = userDTO.Number;
+            user.FirstName = !string.IsNullOrWhiteSpace(userDTO.FirstName) ? userDTO.FirstName : user.FirstName;
+            user.LastName = !string.IsNullOrWhiteSpace(userDTO.LastName) ? userDTO.LastName : user.LastName;
+            user.Email = !string.IsNullOrWhiteSpace(userDTO.Email) ? userDTO.Email : user.Email;
+            user.Position = !string.IsNullOrWhiteSpace(userDTO.Position) ? userDTO.Position : user.Position;
+            user.Number = !string.IsNullOrWhiteSpace(userDTO.Number) ? userDTO.Number : user.Number;
             await _userRepository.UpdateAsync(user);
         }
 
