@@ -1,14 +1,53 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import { UserService } from "../../../apiClient/UserService";
 
-const ChangePassword = ({ onGoBack }) => {
+const ChangePassword = ({ onGoBack, user, changeOnDashboard }) => {
   const [formData, setFormData] = useState({
-    firstName: "Sundar",
-    lastName: "Gurung",
-    email: "sundargurung360@gmail.com",
+    firstName: user?.firstName ?? "",
+    lastName: user?.lastName ?? "",
+    email: user?.email ?? "",
     currentPassword: "",
     newPassword: "",
     confirmPassword: "",
   });
+
+  const [message, setMessage] = useState();
+
+  const isNullOrWhiteSpace = (str) => {
+    return !str || str.trim().length === 0;
+  };
+
+  const toChangePassword = async (e) => {
+    if (e) e.preventDefault();
+
+    if (isNullOrWhiteSpace(formData.currentPassword)) {
+      setMessage("Current password shouldn't be empty");
+      return;
+    }
+
+    if (isNullOrWhiteSpace(formData.newPassword)) {
+      setMessage("Old password shouldn't be empty");
+      return;
+    }
+
+    if (formData.newPassword !== formData.confirmPassword) {
+      setMessage("Passwords should be same");
+      return;
+    }
+
+    try {
+      const result = await UserService.changePassword(
+        user.id,
+        formData.currentPassword,
+        formData.newPassword,
+      );
+      setMessage("Your password was changed successfuly");
+    } catch (err) {
+      const errorDetail =
+        err.response?.data?.detail || err.message || "Undefited error";
+      setMessage("Error: " + errorDetail);
+    }
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -38,7 +77,7 @@ const ChangePassword = ({ onGoBack }) => {
       </div>
 
       <div className="account-card">
-        <form className="account-form" onSubmit={(e) => e.preventDefault()}>
+        <form className="account-form" onSubmit={toChangePassword}>
           <div className="form-grid">
             <div className="form-group">
               <label>Current Password</label>
@@ -53,7 +92,7 @@ const ChangePassword = ({ onGoBack }) => {
             <div className="form-group">
               <label>New Password</label>
               <input
-                type="email"
+                type="text"
                 name="newPassword"
                 value={formData.newPassword}
                 onChange={handleChange}
@@ -69,6 +108,7 @@ const ChangePassword = ({ onGoBack }) => {
                 onChange={handleChange}
               />
             </div>
+            {message && <p className="auth-message">{message}</p>}
           </div>
 
           <div className="account-form-actions">

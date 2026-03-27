@@ -2503,7 +2503,8 @@ div.reg-log {
 .registartion .auth-form-container form {
   gap: 15px;
 }
-.registartion .auth-message {
+
+.auth-message {
   color: red;
   font-size: 12px;
 }

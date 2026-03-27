@@ -1,4 +1,5 @@
-﻿using Business_Logic_Layer.Services.Interfaces;
+﻿using Business_Logic_Layer.DTO;
+using Business_Logic_Layer.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API_Layer.Controllers
@@ -18,6 +19,13 @@ namespace API_Layer.Controllers
         public async Task<IActionResult> ChangePassword(string oldPassword,string newPassword, Guid idUser)
         {
             await _service.ChangePassword(idUser, oldPassword, newPassword);
+            return Ok();
+        }
+
+        [HttpPost("UpdateUser")]
+        public async Task<IActionResult> UpdateUser(UserDTO user)
+        {
+            await _service.UpdateUser(user);
             return Ok();
         }
     }

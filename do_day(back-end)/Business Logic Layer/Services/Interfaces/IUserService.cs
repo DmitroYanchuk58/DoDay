@@ -20,5 +20,7 @@ namespace Business_Logic_Layer.Services.Interfaces
         public Task DeleteUser(Guid idUser);
 
         public Task<UserDTO> GetUserById(Guid idUser);
+
+        public Task UpdateUser(UserDTO userDTO);
     }
 }

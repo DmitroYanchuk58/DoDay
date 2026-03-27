@@ -20,10 +20,7 @@ export const AuthService = {
 
       return response.data;
     } catch (error) {
-      console.error(
-        "Помилка реєстрації:",
-        error.response?.data || error.message,
-      );
+      console.error("Error:", error.response?.data || error.message);
       throw error;
     }
   },
@@ -38,7 +35,7 @@ export const AuthService = {
 
       return response.data;
     } catch (error) {
-      console.error("Login error:", error.response?.data || error.message);
+      console.error("Error:", error.response?.data || error.message);
       throw error;
     }
   },

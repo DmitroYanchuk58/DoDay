@@ -94,6 +94,21 @@ namespace Business_Logic_Layer.Services
             await _userRepository.UpdateAsync(user);
         }
 
+        public async Task UpdateUser(UserDTO userDTO)
+        {
+            var user = await _userRepository.GetByIdAsync(userDTO.Id);
+            if (user == null)
+            {
+                throw new Exception("User not found");
+            }
+            user.FirstName = userDTO.FirstName;
+            user.LastName = userDTO.LastName;
+            user.Email = userDTO.Email;
+            user.Position = userDTO.Position;
+            user.Number = userDTO.Number;
+            await _userRepository.UpdateAsync(user);
+        }
+
         public async Task UploadProfilePicture(Guid idUser, byte[] newProfilePicture)
         {
             var user = await _userRepository.GetByIdAsync(idUser);
