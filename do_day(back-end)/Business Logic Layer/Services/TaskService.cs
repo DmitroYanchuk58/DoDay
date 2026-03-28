@@ -39,6 +39,19 @@ namespace Business_Logic_Layer.Services
             return taskDto;
         }
 
+        public async Task<List<TaskDTO>> GetTasksByUserId(Guid idUser)
+        {
+            var taskEntities = (await _taskRepository.GetAllAsync()).Where(e => e.UserId == idUser);
+
+            var taskDtos = new List<TaskDTO>();
+            foreach (var taskEntity in taskEntities)
+            {
+                var taskDto = new TaskDTO(taskEntity);
+                taskDtos.Add(taskDto);
+            }
+            return taskDtos;
+        }
+
         public async Task CreateTask(TaskDTO taskDto, Guid idUser)
         {
             if (taskDto == null)

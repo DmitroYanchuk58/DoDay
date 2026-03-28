@@ -15,5 +15,7 @@ namespace Business_Logic_Layer.Services.Interfaces
         public Task ChangeImage(Guid id, byte[] newImage);
 
         public Task DeleteTask(Guid id);
+
+        public Task<List<TaskDTO>> GetTasksByUserId(Guid idUser);
     }
 }
