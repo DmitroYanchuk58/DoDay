@@ -36,6 +36,11 @@ namespace API_Layer.Controllers
             return Ok(task);
         }
 
-
+        [HttpDelete("DeleteTask")]
+        public async Task<IActionResult> DeleteTask(Guid idTask)
+        {
+            await _service.DeleteTask(idTask);
+            return Ok();
+        }
     }
 }
