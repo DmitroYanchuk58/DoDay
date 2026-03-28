@@ -28,5 +28,14 @@ namespace API_Layer.Controllers
             await _service.CreateTask(taskDto, idUser);
             return Ok();
         }
+
+        [HttpGet("GetTask")]
+        public async Task<IActionResult> GetTaskById(Guid idTask)
+        {
+            var task = await _service.GetTask(idTask);
+            return Ok(task);
+        }
+
+
     }
 }
