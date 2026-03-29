@@ -4,11 +4,11 @@ namespace Business_Logic_Layer.DTO
 {
     public class TaskDTO
     {
-        public Guid Id { get; set; }
+        public Guid? Id { get; set; } = Guid.NewGuid();
 
-        public string Name { get; set; }
+        public string? Name { get; set; }
 
-        public DateTime DateCreated { get; set; } = DateTime.Now;
+        public DateTime? DateCreated { get; set; } = DateTime.Now;
 
         public string? Description { get; set; }
 
@@ -31,7 +31,13 @@ namespace Business_Logic_Layer.DTO
 
         public Task ToEntity(Guid userId)
         {
-            return new Task(Id, Name, DateCreated, Description, Image)
+            return new Task(
+                    Id ?? Guid.NewGuid(),
+                    Name ?? "Untitled Task",
+                    DateCreated ?? DateTime.Now,
+                    Description,
+                    Image
+                )
             {
                 UserId = userId
             };

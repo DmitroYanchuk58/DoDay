@@ -94,6 +94,7 @@ const Main = () => {
         <CreateTask
           isOpen={isCreatingTask}
           onClose={() => setIsCreatingTask(false)}
+          user={user}
         />
       </>
     ),

@@ -15,8 +15,6 @@ const Register = ({ changeOnMainPage, changeOnLoginPage }) => {
   const [agree, setAgree] = useState(false);
   const [message, setMessage] = useState("");
 
-  const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
-
   const registrateUser = async (e) => {
     if (e) e.preventDefault();
 

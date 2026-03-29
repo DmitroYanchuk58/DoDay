@@ -1,7 +1,31 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import { TaskService } from "../../../apiClient/TaskService";
 
-const CreateTaskOverlay = ({ isOpen, onClose }) => {
+const CreateTaskOverlay = ({ isOpen, onClose, user }) => {
+  const [name, setName] = useState();
+  const [description, setDescription] = useState("");
+
   if (!isOpen) return null;
+
+  const isNullOrWhiteSpace = (str) => {
+    return !str || str.trim().length === 0;
+  };
+
+  const createTask = async (e) => {
+    if (e) e.preventDefault();
+
+    if (isNullOrWhiteSpace(name)) {
+      return;
+    }
+
+    try {
+      const result = await TaskService.createTask(user.id, name, description);
+      onClose();
+    } catch (err) {
+      const errorDetail =
+        err.response?.data?.detail || err.message || "Undefited error";
+    }
+  };
 
   return (
     <div className="edit-overlay">
@@ -19,7 +43,11 @@ const CreateTaskOverlay = ({ isOpen, onClose }) => {
           <div className="edit-form-left">
             <div className="edit-input-group">
               <label>Title</label>
-              <input type="text" name="title" />
+              <input
+                type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+              />
             </div>
 
             <div className="edit-input-group">
@@ -58,8 +86,9 @@ const CreateTaskOverlay = ({ isOpen, onClose }) => {
             <div className="edit-input-group">
               <label>Task Description</label>
               <textarea
-                name="description"
                 placeholder="Start writing here..."
+                value={description}
+                onChange={(e) => setDescription(e.value)}
               ></textarea>
             </div>
           </div>
@@ -78,7 +107,9 @@ const CreateTaskOverlay = ({ isOpen, onClose }) => {
         </div>
 
         <div className="edit-modal-footer">
-          <button className="btn-done">Done</button>
+          <button className="btn-done" onClick={(e) => createTask()}>
+            Done
+          </button>
         </div>
       </div>
     </div>
