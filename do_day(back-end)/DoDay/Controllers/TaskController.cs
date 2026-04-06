@@ -42,5 +42,11 @@ namespace API_Layer.Controllers
             await _service.DeleteTask(idTask);
             return Ok();
         }
+
+        [HttpPut("UpdateTask")]
+        public async Task<IActionResult> UpdateTask(TaskDTO taskDto)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
