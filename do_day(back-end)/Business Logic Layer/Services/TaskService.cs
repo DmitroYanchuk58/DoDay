@@ -140,6 +140,10 @@ namespace Business_Logic_Layer.Services
             }
             await _taskRepository.DeleteAsync(id);
         }
-        
+
+        public async Task UpdateTask(TaskDTO taskDto)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
