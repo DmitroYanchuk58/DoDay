@@ -1,10 +1,12 @@
 ﻿using Business_Logic_Layer.DTO;
 using Business_Logic_Layer.Services;
 using Data_Access_Layer.DatabaseContext;
+using FluentAssertions.Execution;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using static System.Net.Mime.MediaTypeNames;
 using Task = System.Threading.Tasks.Task;
 using TaskEntity = Data_Access_Layer.Entities.Task;
 
@@ -68,7 +70,7 @@ namespace Tests.BLL_Tests
             // Arrange
             using var context = GetDbContext();
             var taskId = Guid.NewGuid();
-            var task = new TaskEntity(taskId, "Title",DateTime.Now, "Description", null);
+            var task = new TaskEntity(taskId, "Title", DateTime.Now, "Description", null);
             context.Tasks.Add(task);
             await context.SaveChangesAsync();
 
@@ -342,7 +344,7 @@ namespace Tests.BLL_Tests
 
             // Assert
             var taskInDb = await context.Tasks.FindAsync(taskId);
-            Assert.Null(taskInDb); 
+            Assert.Null(taskInDb);
         }
 
         [Fact]
@@ -374,7 +376,154 @@ namespace Tests.BLL_Tests
             );
 
             // Assert
-            Assert.Null(exception); 
+            Assert.Null(exception);
+        }
+
+        [Fact]
+        public async Task UpdateTask_ShouldUpdateTask_WhenInfoIsCorrect()
+        {
+
+            // Arrange
+            using var context = GetDbContext();
+            var taskService = new TaskService(context);
+            var task = new TaskDTO
+            {
+                Id = Guid.NewGuid(),
+                Name = "Original Task",
+                Description = "Original Description"
+            };
+
+            // Act
+            await taskService.CreateTask(task, Guid.NewGuid());
+            task.Name = "Updated Task";
+            task.Description = "Updated Description";
+
+            await taskService.UpdateTask(task);
+            var updatedTask = await taskService.GetTask(task.Id.Value);
+
+            // Assert
+
+            Assert.Equal("Updated Task", updatedTask.Name);
+            Assert.Equal("Updated Description", updatedTask.Description);
+        }
+
+        [Fact]
+        public async Task UpdateTask_ShouldThrowArgumentNullException_WhenDtoIsNull()
+        {
+            // Arrange
+            using var context = GetDbContext();
+            var taskService = new TaskService(context);
+            // Act & Assert
+            var exception = await Assert.ThrowsAsync<ArgumentNullException>(() =>
+                taskService.UpdateTask(null)
+            );
+            Assert.Contains("TaskDTO cannot be null", exception.Message);
+        }
+
+        [Fact]
+        public async Task UpdateTask_ShouldThrowArgumentException_WhenIdIsEmpty()
+        {
+            // Arrange
+            using var context = GetDbContext();
+            var taskService = new TaskService(context);
+            var taskDto = new TaskDTO
+            {
+                Id = Guid.Empty,
+                Name = "Task with Empty Id"
+            };
+            // Act & Assert 
+            var exception = await Assert.ThrowsAsync<ArgumentException>(() =>
+                taskService.UpdateTask(taskDto)
+            );
+            Assert.Equal("TaskDTO Id cannot be empty.", exception.Message);
+        }
+
+        [Fact]
+        public async Task UpdateTask_ShouldThrowKeyNotFoundException_WhenTaskDoesNotExist()
+        {
+            // Arrange
+            using var context = GetDbContext();
+            var taskService = new TaskService(context);
+            var taskDto = new TaskDTO
+            {
+                Id = Guid.NewGuid(),
+                Name = "Non-existent Task"
+            };
+            // Act & Assert
+            var exception = await Assert.ThrowsAsync<KeyNotFoundException>(() =>
+                taskService.UpdateTask(taskDto)
+            );
+            Assert.Contains(taskDto.Id.ToString(), exception.Message);
+        }
+
+        [Fact]
+        public async Task UpdateTask_ShouldNotChangeUserId_WhenUpdatingTask()
+        {
+            // Arrange
+            using var context = GetDbContext();
+            var taskService = new TaskService(context);
+            var userId = Guid.NewGuid();
+            var taskDto = new TaskDTO
+            {
+                Id = Guid.NewGuid(),
+                Name = "Task to Update",
+                Description = "Original Description"
+            };
+            await taskService.CreateTask(taskDto, userId);
+            // Act
+            taskDto.Description = "Updated Description";
+            await taskService.UpdateTask(taskDto);
+            var updatedTask = await context.Tasks.FindAsync(taskDto.Id.Value);
+            // Assert
+            Assert.Equal(userId, updatedTask.UserId);
+        }
+
+        [Theory]
+        [InlineData(null)]
+        [InlineData("")]
+        [InlineData("   ")]
+        public async Task CreateManga_ShouldThrowException_WhenTitleIsInvalid(string invalidTitle)
+        {
+            // Arrange
+            using var context = GetDbContext();
+            var service = new TaskService(context);
+            var userId = Guid.NewGuid();
+            var taskDto = new TaskDTO
+            {
+                Id = Guid.NewGuid(),
+                Name = "Task to Update",
+                Description = "Original Description"
+            };
+            // Act
+            await service.CreateTask(taskDto, userId);
+            taskDto.Name = invalidTitle;
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentException>(() => service.UpdateTask(taskDto));
+        }
+
+        [Theory]
+        [InlineData(null)]
+        [InlineData("")]
+        [InlineData("   ")]
+        public async Task CreateManga_ShouldThrowException_WhenDescriptionIsInvalid(string invalidDescription)
+        {
+            // Arrange
+            using var context = GetDbContext();
+            var service = new TaskService(context);
+            var userId = Guid.NewGuid();
+            var taskDto = new TaskDTO
+            {
+                Id = Guid.NewGuid(),
+                Name = "Task to Update",
+                Description = "Original Description"
+            };
+            // Act
+            await service.CreateTask(taskDto, userId);
+            taskDto.Description = invalidDescription;
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentException>(() => service.UpdateTask(taskDto));
         }
     }
 }
