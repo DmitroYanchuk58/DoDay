@@ -10,9 +10,17 @@ const DashboardContent = ({
   onCreateClick,
   user,
   tasks,
+  refreshTasks,
 }) => {
-  const handleDeleteTask = (id) => {
-    setTasks((prev) => prev.filter((task) => task.id !== id));
+  const handleDeleteTask = async (id) => {
+    try {
+      await TaskService.deleteTask(id);
+      if (refreshTasks) {
+        await refreshTasks();
+      }
+    } catch (err) {
+      console.error("Помилка оновлення:", err);
+    }
   };
 
   const todoTasks = tasks.filter((t) => {

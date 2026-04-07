@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import TaskCard from "./task-card";
 import { TaskService } from "../../../apiClient/TaskService";
 
-const VitalTask = ({ user }) => {
+const VitalTask = ({ user, refreshTasks }) => {
   const [tasks, setTasks] = useState([]);
 
   const fetchTasks = async () => {
@@ -20,17 +20,20 @@ const VitalTask = ({ user }) => {
     fetchTasks();
   }, []);
 
-  const [selectedId, setSelectedId] = useState(tasks[0]?.id);
-  const selectedTask = tasks.find((t) => t.id === selectedId);
-
-  const deleteTask = (id) => {
-    setTasks((prevTasks) => prevTasks.filter((task) => task.id !== id));
-
-    if (selectedId === id) {
-      const remainingTasks = tasks.filter((t) => t.id !== id);
-      setSelectedId(remainingTasks[0]?.id);
+  const handleDeleteTask = async (id) => {
+    try {
+      await TaskService.deleteTask(id);
+      setTasks((prev) => prev.filter((task) => task.id !== id));
+      if (refreshTasks) {
+        await refreshTasks();
+      }
+    } catch (err) {
+      console.error("Помилка оновлення:", err);
     }
   };
+
+  const [selectedId, setSelectedId] = useState(tasks[0]?.id);
+  const selectedTask = tasks.find((t) => t.id === selectedId);
 
   return (
     <div className="task-details-page">
@@ -44,7 +47,7 @@ const VitalTask = ({ user }) => {
                 title={task.name}
                 description={task.description}
                 {...task}
-                onDelete={deleteTask}
+                onDelete={handleDeleteTask}
                 type="compact"
                 isVitalPage={true}
                 className={selectedId === task.id ? "selected" : ""}

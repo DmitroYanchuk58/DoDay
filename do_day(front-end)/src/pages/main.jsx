@@ -96,6 +96,7 @@ const Main = () => {
           onCreateClick={openCreateOverlay}
           user={user}
           tasks={tasks}
+          refreshTasks={refreshTasks}
         />
         <DashboardOverlay
           isOpen={isInviteModalOpen}
@@ -119,8 +120,8 @@ const Main = () => {
         />
       </>
     ),
-    2: <VitalTask user={user} />,
-    3: <MyTask user={user} />,
+    2: <VitalTask user={user} refreshTasks={refreshTasks} />,
+    3: <MyTask user={user} refreshTasks={refreshTasks} />,
     4: isCreatingCategory ? (
       <CreateCategory
         onCreate={(title) => {

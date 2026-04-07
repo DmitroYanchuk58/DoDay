@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { TaskService } from "../../../apiClient/TaskService";
 import TaskCard from "./task-card";
 
-const MyTask = ({ user }) => {
+const MyTask = ({ user, refreshTasks }) => {
   const [tasks, setTasks] = useState([]);
   const fetchTasks = async () => {
     try {
@@ -23,12 +23,15 @@ const MyTask = ({ user }) => {
 
   const selectedTask = tasks.find((t) => t.id === selectedTaskId);
 
-  const deleteTask = (id) => {
-    const updatedTasks = tasks.filter((task) => task.id !== id);
-    setTasks(updatedTasks);
-
-    if (selectedTaskId === id) {
-      setSelectedTaskId(updatedTasks[0]?.id || null);
+  const handleDeleteTask = async (id) => {
+    try {
+      await TaskService.deleteTask(id);
+      setTasks((prev) => prev.filter((task) => task.id !== id));
+      if (refreshTasks) {
+        await refreshTasks();
+      }
+    } catch (err) {
+      console.error("Помилка оновлення:", err);
     }
   };
 
@@ -47,7 +50,7 @@ const MyTask = ({ user }) => {
                 id={task.id}
                 title={task.name || task.Name}
                 {...task}
-                onDelete={deleteTask}
+                onDelete={handleDeleteTask}
                 type="compact"
                 className={selectedTaskId === task.id ? "selected" : ""}
               />
