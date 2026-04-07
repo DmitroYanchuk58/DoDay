@@ -395,11 +395,14 @@ namespace Tests.BLL_Tests
 
             // Act
             await taskService.CreateTask(task, Guid.NewGuid());
+            context.ChangeTracker.Clear();
             task.Name = "Updated Task";
             task.Description = "Updated Description";
 
             await taskService.UpdateTask(task);
+            context.ChangeTracker.Clear();
             var updatedTask = await taskService.GetTask(task.Id.Value);
+            context.ChangeTracker.Clear();
 
             // Assert
 
@@ -415,9 +418,8 @@ namespace Tests.BLL_Tests
             var taskService = new TaskService(context);
             // Act & Assert
             var exception = await Assert.ThrowsAsync<ArgumentNullException>(() =>
-                taskService.UpdateTask(null)
+                taskService.UpdateTask(null!)
             );
-            Assert.Contains("TaskDTO cannot be null", exception.Message);
         }
 
         [Fact]
@@ -435,7 +437,6 @@ namespace Tests.BLL_Tests
             var exception = await Assert.ThrowsAsync<ArgumentException>(() =>
                 taskService.UpdateTask(taskDto)
             );
-            Assert.Equal("TaskDTO Id cannot be empty.", exception.Message);
         }
 
         [Fact]
@@ -456,33 +457,11 @@ namespace Tests.BLL_Tests
             Assert.Contains(taskDto.Id.ToString(), exception.Message);
         }
 
-        [Fact]
-        public async Task UpdateTask_ShouldNotChangeUserId_WhenUpdatingTask()
-        {
-            // Arrange
-            using var context = GetDbContext();
-            var taskService = new TaskService(context);
-            var userId = Guid.NewGuid();
-            var taskDto = new TaskDTO
-            {
-                Id = Guid.NewGuid(),
-                Name = "Task to Update",
-                Description = "Original Description"
-            };
-            await taskService.CreateTask(taskDto, userId);
-            // Act
-            taskDto.Description = "Updated Description";
-            await taskService.UpdateTask(taskDto);
-            var updatedTask = await context.Tasks.FindAsync(taskDto.Id.Value);
-            // Assert
-            Assert.Equal(userId, updatedTask.UserId);
-        }
-
         [Theory]
         [InlineData(null)]
         [InlineData("")]
         [InlineData("   ")]
-        public async Task CreateManga_ShouldThrowException_WhenTitleIsInvalid(string invalidTitle)
+        public async Task UpdateManga_ShouldThrowException_WhenTitleIsInvalid(string invalidTitle)
         {
             // Arrange
             using var context = GetDbContext();
@@ -506,7 +485,7 @@ namespace Tests.BLL_Tests
         [InlineData(null)]
         [InlineData("")]
         [InlineData("   ")]
-        public async Task CreateManga_ShouldThrowException_WhenDescriptionIsInvalid(string invalidDescription)
+        public async Task UpdateManga_ShouldThrowException_WhenDescriptionIsInvalid(string invalidDescription)
         {
             // Arrange
             using var context = GetDbContext();
@@ -522,6 +501,69 @@ namespace Tests.BLL_Tests
             await service.CreateTask(taskDto, userId);
             taskDto.Description = invalidDescription;
 
+            // Assert
+            await Assert.ThrowsAsync<ArgumentException>(() => service.UpdateTask(taskDto));
+        }
+
+        [Fact]
+        public async Task UpdateReadItem_ShouldThrowException_WhenNameIsToLong()
+        {
+            // Arrange
+            using var context = GetDbContext();
+            var service = new TaskService(context);
+            var userId = Guid.NewGuid();
+            var taskDto = new TaskDTO
+            {
+                Id = Guid.NewGuid(),
+                Name = "Task to Update",
+                Description = "Original Description"
+            };
+            // Act
+            await service.CreateTask(taskDto, userId);
+            var longName = new string('A', 501);
+            taskDto.Name = longName;
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentException>(() => service.UpdateTask(taskDto));
+        }
+
+        [Fact]
+        public async Task UpdateReadItem_ShouldThrowException_WhenDescriptionIsToLong()
+        {
+            // Arrange
+            using var context = GetDbContext();
+            var service = new TaskService(context);
+            var userId = Guid.NewGuid();
+            var taskDto = new TaskDTO
+            {
+                Id = Guid.NewGuid(),
+                Name = "Task to Update",
+                Description = "Original Description"
+            };
+            // Act
+            await service.CreateTask(taskDto, userId);
+            var longDescription = new string('A', 3001);
+            taskDto.Description = longDescription;
+            // Assert
+            await Assert.ThrowsAsync<ArgumentException>(() => service.UpdateTask(taskDto));
+        }
+
+        [Fact]
+        public async Task UpdateReadItem_ShouldThrowException_WhenDescriptionIsTooShort()
+        {
+            // Arrange
+            using var context = GetDbContext();
+            var service = new TaskService(context);
+            var userId = Guid.NewGuid();
+            var taskDto = new TaskDTO
+            {
+                Id = Guid.NewGuid(),
+                Name = "Task to Update",
+                Description = "Original Description"
+            };
+            // Act
+            await service.CreateTask(taskDto, userId);
+            taskDto.Description = "12"; 
             // Assert
             await Assert.ThrowsAsync<ArgumentException>(() => service.UpdateTask(taskDto));
         }

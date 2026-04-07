@@ -4,6 +4,7 @@ using Business_Logic_Layer.Validators;
 using Data_Access_Layer.DatabaseContext;
 using Data_Access_Layer.Entities;
 using Data_Access_Layer.Repositories;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -143,7 +144,17 @@ namespace Business_Logic_Layer.Services
 
         public async Task UpdateTask(TaskDTO taskDto)
         {
-            throw new NotImplementedException();
+            ArgumentNullException.ThrowIfNull(taskDto);
+            var validator = new TaskDTOValidator();
+            var result = validator.Validate(taskDto);
+            if (!result.IsValid)
+            {
+                var errors = string.Join(", ", result.Errors.Select(e => e.ErrorMessage));
+                throw new ArgumentException(errors);
+            }
+            var task = await _taskRepository.GetByIdAsync(taskDto.Id ?? Guid.Empty) ?? throw new KeyNotFoundException($"Task with id {taskDto.Id} was not found.");
+ 
+            await _taskRepository.UpdateAsync(taskDto.ToEntity(task.UserId));
         }
     }
 }

@@ -26,7 +26,9 @@ namespace Data_Access_Layer.Repositories
         // READ (Один за ID)
         public async Task<T> GetByIdAsync(Guid id)
         {
-            return await _dbSet.FindAsync(id);
+            var user = await _dbSet.FindAsync(id);
+            _context.ChangeTracker.Clear();
+            return user;
         }
 
         // READ (Всі записи)

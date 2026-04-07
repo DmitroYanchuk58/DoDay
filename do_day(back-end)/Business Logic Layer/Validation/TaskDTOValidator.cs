@@ -8,26 +8,26 @@ namespace Business_Logic_Layer.Validators
         public TaskDTOValidator()
         {
             RuleFor(x => x.Id)
-                .NotEmpty().WithMessage("ID завдання обов'язкове");
+                .NotEmpty().WithMessage("Task ID is required");
 
             RuleFor(x => x.Name)
-                .NotEmpty().WithMessage("Назва завдання обов'язкова")
-                .MinimumLength(1).WithMessage("Назва не може бути порожньою")
-                .MaximumLength(500).WithMessage("Назва завдання не може перевищувати 500 символів")
-                .Must(name => !string.IsNullOrWhiteSpace(name)).WithMessage("Назва не може складатися лише з пробілів");
+                .NotEmpty().WithMessage("Task name is required")
+                .MinimumLength(1).WithMessage("Name cannot be empty")
+                .MaximumLength(500).WithMessage("Task name cannot exceed 500 characters")
+                .Must(name => !string.IsNullOrWhiteSpace(name)).WithMessage("Name cannot consist of whitespace only");
 
             RuleFor(x => x.DateCreated)
-                .NotEmpty().WithMessage("Дата створення обов'язкова")
-                .LessThanOrEqualTo(DateTime.Now).WithMessage("Дата створення не може бути в майбутньому");
+                .NotEmpty().WithMessage("Creation date is required")
+                .LessThanOrEqualTo(DateTime.Now).WithMessage("Creation date cannot be in the future");
 
             RuleFor(x => x.Description)
-                .MinimumLength(5).WithMessage("Опис завдання не може бути меншим за 5 символів")
-                .MaximumLength(3000).WithMessage("Опис завдання не може перевищувати 3000 символів")
-                .When(x => x.Description != null);
+                .MinimumLength(5).WithMessage("Task description must be at least 5 characters long")
+                .MaximumLength(3000).WithMessage("Task description cannot exceed 3000 characters")
+                .NotEmpty().WithMessage("Task description is required");
 
             RuleFor(x => x.Image)
                 .Must(img => img.Length <= 2 * 1024 * 1024)
-                .WithMessage("Розмір зображення не може перевищувати 2 МБ")
+                .WithMessage("Image size cannot exceed 2 MB")
                 .When(x => x.Image != null);
         }
     }
