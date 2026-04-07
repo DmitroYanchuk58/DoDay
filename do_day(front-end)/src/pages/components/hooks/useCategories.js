@@ -1,7 +1,6 @@
 import { useState } from "react";
 
 const useCategories = () => {
-  // 1. Оголошуємо стани
   const [categories, setCategories] = useState([
     {
       id: "cat_1",
@@ -25,7 +24,6 @@ const useCategories = () => {
 
   const [modalConfig, setModalConfig] = useState({ isOpen: false });
 
-  // 2. Оголошуємо допоміжну функцію (вона має бути всередині хука)
   const updateItems = (categoryId, transformFn) => {
     setCategories((prev) =>
       prev.map((cat) =>
@@ -34,7 +32,6 @@ const useCategories = () => {
     );
   };
 
-  // 3. Оголошуємо дії (також всередині хука)
   const actions = {
     addCategory: (title) => {
       setCategories((prev) => [

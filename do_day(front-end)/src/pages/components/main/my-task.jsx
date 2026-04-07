@@ -111,7 +111,7 @@ const MyTask = ({ user, refreshTasks }) => {
           <div className="details-actions">
             <button
               className="action-btn"
-              onClick={() => deleteTask(selectedTask.id)}
+              onClick={() => handleDeleteTask(selectedTask.id)}
             >
               <svg className="icon">
                 <use
