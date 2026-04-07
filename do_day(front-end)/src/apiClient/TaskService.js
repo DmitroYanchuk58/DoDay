@@ -19,4 +19,38 @@ export const TaskService = {
       throw error;
     }
   },
+
+  async getTask(idTask) {
+    try {
+      const response = await apiClient.post(
+        "/Task/GetTask",
+        {},
+        {
+          params: {
+            idTask,
+          },
+        },
+      );
+
+      return response.data;
+    } catch (error) {
+      console.error("Error:", error.response?.data || error.message);
+      throw error;
+    }
+  },
+
+  async getTasks(idUser) {
+    try {
+      const response = await apiClient.get("/Task/GetTasks", {
+        params: {
+          idUser,
+        },
+      });
+
+      return response.data;
+    } catch (error) {
+      console.error("Error:", error.response?.data || error.message);
+      throw error;
+    }
+  },
 };
