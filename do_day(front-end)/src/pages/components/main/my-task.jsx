@@ -1,51 +1,23 @@
-import React, { useState } from "react";
+import { useState, useEffect } from "react";
+import { TaskService } from "../../../apiClient/TaskService";
 import TaskCard from "./task-card";
 
-const MyTask = () => {
-  const [tasks, setTasks] = useState([
-    {
-      id: 1,
-      title: "Submit Documents",
-      fullTitle: "Document Submission for Project X",
-      objective: "To submit required documents for something important",
-      description:
-        "Review the list of documents required for submission and ensure all necessary documents are ready.",
-      priority: "Extreme",
-      status: "Not Started",
-      date: "20/06/2023",
-      deadline: "End of Day",
-      image: "/images/task_image1.png",
-      notes: ["Ensure documents are authentic", "Maintain confidentiality"],
-    },
-    {
-      id: 2,
-      title: "Complete assignments",
-      fullTitle: "Final Year Assignments",
-      objective: "Pass the final year with high grades",
-      description:
-        "Complete all research papers and submit them to the professor before the deadline.",
-      priority: "Moderate",
-      status: "In Progress",
-      date: "21/06/2023",
-      deadline: "Next Week",
-      image: "/images/task_image2.png",
-      notes: ["Check for plagiarism", "Format according to APA style"],
-    },
-    {
-      id: 3,
-      title: "Complete assignments",
-      fullTitle: "Final Year Assignments",
-      objective: "Pass the final year with high grades",
-      description:
-        "Complete all research papers and submit them to the professor before the deadline.",
-      priority: "Moderate",
-      status: "In Progress",
-      date: "21/06/2026",
-      deadline: "Next Week",
-      image: "/images/task_image2.png",
-      notes: ["Check for plagiarism", "Format according to APA style"],
-    },
-  ]);
+const MyTask = ({ user }) => {
+  const [tasks, setTasks] = useState([]);
+  const fetchTasks = async () => {
+    try {
+      const data = await TaskService.getTasks(user.id);
+      setTasks(data);
+    } catch (err) {
+      const errorDetail =
+        err.response?.data?.detail || err.message || "Undefined error";
+      console.error("Failed to fetch tasks:", errorDetail);
+    }
+  };
+
+  useEffect(() => {
+    fetchTasks();
+  }, []);
 
   const [selectedTaskId, setSelectedTaskId] = useState(tasks[0]?.id);
 
@@ -73,6 +45,7 @@ const MyTask = () => {
             >
               <TaskCard
                 id={task.id}
+                title={task.name || task.Name}
                 {...task}
                 onDelete={deleteTask}
                 type="compact"
@@ -92,7 +65,7 @@ const MyTask = () => {
               className="details-image"
             />
             <div className="details-title-block">
-              <h2>{selectedTask.title}</h2>
+              <h2>{selectedTask.name}</h2>
               <div className="details-meta">
                 <p>
                   Priority:{" "}
