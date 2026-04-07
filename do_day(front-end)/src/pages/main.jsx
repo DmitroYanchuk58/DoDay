@@ -98,7 +98,7 @@ const Main = () => {
         />
       </>
     ),
-    2: <VitalTask />,
+    2: <VitalTask user={user} />,
     3: <MyTask />,
     4: isCreatingCategory ? (
       <CreateCategory
