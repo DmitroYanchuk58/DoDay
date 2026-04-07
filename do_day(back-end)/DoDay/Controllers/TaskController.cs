@@ -1,5 +1,6 @@
 ﻿using Business_Logic_Layer.DTO;
 using Business_Logic_Layer.Services.Interfaces;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API_Layer.Controllers
@@ -46,7 +47,8 @@ namespace API_Layer.Controllers
         [HttpPut("UpdateTask")]
         public async Task<IActionResult> UpdateTask(TaskDTO taskDto)
         {
-            throw new NotImplementedException();
+            await _service.UpdateTask(taskDto);
+            return Ok();
         }
     }
 }
