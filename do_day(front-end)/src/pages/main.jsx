@@ -15,7 +15,9 @@ import CreateTask from "./components/main/create-task";
 
 import useCategories from "./components/hooks/useCategories";
 
-import { useState } from "react";
+import { TaskService } from "../apiClient/TaskService";
+
+import { useState, useEffect } from "react";
 
 const Main = () => {
   const [activeId, setActiveId] = useState(1);
@@ -31,6 +33,23 @@ const Main = () => {
     const stickyValue = localStorage.getItem("user");
     return stickyValue !== null ? JSON.parse(stickyValue) : null;
   });
+
+  const [tasks, setTasks] = useState([]);
+
+  const refreshTasks = async () => {
+    if (user?.id) {
+      try {
+        const data = await TaskService.getTasks(user.id);
+        setTasks(data);
+      } catch (err) {
+        console.error("Помилка оновлення:", err);
+      }
+    }
+  };
+
+  useEffect(() => {
+    refreshTasks();
+  }, [user?.id]);
 
   const isDashboardActive = activeId === 1 && !selectedTask;
 
@@ -76,6 +95,7 @@ const Main = () => {
           onTaskClick={openTaskDetails}
           onCreateClick={openCreateOverlay}
           user={user}
+          tasks={tasks}
         />
         <DashboardOverlay
           isOpen={isInviteModalOpen}
@@ -95,6 +115,7 @@ const Main = () => {
           isOpen={isCreatingTask}
           onClose={() => setIsCreatingTask(false)}
           user={user}
+          onTaskCreated={refreshTasks}
         />
       </>
     ),

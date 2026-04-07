@@ -9,24 +9,8 @@ const DashboardContent = ({
   onTaskClick,
   onCreateClick,
   user,
+  tasks,
 }) => {
-  const [tasks, setTasks] = useState([]);
-
-  const fetchTasks = async () => {
-    try {
-      const data = await TaskService.getTasks(user.id);
-      setTasks(data);
-    } catch (err) {
-      const errorDetail =
-        err.response?.data?.detail || err.message || "Undefined error";
-      console.error("Failed to fetch tasks:", errorDetail);
-    }
-  };
-
-  useEffect(() => {
-    fetchTasks();
-  }, []);
-
   const handleDeleteTask = (id) => {
     setTasks((prev) => prev.filter((task) => task.id !== id));
   };

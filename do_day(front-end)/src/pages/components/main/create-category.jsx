@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const CreateCategory = ({ onCreate, onCancel }) => {
+const CreateCategory = ({ onCreate, onCancel, refreshTasks }) => {
   const [value, setValue] = React.useState("");
 
   return (

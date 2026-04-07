@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { TaskService } from "../../../apiClient/TaskService";
 
-const CreateTaskOverlay = ({ isOpen, onClose, user }) => {
+const CreateTaskOverlay = ({ isOpen, onClose, user, onTaskCreated }) => {
   const [name, setName] = useState();
   const [description, setDescription] = useState("");
 
@@ -20,6 +20,11 @@ const CreateTaskOverlay = ({ isOpen, onClose, user }) => {
 
     try {
       const result = await TaskService.createTask(user.id, name, description);
+      if (onTaskCreated) {
+        await onTaskCreated();
+      }
+      setName("");
+      setDescription("");
       onClose();
     } catch (err) {
       const errorDetail =
@@ -88,7 +93,7 @@ const CreateTaskOverlay = ({ isOpen, onClose, user }) => {
               <textarea
                 placeholder="Start writing here..."
                 value={description}
-                onChange={(e) => setDescription(e.value)}
+                onChange={(e) => setDescription(e.target.value)}
               ></textarea>
             </div>
           </div>
