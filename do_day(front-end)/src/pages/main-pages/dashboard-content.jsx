@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { TaskService } from "../../../apiClient/TaskService";
+import { TaskService } from "../../apiClient/TaskService";
 import TaskCard from "./task-card";
 import StatusChart from "./status-chart";
 

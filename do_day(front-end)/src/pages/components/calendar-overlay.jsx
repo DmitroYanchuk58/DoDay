@@ -4,7 +4,6 @@ const CalendarOverlay = ({ isOpen, onClose }) => {
   const today = new Date();
   const [currentDate, setCurrentDate] = useState(new Date());
 
-  // Встановлюємо сьогоднішню дату як вибрану за дефолтом
   const [selectedDate, setSelectedDate] = useState(today);
 
   if (!isOpen) return null;

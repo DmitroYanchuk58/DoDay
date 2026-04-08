@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import TaskCard from "./task-card";
-import { TaskService } from "../../../apiClient/TaskService";
+import { TaskService } from "../../apiClient/TaskService";
 
 const VitalTask = ({ user, refreshTasks }) => {
   const [tasks, setTasks] = useState([]);

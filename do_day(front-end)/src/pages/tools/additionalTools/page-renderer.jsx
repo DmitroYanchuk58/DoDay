@@ -1,15 +1,15 @@
-import DashboardContent from "../main/dashboard-content";
-import DashboardOverlay from "../main/dashboard-overlay";
-import MyTask from "../main/my-task";
-import VitalTask from "../main/vitals-tasks";
-import TaskCategories from "../main/categories";
-import CreateCategory from "../main/create-category";
-import CategoryModal from "../main/modal-category";
-import AccountInfo from "../main/account-info";
-import ChangePassword from "../main/change-password";
-import EditTask from "../main/edit-task";
-import TaskDetails from "../main/task-details";
-import CreateTask from "../main/create-task";
+import DashboardContent from "../../main-pages/dashboard-content";
+import DashboardOverlay from "../../main-pages/dashboard-overlay";
+import MyTask from "../../main-pages/my-task";
+import VitalTask from "../../main-pages/vitals-tasks";
+import TaskCategories from "../../main-pages/categories";
+import CreateCategory from "../../main-pages/create-category";
+import CategoryModal from "../../main-pages/modal-category";
+import ChangeAccountInfoPage from "../../main-pages/change-account-info-page";
+import ChangePassword from "../../main-pages/change-password";
+import EditTask from "../../main-pages/edit-task";
+import TaskDetails from "../../main-pages/task-details";
+import CreateTask from "../../main-pages/create-task";
 
 const PageRenderer = ({
   activeId,
@@ -71,7 +71,9 @@ const PageRenderer = ({
           />
         );
       case 5:
-        return <AccountInfo user={user} setUser={uiActions.setUser} />;
+        return (
+          <ChangeAccountInfoPage user={user} setUser={uiActions.setUser} />
+        );
       case 6:
         return (
           <ChangePassword

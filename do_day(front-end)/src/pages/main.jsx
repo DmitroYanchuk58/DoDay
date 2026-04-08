@@ -1,11 +1,11 @@
 import { useState } from "react";
-import { useTasks } from "./components/hooks/useTasks";
+import { useTasks } from "./tools/hooks/useTasks";
 
-import Header from "./components/main/header";
-import Sidebar from "./components/main/sidebar";
+import Header from "./components/header";
+import Sidebar from "./components/sidebar";
 
-import useCategories from "./components/hooks/useCategories";
-import PageRenderer from "./components/additionalTools/page-renderer";
+import useCategories from "./tools/hooks/useCategories";
+import PageRenderer from "./tools/additionalTools/page-renderer";
 
 const Main = () => {
   const [activeId, setActiveId] = useState(1);

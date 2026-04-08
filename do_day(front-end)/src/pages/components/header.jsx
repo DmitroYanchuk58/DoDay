@@ -3,7 +3,6 @@ import CalendarOverlay from "./calendar-overlay";
 import NotificationOverlay from "./notification-overlay";
 
 const Header = () => {
-  // Стан для відображення календаря
   const [isCalendarOpen, setIsCalendarOpen] = useState(false);
   const [isNotificationOpen, setIsNotificationOpen] = useState(false);
 

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { TaskService } from "../../../apiClient/TaskService";
+import { TaskService } from "../../apiClient/TaskService";
 
 const CreateTaskOverlay = ({ isOpen, onClose, user, onTaskCreated }) => {
   const [name, setName] = useState();

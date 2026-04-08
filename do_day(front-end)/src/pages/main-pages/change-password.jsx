@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { UserService } from "../../../apiClient/UserService";
+import { UserService } from "../../apiClient/UserService";
 
 const ChangePassword = ({ onGoBack, user, changeOnDashboard }) => {
   const [formData, setFormData] = useState({
