@@ -1,4 +1,5 @@
-﻿using Business_Logic_Layer.DTO;
+﻿using API_Layer.DTO;
+using Business_Logic_Layer.DTO;
 using Business_Logic_Layer.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -23,8 +24,14 @@ namespace API_Layer.Controllers
         }
 
         [HttpPost("CreateCategory")]
-        public async Task<IActionResult> CreateCategory(CategoryDTO categoryDto)
+        public async Task<IActionResult> CreateCategory(CategoryForRequest categoryRequest)
         {
+            var categoryDto = new CategoryDTO
+            {
+                Id = categoryRequest.Id,
+                Name = categoryRequest.Name,
+                IdUser = categoryRequest.IdUser
+            };
             await _service.CreateCategory(categoryDto);
             return Ok();
         }
