@@ -30,7 +30,12 @@ namespace API_Layer.Middleware
                     _ => (StatusCodes.Status500InternalServerError, "Server Error")
                 };
 
-                _logger.LogError(exception, "{Title} occurred: {Message}", title, exception.Message);
+                if(statusCode == StatusCodes.Status500InternalServerError)
+                {
+                    _logger.LogError(exception, "An unhandled exception occurred during the request: {Path} {Method}",
+                        context.Request.Path,
+                        context.Request.Method);
+                }
 
                 var problemDetails = new ProblemDetails
                 {

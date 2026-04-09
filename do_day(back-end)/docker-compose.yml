@@ -34,5 +34,15 @@ services:
     depends_on:
       - backend
 
+  seq:
+    image: datalust/seq:latest
+    container_name: doday-seq
+    environment:
+      - ACCEPT_EULA=Y
+      - SEQ_FIRSTRUN_ADMINPASSWORD=SEQpassword2333
+    ports:
+      - "5341:80"
+      - "5342:5341"
+
 volumes:
   sql_data:
