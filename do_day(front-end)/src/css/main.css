@@ -2536,28 +2536,28 @@ div.reg-log {
 
 .main-page {
   width: 100%;
-  height: 100vh; /* Жорстко фіксуємо висоту на весь екран */
+  height: 100vh;
   display: flex;
   flex-direction: column;
   background-color: var(--content-bg);
-  overflow: hidden; /* Забороняємо скрол всієї сторінки */
+  overflow: hidden;
 }
 
 .header-section {
   width: 100%;
-  height: 80px; /* Краще використовувати фіксовані пікселі для хедера, а не % */
-  flex-shrink: 0; /* Забороняємо хедеру стискатися */
+  height: 80px;
+  flex-shrink: 0;
 }
 
 .main-content {
   width: 100%;
-  flex: 1; /* Займає весь доступний простір, що залишився від хедера */
+  flex: 1;
   display: flex;
-  min-height: 0; /* Критично важливо для flex-контейнерів зі скролом */
+  min-height: 0;
 }
 
 .sidebar-section {
-  width: 20%; /* Або фіксовані 250px */
+  width: 20%;
   height: 100%;
   flex-shrink: 0;
   display: flex;
@@ -2568,6 +2568,6 @@ div.reg-log {
   height: 100%;
   display: flex;
   flex-direction: column;
-  overflow-y: auto; /* Скрол з'являється ТІЛЬКИ тут, якщо контенту багато */
+  overflow-y: auto;
   min-width: 0;
 }/*# sourceMappingURL=main.css.map */

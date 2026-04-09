@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from "react";
-import TaskCard from "./task-card";
+import { useState, useEffect } from "react";
 import { TaskService } from "../../apiClient/TaskService";
+import TaskCard from "../components/task-card";
 
-const VitalTask = ({ user, refreshTasks }) => {
+const MyTask = ({ user, refreshTasks }) => {
   const [tasks, setTasks] = useState([]);
-
   const fetchTasks = async () => {
     try {
       const data = await TaskService.getTasks(user.id);
@@ -20,6 +19,10 @@ const VitalTask = ({ user, refreshTasks }) => {
     fetchTasks();
   }, []);
 
+  const [selectedTaskId, setSelectedTaskId] = useState(tasks[0]?.id);
+
+  const selectedTask = tasks.find((t) => t.id === selectedTaskId);
+
   const handleDeleteTask = async (id) => {
     try {
       await TaskService.deleteTask(id);
@@ -32,25 +35,24 @@ const VitalTask = ({ user, refreshTasks }) => {
     }
   };
 
-  const [selectedId, setSelectedId] = useState(tasks[0]?.id);
-  const selectedTask = tasks.find((t) => t.id === selectedId);
-
   return (
     <div className="task-details-page">
       <div className="task-sidebar card tasks">
-        <h3 className="sidebar-title">Vital Tasks</h3>
+        <h3 className="sidebar-title">My Tasks</h3>
         <div className="sidebar-list">
           {tasks.map((task) => (
-            <div key={task.id} onClick={() => setSelectedId(task.id)}>
+            <div
+              key={task.id}
+              onClick={() => setSelectedTaskId(task.id)}
+              style={{ cursor: "pointer" }}
+            >
               <TaskCard
                 id={task.id}
-                title={task.name}
-                description={task.description}
+                title={task.name || task.Name}
                 {...task}
                 onDelete={handleDeleteTask}
                 type="compact"
-                isVitalPage={true}
-                className={selectedId === task.id ? "selected" : ""}
+                className={selectedTaskId === task.id ? "selected" : ""}
               />
             </div>
           ))}
@@ -62,7 +64,7 @@ const VitalTask = ({ user, refreshTasks }) => {
           <div className="details-header">
             <img
               src={selectedTask.image}
-              alt="Task"
+              alt="Task large"
               className="details-image"
             />
             <div className="details-title-block">
@@ -82,25 +84,57 @@ const VitalTask = ({ user, refreshTasks }) => {
           </div>
 
           <div className="details-body">
-            <p>{selectedTask.description}</p>
+            <p>
+              <strong>Task Title:</strong> {selectedTask.fullTitle}
+            </p>
+            <p>
+              <strong>Objective:</strong> {selectedTask.objective}
+            </p>
+            <p>
+              <strong>Task Description:</strong> {selectedTask.description}
+            </p>
             {selectedTask.notes && (
               <div className="additional-notes">
-                <ol>
+                <strong>Additional Notes:</strong>
+                <ul>
                   {selectedTask.notes.map((note, index) => (
                     <li key={index}>{note}</li>
                   ))}
-                </ol>
+                </ul>
               </div>
             )}
+            <p>
+              <strong>Deadline for Submission:</strong> {selectedTask.deadline}
+            </p>
+          </div>
+
+          <div className="details-actions">
+            <button
+              className="action-btn"
+              onClick={() => handleDeleteTask(selectedTask.id)}
+            >
+              <svg className="icon">
+                <use
+                  xlinkHref={`images/icons/my-task-icons.svg#icon-delete`}
+                ></use>
+              </svg>
+            </button>
+            <button className="action-btn">
+              <svg className="icon">
+                <use
+                  xlinkHref={`images/icons/my-task-icons.svg#icon-edit`}
+                ></use>
+              </svg>
+            </button>
           </div>
         </div>
       ) : (
-        <div className="details-main card details empty">
-          <p>Select a task to see details or list is empty</p>
+        <div className="details-main card details empty-state">
+          <p>Будь ласка, виберіть завдання або список порожній.</p>
         </div>
       )}
     </div>
   );
 };
 
-export default VitalTask;
+export default MyTask;

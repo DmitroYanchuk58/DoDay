@@ -1,14 +1,30 @@
-import React, { useState } from "react";
+import { useState, useEffect } from "react";
+import { TaskService } from "../../apiClient/TaskService";
 
 const EditTaskOverlay = ({ isOpen, task, onClose, onSave }) => {
   const [formData, setFormData] = useState({
-    title: task?.title || "",
-    date: task?.date || "",
-    priority: task?.priority || "Moderate",
-    description: task?.description || "",
+    id: "",
+    name: "",
+    description: "",
+    priority: "Low",
+    date: "",
+    dateCreated: "",
   });
 
-  if (!isOpen) return null;
+  useEffect(() => {
+    if (task) {
+      setFormData({
+        id: task.id || task.Id,
+        name: task.name || task.Name || "",
+        description: task.description || task.Description || "",
+        priority: task.priority || task.Priority || "Low",
+        date: "",
+        dateCreated: task.dateCreated || task.DateCreated || "",
+      });
+    }
+  }, [task, isOpen]);
+
+  if (!isOpen || !task) return null;
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -17,6 +33,22 @@ const EditTaskOverlay = ({ isOpen, task, onClose, onSave }) => {
 
   const handlePriorityChange = (priority) => {
     setFormData((prev) => ({ ...prev, priority }));
+  };
+
+  const handleUpdate = async (e) => {
+    if (e) e.preventDefault();
+
+    try {
+      await TaskService.updateTask(formData);
+
+      if (onSave) {
+        await onSave();
+      }
+
+      onClose();
+    } catch (err) {
+      console.error("Update error:", err);
+    }
   };
 
   return (
@@ -37,8 +69,8 @@ const EditTaskOverlay = ({ isOpen, task, onClose, onSave }) => {
               <label>Title</label>
               <input
                 type="text"
-                name="title"
-                value={formData.title}
+                name="name"
+                value={formData.name}
                 onChange={handleChange}
               />
             </div>
@@ -64,36 +96,18 @@ const EditTaskOverlay = ({ isOpen, task, onClose, onSave }) => {
             <div className="edit-input-group">
               <label>Priority</label>
               <div className="priority-radio-group">
-                <label className="priority-option">
-                  <span className="dot extreme"></span>
-                  <span className="priority-text">Extreme</span>
-                  <input
-                    className="priority-box"
-                    type="radio"
-                    checked={formData.priority === "Extreme"}
-                    onChange={() => handlePriorityChange("Extreme")}
-                  />
-                </label>
-                <label className="priority-option">
-                  <span className="dot moderate"></span>
-                  <span className="priority-text">Moderate</span>
-                  <input
-                    className="priority-box"
-                    type="radio"
-                    checked={formData.priority === "Moderate"}
-                    onChange={() => handlePriorityChange("Moderate")}
-                  />
-                </label>
-                <label className="priority-option">
-                  <span className="dot low"></span>
-                  <span className="priority-text">Low</span>
-                  <input
-                    className="priority-box"
-                    type="radio"
-                    checked={formData.priority === "Low"}
-                    onChange={() => handlePriorityChange("Low")}
-                  />
-                </label>
+                {["Extreme", "Moderate", "Low"].map((p) => (
+                  <label key={p} className="priority-option">
+                    <span className={`dot ${p.toLowerCase()}`}></span>
+                    <span className="priority-text">{p}</span>
+                    <input
+                      className="priority-box"
+                      type="radio"
+                      checked={formData.priority === p}
+                      onChange={() => handlePriorityChange(p)}
+                    />
+                  </label>
+                ))}
               </div>
             </div>
 
@@ -116,13 +130,15 @@ const EditTaskOverlay = ({ isOpen, task, onClose, onSave }) => {
               </div>
               <p>Drag&Drop files here</p>
               <span>or</span>
-              <button className="btn-browse">Browse</button>
+              <button className="btn-browse" type="button">
+                Browse
+              </button>
             </div>
           </div>
         </div>
 
         <div className="edit-modal-footer">
-          <button className="btn-done" onClick={() => onSave(formData)}>
+          <button className="btn-done" onClick={handleUpdate}>
             Done
           </button>
         </div>

@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { TaskService } from "../../apiClient/TaskService";
-import TaskCard from "./task-card";
-import StatusChart from "./status-chart";
+import TaskCard from "../components/task-card";
+import StatusChart from "../components/status-chart";
 
 const DashboardContent = ({
   onInviteClick,
@@ -79,6 +79,10 @@ const DashboardContent = ({
                 description={task.description || task.Description}
                 {...task}
                 onDelete={handleDeleteTask}
+                openEditTask={(e) => {
+                  e.stopPropagation();
+                  onEditClick(task);
+                }}
               />
             ))}
           </div>

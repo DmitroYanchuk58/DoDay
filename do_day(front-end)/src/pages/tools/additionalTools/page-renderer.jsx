@@ -1,15 +1,15 @@
-import DashboardContent from "../../main-pages/dashboard-content";
+import DashboardContent from "../../main-pages/dashboard-page";
 import DashboardOverlay from "../../components/dashboard-overlay";
-import MyTask from "../../main-pages/my-task";
-import VitalTask from "../../main-pages/vitals-tasks";
+import MyTask from "../../main-pages/my-task-page";
+import VitalTask from "../../main-pages/vitals-tasks-page";
 import TaskCategories from "../../main-pages/categories-page";
-import CreateCategory from "../../main-pages/create-category";
-import CategoryModal from "../../main-pages/modal-category";
+import CreateCategory from "../../main-pages/create-category-page";
+import CategoryModal from "../../components/modal-category";
 import ChangeAccountInfoPage from "../../main-pages/change-account-info-page";
-import ChangePassword from "../../main-pages/change-password";
-import EditTask from "../../main-pages/edit-task";
-import TaskDetails from "../../main-pages/task-details";
-import CreateTask from "../../main-pages/create-task";
+import ChangePassword from "../../main-pages/change-password-page";
+import EditTask from "../../components/edit-task";
+import TaskDetails from "../../components/task-details";
+import CreateTask from "../../components/create-task";
 
 const PageRenderer = ({
   activeId,
