@@ -43,6 +43,19 @@ namespace API_Layer.Controllers
             return Ok();
         }
 
+        [HttpPut("UpdateCategory")]
+        public async Task<IActionResult> UpdateCategory(CategoryForRequest categoryRequest)
+        {
+            var categoryDto = new CategoryDTO
+            {
+                Id = categoryRequest.Id,
+                Name = categoryRequest.Name,
+                IdUser = categoryRequest.IdUser
+            };
+            await _service.UpdateCategory(categoryDto);
+            return Ok();
+        }
+
 
     }
 }
