@@ -31,6 +31,12 @@ namespace Business_Logic_Layer.Services
             return new CategoryDTO(categoryEntity);
         }
 
+        public async Task<List<CategoryDTO>> GetAllUserCategories(Guid idUser)
+        {
+            var categoryEntities = (await _categoryRepository.GetAllAsync()).Where(c => c.IdUser == idUser).ToList();
+            return categoryEntities.Select(c => new CategoryDTO(c)).ToList();
+        }
+
         public async Task CreateCategory(CategoryDTO categoryDto)
         {
             if (categoryDto == null)
@@ -91,24 +97,22 @@ namespace Business_Logic_Layer.Services
             return category;
         }
 
-        public async Task ChangeName(Guid id, string newName)
+        public async Task UpdateCategory(CategoryDTO category)
         {
-            if (id == Guid.Empty)
+            if (category.Id == Guid.Empty)
             {
                 throw new ArgumentException("Id cannot be empty.");
             }
-            if (string.IsNullOrWhiteSpace(newName))
+            if (string.IsNullOrWhiteSpace(category.Name))
             {
                 throw new ArgumentException("New name cannot be null or whitespace.");
             }
-            var categoryEntity = await _categoryRepository.GetByIdAsync(id);
+            var categoryEntity = await _categoryRepository.GetByIdAsync(category.Id);
             if (categoryEntity == null)
             {
-                throw new KeyNotFoundException($"Category with id {id} was not found.");
+                throw new KeyNotFoundException($"Category with id {category.Id} was not found.");
             }
-            var categoryDto = new CategoryDTO(categoryEntity);
-            categoryDto.Name = newName;
-            categoryEntity.Name = categoryDto.Name;
+            categoryEntity.Name = category.Name;
             await _categoryRepository.UpdateAsync(categoryEntity);
         }
 

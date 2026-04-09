@@ -10,6 +10,9 @@ namespace Business_Logic_Layer.Validators
             RuleFor(x => x.Id)
                 .NotEmpty().WithMessage("ID категорії не може бути порожнім");
 
+            RuleFor(x => x.IdUser)
+                .NotEmpty().WithMessage("ID користувача не може бути порожнім");
+
             RuleFor(x => x.Name)
                 .NotEmpty().WithMessage("Назва категорії обов'язкова")
                 .MinimumLength(1).WithMessage("Назва має містити хоча б 1 символ")
