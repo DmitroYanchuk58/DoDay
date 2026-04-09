@@ -23,6 +23,13 @@ namespace API_Layer.Controllers
             return Ok(category);
         }
 
+        [HttpGet("GetCategoriesByUser")]
+        public async Task<IActionResult> GetCategoriesByUser(Guid idUser)
+        {
+            var categories = await _service.GetAllUserCategories(idUser);
+            return Ok(categories);
+        }
+
         [HttpPost("CreateCategory")]
         public async Task<IActionResult> CreateCategory(CategoryForRequest categoryRequest)
         {
@@ -35,5 +42,7 @@ namespace API_Layer.Controllers
             await _service.CreateCategory(categoryDto);
             return Ok();
         }
+
+
     }
 }
