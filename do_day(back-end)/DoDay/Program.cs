@@ -2,7 +2,6 @@ using API_Layer.Middleware;
 using Business_Logic_Layer.Services;
 using Business_Logic_Layer.Services.Interfaces;
 using Data_Access_Layer.DatabaseContext;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 
@@ -34,6 +33,7 @@ builder.Services.AddDbContext<DoDayDBContext>(options =>
 builder.Services.AddScoped<IAuthorizationService, UserService>();
 builder.Services.AddScoped<IUserService, UserService>(); 
 builder.Services.AddScoped<ITaskService, TaskService>();
+builder.Services.AddScoped<ICategoryService, CategoryService>();
 
 builder.Services.AddCors(options =>
 {

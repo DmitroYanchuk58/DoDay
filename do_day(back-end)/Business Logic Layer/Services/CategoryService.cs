@@ -8,7 +8,7 @@ using Task = System.Threading.Tasks.Task;
 
 namespace Business_Logic_Layer.Services
 {
-    public class CategoryService
+    public class CategoryService : ICategoryService
     {
         CrudRepository<Category> _categoryRepository;
 
