@@ -14,8 +14,6 @@ namespace Data_Access_Layer.DatabaseContext
 
         public DbSet<CategoryOption> CategoryOptions { get; set; }
 
-        public DbSet<CategoryTask> CategoryTasks { get; set; }
-
         public DoDayDBContext(DbContextOptions<DoDayDBContext> options) : base(options)
         {
         }
@@ -104,12 +102,6 @@ namespace Data_Access_Layer.DatabaseContext
 
             #endregion
 
-            #region CategoryTasks configuration
-            modelBuilder.Entity<CategoryTask>().ToTable("CategoryTasks");
-
-            modelBuilder.Entity<CategoryTask>().HasKey(b => b.Id);
-            #endregion
-
             #region Relationships configuration
 
             modelBuilder.Entity<Task>()
@@ -118,16 +110,10 @@ namespace Data_Access_Layer.DatabaseContext
                 .HasForeignKey(co => co.UserId) 
                 .OnDelete(DeleteBehavior.Cascade);
 
-            modelBuilder.Entity<CategoryTask>()
-                .HasOne(co => co.Task)
-                .WithMany(c => c.CategoryTasks)
-                .HasForeignKey(co => co.TaskId)
-                .OnDelete(DeleteBehavior.Cascade);
-
-            modelBuilder.Entity<CategoryTask>()
-                .HasOne(co => co.Category)
-                .WithMany(c => c.CategoryTasks)
-                .HasForeignKey(co => co.CategoryId)
+            modelBuilder.Entity<Category>()
+                .HasOne(co => co.User)          
+                .WithMany(c => c.Categories)         
+                .HasForeignKey(co => co.IdUser) 
                 .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<CategoryOption>()

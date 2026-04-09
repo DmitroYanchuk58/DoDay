@@ -15,7 +15,7 @@ namespace Tests.BLL_Tests
             // Arrange
             using var context = GetDbContext();
             var categoryId = Guid.NewGuid();
-            var category = new Category { Id = categoryId, Name = "Manga" };
+            var category = new Category { Id = categoryId, Name = "Manga", IdUser = Guid.NewGuid() };
             context.Categories.Add(category);
             await context.SaveChangesAsync();
 
@@ -74,6 +74,7 @@ namespace Tests.BLL_Tests
             {
                 Id = categoryId,
                 Name = "Genre",
+                IdUser = Guid.NewGuid(),
                 CategoryOptions = new List<CategoryOption>
         {
             new CategoryOption { Id = Guid.NewGuid(), Key = 1, Value = "action" }
@@ -188,7 +189,7 @@ namespace Tests.BLL_Tests
             // Arrange
             using var context = GetDbContext();
             var categoryId = Guid.NewGuid();
-            var category = new Category { Id = categoryId, Name = "Old Name" };
+            var category = new Category { Id = categoryId, Name = "Old Name", IdUser = Guid.NewGuid() };
             context.Categories.Add(category);
             await context.SaveChangesAsync();
 
@@ -259,7 +260,7 @@ namespace Tests.BLL_Tests
             // Arrange
             using var context = GetDbContext();
             var categoryId = Guid.NewGuid();
-            var category = new Category { Id = categoryId, Name = "ToDelete" };
+            var category = new Category { Id = categoryId, Name = "ToDelete", IdUser = Guid.NewGuid() };
             context.Categories.Add(category);
             await context.SaveChangesAsync();
 
@@ -393,7 +394,7 @@ namespace Tests.BLL_Tests
             var optionId = Guid.NewGuid();
             var categoryId = Guid.NewGuid();
 
-            var categoryEntity = new Category { Id = categoryId, Name = "Genres" };
+            var categoryEntity = new Category { Id = categoryId, Name = "Genres", IdUser = Guid.NewGuid() };
             var optionEntity = new CategoryOption { Id = optionId, CategoryId = categoryId, Value = "Action", Key = 10 };
 
             context.Categories.Add(categoryEntity);

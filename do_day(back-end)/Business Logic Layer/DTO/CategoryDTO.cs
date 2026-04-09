@@ -10,7 +10,7 @@ namespace Business_Logic_Layer.DTO
 
         public string Name { get; set; }
 
-        public List<TaskDTO>? Tasks{ get; set;  }
+        public Guid IdUser { get; set; }
 
         public List<CategoryOptionDTO>? CategoryOptions { get; set; }
 
@@ -21,16 +21,15 @@ namespace Business_Logic_Layer.DTO
             this.Name = name;
         }
 
-        public CategoryDTO(Guid id, string name, List<TaskDTO> tasks, List<CategoryOptionDTO> categoryOptions) : this(id, name)
+        public CategoryDTO(Guid id, string name,Guid idUser, List<CategoryOptionDTO> categoryOptions) : this(id, name)
         { 
-            this.Tasks = tasks;
+            this.IdUser = idUser;
             this.CategoryOptions = categoryOptions;
         }
 
         public CategoryDTO(Category category) : this(category.Id, category.Name)
         { 
             this.CategoryOptions = category.CategoryOptions?.Select(co => new CategoryOptionDTO(co)).ToList();
-            //TODO: add tasks to categoryDTO
         }
     }
 }

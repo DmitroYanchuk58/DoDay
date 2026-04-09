@@ -21,8 +21,6 @@ namespace Data_Access_Layer.Entities
         public Guid UserId { get; set; }
 
         public User User { get; set; }
-
-        public List<CategoryTask> CategoryTasks { get; set; }
         #endregion
 
         #region Constructors

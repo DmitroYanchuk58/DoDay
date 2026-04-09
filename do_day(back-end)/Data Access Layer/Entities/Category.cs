@@ -4,7 +4,9 @@
     {
         public required string Name { get; set; }    
 
-        public List<CategoryTask> CategoryTasks { get; set; }
+        public required Guid IdUser { get; set; }
+
+        public User User { get; set; }
 
         public List<CategoryOption> CategoryOptions { get; set; }
     }

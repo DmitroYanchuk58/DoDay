@@ -32,6 +32,8 @@ namespace Data_Access_Layer.Entities
 
         public List<Task> Tasks { get; set; } = new List<Task>();
 
+        public List<Category> Categories { get; set; } = new List<Category>();
+
         #endregion
 
         #region Constructor

@@ -19,7 +19,8 @@ namespace Tests.BLL_Tests
             var category = new Category
             {
                 Id = categoryId,
-                Name = "Manga Genres"
+                Name = "Manga Genres",
+                IdUser = Guid.NewGuid()
             };
             context.Categories.Add(category);
             await context.SaveChangesAsync();
@@ -71,7 +72,8 @@ namespace Tests.BLL_Tests
             var category = new Category
             {
                 Id = categoryId,
-                Name = "Manga Genres"
+                Name = "Manga Genres",
+                IdUser = Guid.NewGuid()
             };
             context.Categories.Add(category);
             await context.SaveChangesAsync();
@@ -103,7 +105,7 @@ namespace Tests.BLL_Tests
             using var context = GetDbContext();
             var service = new CategoryOptionService(context);
 
-            var category = new Category { Id = Guid.NewGuid(), Name = "Genres" };
+            var category = new Category { Id = Guid.NewGuid(), Name = "Genres", IdUser = Guid.NewGuid() };
             var optionId = Guid.NewGuid();
             var option = new CategoryOption
             {

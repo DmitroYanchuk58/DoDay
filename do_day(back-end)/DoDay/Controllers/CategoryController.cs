@@ -8,12 +8,25 @@ namespace API_Layer.Controllers
     [Route("api/[controller]")]
     public class CategoryController : ControllerBase
     {
-        private ITaskService _service;
+        private ICategoryService _service;
 
-        public CategoryController(ITaskService service)
+        public CategoryController(ICategoryService service)
         {
             _service = service;
         }
 
+        [HttpGet("GetCategory")]
+        public async Task<IActionResult> GetCategory(Guid idCategory)
+        {
+            var category = await _service.GetCategory(idCategory);
+            return Ok(category);
+        }
+
+        [HttpPost("CreateCategory")]
+        public async Task<IActionResult> CreateCategory(CategoryDTO categoryDto)
+        {
+            await _service.CreateCategory(categoryDto);
+            return Ok();
+        }
     }
 }

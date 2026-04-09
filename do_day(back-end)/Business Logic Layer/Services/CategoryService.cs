@@ -41,6 +41,7 @@ namespace Business_Logic_Layer.Services
             {
                 Id = categoryDto.Id,
                 Name = categoryDto.Name,
+                IdUser = categoryDto.IdUser,
                 CategoryOptions = categoryDto.CategoryOptions?.Select(co => new CategoryOption
                 {
                     Id = co.Id,
