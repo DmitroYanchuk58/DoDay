@@ -1,15 +1,10 @@
 ﻿using Data_Access_Layer.DatabaseContext;
 using Data_Access_Layer.Entities;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Data_Access_Layer.Repositories
 {
-    public class JoinRepository
+    public class JoinRepository : IJoin
     {
         private readonly DoDayDBContext _context;
 

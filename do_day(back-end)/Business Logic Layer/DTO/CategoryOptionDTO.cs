@@ -19,14 +19,15 @@ namespace Business_Logic_Layer.DTO
         public Guid CategoryId { get; set; }
 
         public CategoryOptionDTO() { }
-        public CategoryOptionDTO(Guid id, int key, string value)
+        public CategoryOptionDTO(Guid id, int key, string value, Guid idCategory)
         { 
             this.Id = id;
             this.Key = key;
             this.Value = value;
+            this.CategoryId = idCategory;
         }
 
-        public CategoryOptionDTO(CategoryOption categoryOption) : this(categoryOption.Id, categoryOption.Key, categoryOption.Value)
+        public CategoryOptionDTO(CategoryOption categoryOption) : this(categoryOption.Id, categoryOption.Key, categoryOption.Value, categoryOption.CategoryId)
         {
         }
     }

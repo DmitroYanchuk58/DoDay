@@ -10,11 +10,13 @@ namespace Business_Logic_Layer.Services
 {
     public class CategoryService : ICategoryService
     {
-        CrudRepository<Category> _categoryRepository;
+        ICRUD<Category> _categoryRepository;
+        IJoin _joinRepository;
 
         public CategoryService(DoDayDBContext context)
         {
             _categoryRepository = new CrudRepository<Category>(context);
+            _joinRepository = new JoinRepository(context);
         }
 
         public async Task<CategoryDTO> GetCategory(Guid id)
@@ -23,7 +25,7 @@ namespace Business_Logic_Layer.Services
             {
                 throw new ArgumentException("Id cannot be empty.");
             }
-            var categoryEntity = await _categoryRepository.GetByIdAsync(id);
+            var categoryEntity = await _joinRepository.GetCategoryWithOptionsAsync(id);
             if (categoryEntity == null)
             {
                 throw new KeyNotFoundException($"Category with id {id} was not found.");
