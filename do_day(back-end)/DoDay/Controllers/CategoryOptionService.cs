@@ -14,6 +14,11 @@ namespace API_Layer.Controllers
             _service = service;
         }
 
-
+        [HttpGet("GetCategoryOption")]
+        public async Task<IActionResult> GetCategoryOption(Guid id)
+        {
+            var categoryOption = await _service.GetCategoryOption(id);
+            return Ok(categoryOption);
+        }
     }
 }
