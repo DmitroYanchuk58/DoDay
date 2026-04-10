@@ -34,6 +34,7 @@ builder.Services.AddScoped<IAuthorizationService, UserService>();
 builder.Services.AddScoped<IUserService, UserService>(); 
 builder.Services.AddScoped<ITaskService, TaskService>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
+builder.Services.AddScoped<ICategoryOptionService, CategoryOptionService>();
 
 builder.Services.AddCors(options =>
 {
