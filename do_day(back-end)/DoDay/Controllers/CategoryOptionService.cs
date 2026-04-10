@@ -36,5 +36,12 @@ namespace API_Layer.Controllers
             await _service.CreateCategoryOption(categoryOptionDTO);
             return Ok();
         }
+
+        [HttpDelete("DeleteCategoryOption")]
+        public async Task<IActionResult> DeleteCategoryOption(Guid id)
+        {
+            await _service.DeleteCategoryOption(id);
+            return Ok();
+        }
     }
 }
