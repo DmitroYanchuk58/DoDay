@@ -13,10 +13,6 @@ namespace Business_Logic_Layer.Services.Interfaces
 
         public Task CreateCategory(CategoryDTO categoryDto);
 
-        public Task<CategoryDTO> AddCategoryOptionToCategory(CategoryDTO category, CategoryOptionDTO categoryOption, ICategoryOptionService categoryOptionService);
-
-        public Task<CategoryDTO> RemoveCategoryOptionFromCategory(CategoryDTO category, CategoryOptionDTO categoryOption, ICategoryOptionService categoryOptionService);
-
         public Task UpdateCategory(CategoryDTO category);
 
         public Task DeleteCategory(Guid id);

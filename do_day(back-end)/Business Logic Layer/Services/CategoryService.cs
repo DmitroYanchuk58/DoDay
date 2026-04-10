@@ -65,38 +65,6 @@ namespace Business_Logic_Layer.Services
             await _categoryRepository.CreateAsync(categoryEntity);
         }
 
-        public async Task<CategoryDTO> AddCategoryOptionToCategory(CategoryDTO category,CategoryOptionDTO categoryOption, ICategoryOptionService categoryOptionService)
-        {
-            if(categoryOption == null)
-            {
-                throw new ArgumentNullException(nameof(categoryOption), "CategoryOptionDTO cannot be null.");
-            }
-            if(category == null)
-            {
-                throw new ArgumentNullException(nameof(category), "CategoryDTO cannot be null.");
-            }
-            categoryOption.CategoryId = category.Id;
-            await categoryOptionService.CreateCategoryOption(categoryOption);
-            category.CategoryOptions ??= new List<CategoryOptionDTO>();
-            category.CategoryOptions.Add(categoryOption);
-            return category;
-        }
-
-        public async Task<CategoryDTO> RemoveCategoryOptionFromCategory(CategoryDTO category, CategoryOptionDTO categoryOption, ICategoryOptionService categoryOptionService)
-        {
-            if (categoryOption == null)
-            {
-                throw new ArgumentNullException(nameof(categoryOption), "CategoryOptionDTO cannot be null.");
-            }
-            if (category == null)
-            {
-                throw new ArgumentNullException(nameof(category), "CategoryDTO cannot be null.");
-            }
-            await categoryOptionService.DeleteCategoryOption(categoryOption.Id);
-            category.CategoryOptions?.RemoveAll(co => co.Id == categoryOption.Id);
-            return category;
-        }
-
         public async Task UpdateCategory(CategoryDTO category)
         {
             if (category.Id == Guid.Empty)
