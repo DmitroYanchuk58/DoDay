@@ -35,7 +35,7 @@ namespace Business_Logic_Layer.Services
 
         public async Task<List<CategoryDTO>> GetAllUserCategories(Guid idUser)
         {
-            var categoryEntities = (await _categoryRepository.GetAllAsync()).Where(c => c.IdUser == idUser).ToList();
+            var categoryEntities = await _joinRepository.GetAllUserCategoriesWithOptionsAsync(idUser);
             return categoryEntities.Select(c => new CategoryDTO(c)).ToList();
         }
 

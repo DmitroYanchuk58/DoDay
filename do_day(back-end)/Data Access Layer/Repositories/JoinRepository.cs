@@ -16,8 +16,18 @@ namespace Data_Access_Layer.Repositories
         public async Task<Category> GetCategoryWithOptionsAsync(Guid id)
         {
             return await _context.Categories
-                .Include(c => c.CategoryOptions) 
+                .Include(c => c.CategoryOptions)
+                .AsNoTracking()
                 .FirstOrDefaultAsync(c => c.Id == id);
+        }
+
+        public async Task<List<Category>> GetAllUserCategoriesWithOptionsAsync(Guid idUser)
+        {
+            return await _context.Categories
+                .Include(c => c.CategoryOptions)
+                .Where(c => c.IdUser == idUser)
+                .AsNoTracking()
+                .ToListAsync();
         }
     }
 }
