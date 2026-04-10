@@ -56,6 +56,11 @@ namespace API_Layer.Controllers
             return Ok();
         }
 
-
+        [HttpDelete("DeleteCategory")]
+        public async Task<IActionResult> DeleteCategory(Guid idCategory)
+        {
+            await _service.DeleteCategory(idCategory);
+            return Ok();
+        }
     }
 }
