@@ -43,5 +43,19 @@ namespace API_Layer.Controllers
             await _service.DeleteCategoryOption(id);
             return Ok();
         }
+
+        [HttpPut("UpdateCategoryOption")]
+        public async Task<IActionResult> UpdateCategoryOption(CategoryOptionForRequest categoryOption)
+        {
+            var categoryOptionDTO = new CategoryOptionDTO
+            {
+                Id = categoryOption.Id ?? Guid.Empty,
+                Key = categoryOption.Key ?? 5,
+                Value = categoryOption.Value,
+                CategoryId = categoryOption.IdCategory ?? Guid.Empty
+            };
+            await _service.UpdateCategoryOption(categoryOptionDTO);
+            return Ok();
+        }
     }
 }

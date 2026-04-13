@@ -22,19 +22,19 @@ namespace Business_Logic_Layer.Services
             {
                 throw new ArgumentNullException(nameof(categoryOptionDTO), "CategoryOptionDTO cannot be null.");
             }
-            CategoryOption categoryOption = new CategoryOption() 
-            { 
+            CategoryOption categoryOption = new CategoryOption()
+            {
                 Id = categoryOptionDTO.Id,
                 Key = categoryOptionDTO.Key,
                 Value = categoryOptionDTO.Value,
-                CategoryId = categoryOptionDTO.CategoryId    
+                CategoryId = categoryOptionDTO.CategoryId
             };
             await _categoryOptionRepository.CreateAsync(categoryOption);
         }
 
         public async Task DeleteCategoryOption(Guid id)
         {
-            if(id == Guid.Empty)
+            if (id == Guid.Empty)
             {
                 throw new ArgumentNullException(nameof(id));
             }
@@ -43,7 +43,7 @@ namespace Business_Logic_Layer.Services
 
         public async Task<CategoryOptionDTO> GetCategoryOption(Guid id)
         {
-            if(id == Guid.Empty) 
+            if (id == Guid.Empty)
             {
                 throw new ArgumentNullException(nameof(id));
             }
@@ -57,9 +57,26 @@ namespace Business_Logic_Layer.Services
                 Id = categoryOption.Id,
                 Key = categoryOption.Key,
                 Value = categoryOption.Value,
-                CategoryId=categoryOption.CategoryId
+                CategoryId = categoryOption.CategoryId
             };
             return categoryOptionDto;
+        }
+
+        public async Task UpdateCategoryOption(CategoryOptionDTO categoryOptionDTO)
+        {
+            if (categoryOptionDTO == null)
+            {
+                throw new ArgumentNullException(nameof(categoryOptionDTO), "CategoryOptionDTO cannot be null.");
+            }
+            var existingCategoryOption = await _categoryOptionRepository.GetByIdAsync(categoryOptionDTO.Id);
+            if (existingCategoryOption == null)
+            {
+                throw new KeyNotFoundException($"Option with id {categoryOptionDTO.Id} not found.");
+            }
+            existingCategoryOption.Key = categoryOptionDTO.Key;
+            existingCategoryOption.Value = categoryOptionDTO.Value;
+            existingCategoryOption.CategoryId = categoryOptionDTO.CategoryId;
+            await _categoryOptionRepository.UpdateAsync(existingCategoryOption);
         }
     }
 }
