@@ -1,10 +1,9 @@
 import DashboardContent from "../../main-pages/dashboard-page";
-import DashboardOverlay from "../../components/dashboard-overlay";
+import DashboardOverlay from "../../components/modals/dashboard-overlay";
 import MyTask from "../../main-pages/my-task-page";
 import VitalTask from "../../main-pages/vitals-tasks-page";
 import TaskCategories from "../../main-pages/categories-page";
-import CreateCategory from "../../main-pages/create-category-page";
-import CategoryModal from "../../components/modal-category";
+import CategoryModal from "../../components/modals/category-modal";
 import ChangeAccountInfoPage from "../../main-pages/change-account-info-page";
 import ChangePassword from "../../main-pages/change-password-page";
 import EditTask from "../../components/edit-task";
@@ -38,9 +37,9 @@ const PageRenderer = ({
         tasks={tasks}
         refreshTasks={refreshTasks}
         onInviteClick={uiActions.openInvite}
-        onEditClick={uiActions.openEdit}
+        onEditClick={uiActions.openEditTask}
         onTaskClick={setSelectedTask}
-        onCreateClick={uiActions.openCreate}
+        onCreateClick={uiActions.openCreateTask}
       />
     );
   };
@@ -54,19 +53,32 @@ const PageRenderer = ({
       case 3:
         return <MyTask user={user} refreshTasks={refreshTasks} />;
       case 4:
-        return categoryData.isCreating ? (
-          <CreateCategory
-            onCreate={(title) => {
-              categoryData.actions.addCategory(title);
-              categoryData.setIsCreating(false);
-            }}
-            onCancel={() => categoryData.setIsCreating(false)}
+        return categoryData.modalConfig.isOpen ? (
+          <CategoryModal
+            config={categoryData.modalConfig}
+            onCancel={() => categoryData.actions.closeModal()}
+            onSubmit={(value) => categoryData.modalConfig.onSubmit(value)}
           />
         ) : (
           <TaskCategories
             categories={categoryData.categories}
-            onAddCategoryClick={() => categoryData.setIsCreating(true)}
             onGoBack={() => uiActions.setActiveId(1)}
+            onAddCategoryClick={() =>
+              categoryData.actions.openCreateCategoryModal()
+            }
+            onAddCategoryOptionClick={(id) =>
+              categoryData.actions.openCreateCategoryOptionModal(id)
+            }
+            onEditCategoryOptionClick={(categoryId, item) =>
+              categoryData.actions.openEditCategoryOptionModel(
+                categoryId,
+                item.id,
+                item.name,
+              )
+            }
+            onDeleteCategoryOptionClick={(itemId) =>
+              categoryData.actions.deleteCategoryOption(itemId)
+            }
             {...categoryData.actions}
           />
         );
@@ -96,20 +108,15 @@ const PageRenderer = ({
       />
       <CreateTask
         isOpen={uiActions.modals.create}
-        onClose={uiActions.closeCreate}
+        onClose={uiActions.closeCreateTask}
         user={user}
         onTaskCreated={refreshTasks}
       />
       <EditTask
         isOpen={uiActions.modals.edit}
         task={uiActions.taskToEdit}
-        onClose={uiActions.closeEdit}
+        onClose={uiActions.closeEditTask}
         onSave={refreshTasks}
-      />
-      <CategoryModal
-        {...categoryData.modalConfig}
-        onClose={categoryData.actions.closeModal}
-        onSubmit={categoryData.actions.handleModalSubmit}
       />
     </>
   );

@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { useTasks } from "./tools/hooks/useTasks";
+import useCategories from "../controllers/category-controller";
 
 import Header from "./components/header";
 import Sidebar from "./components/sidebar";
 
-import useCategories from "./tools/hooks/useCategories";
 import PageRenderer from "./tools/additionalTools/page-renderer";
 
 const Main = () => {
@@ -15,7 +15,11 @@ const Main = () => {
   );
 
   const { tasks, refreshTasks } = useTasks(user);
-  const { categories, modalConfig, actions: catActions } = useCategories();
+  const {
+    categories,
+    modalConfig,
+    actions: categoryActions,
+  } = useCategories(user.id);
   const [isCreatingCategory, setIsCreatingCategory] = useState(false);
 
   const [modals, setModals] = useState({
@@ -32,13 +36,16 @@ const Main = () => {
     taskToEdit,
     openInvite: () => setModals((prev) => ({ ...prev, invite: true })),
     closeInvite: () => setModals((prev) => ({ ...prev, invite: false })),
-    openCreate: () => setModals((prev) => ({ ...prev, create: true })),
-    closeCreate: () => setModals((prev) => ({ ...prev, create: false })),
-    openEdit: (task) => {
+    openCreateTask: () => setModals((prev) => ({ ...prev, create: true })),
+    closeCreateTask: () => setModals((prev) => ({ ...prev, create: false })),
+    openEditTask: (task) => {
       setTaskToEdit(task);
       setModals((prev) => ({ ...prev, edit: true }));
     },
-    closeEdit: () => setModals((prev) => ({ ...prev, edit: false })),
+    closeEditTask: () => setModals((prev) => ({ ...prev, edit: false })),
+    openCreateCategoryOption: (categoryId) => {
+      categoryActions.openAdd(categoryId);
+    },
   };
 
   const isDashboardActive = activeId === 1 && !selectedTask;
@@ -67,7 +74,7 @@ const Main = () => {
             categoryData={{
               categories,
               modalConfig,
-              actions: catActions,
+              actions: categoryActions,
               isCreating: isCreatingCategory,
               setIsCreating: setIsCreatingCategory,
             }}

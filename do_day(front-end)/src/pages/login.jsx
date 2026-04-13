@@ -10,7 +10,33 @@ const Login = ({ onLogin, changeOnRegisterPage }) => {
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
 
+  const validateEmail = (email) => {
+    return email.match(
+      /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+    );
+  };
+
+  const checkValues = () => {
+    if (!email) {
+      setMessage("Please fill email field");
+      return false;
+    }
+    if (!password) {
+      setMessage("Please fill password field");
+      return false;
+    }
+    if (!validateEmail(email)) {
+      setMessage("Please write existing email");
+      return false;
+    }
+    setMessage("");
+    return true;
+  };
+
   const handleLogin = async () => {
+    if (!checkValues()) {
+      return;
+    }
     try {
       const response = await AuthService.login(email, password);
 
@@ -18,7 +44,6 @@ const Login = ({ onLogin, changeOnRegisterPage }) => {
 
       if (isSuccess && user) {
         localStorage.setItem("user", JSON.stringify(user));
-        console.log("Успішний вхід:", user.firstName);
         onLogin();
       } else {
         setMessage("Incorrect email or password");

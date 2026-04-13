@@ -3,9 +3,9 @@ const TaskCategories = ({
   onDeleteCategory,
   onAddCategoryClick,
   onGoBack,
-  onEditItem,
-  onDeleteItem,
-  onAddItem,
+  onEditCategoryOptionClick,
+  onDeleteCategoryOptionClick,
+  onAddCategoryOptionClick,
 }) => {
   return (
     <div className="task-categories-page">
@@ -28,9 +28,11 @@ const TaskCategories = ({
               title={category.title}
               data={category.items}
               onDeleteTable={() => onDeleteCategory(category.id)}
-              onEditItem={(item) => onEditItem(category.id, item)}
-              onDeleteItem={(item) => onDeleteItem(category.id, item)}
-              onAddItem={() => onAddItem(category.id)}
+              onEditItem={(item) =>
+                onEditCategoryOptionClick(category.id, item)
+              }
+              onDeleteItem={(itemId) => onDeleteCategoryOptionClick(itemId)}
+              onAddItem={() => onAddCategoryOptionClick(category.id)}
             />
           ))}
         </div>

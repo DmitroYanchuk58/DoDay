@@ -813,12 +813,6 @@ div.reg-log {
   scrollbar-color: #a1a3ab transparent;
 }
 
-.sidebar {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
 .column {
   display: flex;
   flex-direction: column;
@@ -2508,7 +2502,7 @@ div.reg-log {
 }
 .login .auth-message {
   color: red;
-  font-size: 12px;
+  font-size: 16px;
 }
 
 .registartion .auth-card .auth-image {

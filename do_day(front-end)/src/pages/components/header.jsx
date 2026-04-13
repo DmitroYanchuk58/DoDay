@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import CalendarOverlay from "./calendar-overlay";
+import CalendarOverlay from "./modals/calendar-overlay";
 import NotificationOverlay from "./notification-overlay";
 
 const Header = () => {
