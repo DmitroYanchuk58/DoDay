@@ -2502,7 +2502,7 @@ div.reg-log {
 }
 .login .auth-message {
   color: red;
-  font-size: 16px;
+  font-size: 18px;
 }
 
 .registartion .auth-card .auth-image {
@@ -2525,7 +2525,7 @@ div.reg-log {
 
 .auth-message {
   color: red;
-  font-size: 12px;
+  font-size: 18px;
 }
 
 .main-page {

@@ -41,7 +41,7 @@ namespace Business_Logic_Layer.Services
             return (false,null!);
         }
 
-        public async Task Register(UserDTO userDto)
+        public async Task<UserDTO> Register(UserDTO userDto)
         {
             var validator = new UserDTOValidator();
             var result = validator.Validate(userDto);
@@ -54,6 +54,8 @@ namespace Business_Logic_Layer.Services
             var user = userDto.ToEntity();
 
             await _userRepository.CreateAsync(user);
+            
+            return new UserDTO(user);
         }
 
         public async Task ChangePassword(Guid userId, string oldPassword, string newPassword)

@@ -15,11 +15,53 @@ const Register = ({ changeOnMainPage, changeOnLoginPage }) => {
   const [agree, setAgree] = useState(false);
   const [message, setMessage] = useState("");
 
+  const validateEmail = (email) => {
+    return email.match(
+      /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+    );
+  };
+
+  const checkValues = () => {
+    if (!firstName) {
+      setMessage("First Name field should be filled");
+      return false;
+    }
+    if (!lastName) {
+      setMessage("Last Name field should be filled");
+      return false;
+    }
+    if (!username) {
+      setMessage("Username field should be filled");
+      return false;
+    }
+    if (!email) {
+      setMessage("Email field should be filled");
+      return false;
+    }
+    if (!validateEmail(email)) {
+      setMessage("Please write an existing email");
+      return false;
+    }
+    if (!password) {
+      setMessage("Password field should be filled");
+      return false;
+    }
+    if (!confirmPassword) {
+      setMessage("Password filed should be filled");
+      return false;
+    }
+    if (password !== confirmPassword) {
+      setMessage("Passwords should be same");
+      return false;
+    }
+    setMessage("");
+    return true;
+  };
+
   const registrateUser = async (e) => {
     if (e) e.preventDefault();
 
-    if (password !== confirmPassword) {
-      setMessage("Passwords should be same");
+    if (!checkValues()) {
       return;
     }
 
@@ -42,7 +84,7 @@ const Register = ({ changeOnMainPage, changeOnLoginPage }) => {
     } catch (err) {
       const errorDetail =
         err.response?.data?.detail || err.message || "Undefited error";
-      setMessage("Error: " + errorDetail);
+      setMessage(errorDetail);
     }
   };
 

@@ -19,7 +19,7 @@ namespace API_Layer.Controllers
         [HttpPost("Register")]
         public async Task<IActionResult> Register(UserDTO user)
         {
-            await _service.Register(user);
+            user = await _service.Register(user);
             return Ok(user);
         }
 
