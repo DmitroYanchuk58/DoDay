@@ -7,11 +7,11 @@ namespace API_Layer.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class CategoryOptionService : ControllerBase
+    public class CategoryOption : ControllerBase
     {
         public ICategoryOptionService _service;
 
-        public CategoryOptionService(ICategoryOptionService service)
+        public CategoryOption(ICategoryOptionService service)
         {
             _service = service;
         }
@@ -28,10 +28,10 @@ namespace API_Layer.Controllers
         {
             var categoryOptionDTO = new CategoryOptionDTO
             {
-                Id = categoryOption.Id,
-                Key = categoryOption.Key,
+                Id = categoryOption.Id ?? Guid.NewGuid(),
+                Key = categoryOption.Key ?? 5,
                 Value = categoryOption.Value,
-                CategoryId = categoryOption.IdCategory
+                CategoryId = categoryOption.IdCategory ?? Guid.Empty
             };
             await _service.CreateCategoryOption(categoryOptionDTO);
             return Ok();

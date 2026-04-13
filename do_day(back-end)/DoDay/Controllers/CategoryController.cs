@@ -35,9 +35,9 @@ namespace API_Layer.Controllers
         {
             var categoryDto = new CategoryDTO
             {
-                Id = categoryRequest.Id,
+                Id = categoryRequest.Id ?? Guid.NewGuid(),
                 Name = categoryRequest.Name,
-                IdUser = categoryRequest.IdUser
+                IdUser = categoryRequest.IdUser ?? Guid.Empty
             };
             await _service.CreateCategory(categoryDto);
             return Ok();
@@ -48,9 +48,9 @@ namespace API_Layer.Controllers
         {
             var categoryDto = new CategoryDTO
             {
-                Id = categoryRequest.Id,
+                Id = categoryRequest.Id ?? Guid.Empty,
                 Name = categoryRequest.Name,
-                IdUser = categoryRequest.IdUser
+                IdUser = categoryRequest.IdUser ?? Guid.Empty
             };
             await _service.UpdateCategory(categoryDto);
             return Ok();
