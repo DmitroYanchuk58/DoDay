@@ -2,6 +2,16 @@ import { useState, useEffect } from "react";
 
 const CategoryModal = ({ config, onSubmit, onCancel }) => {
   const [value, setValue] = useState(config?.initialValue || "");
+  const [message, setMessage] = useState("");
+
+  const checkValues = () => {
+    if (!value) {
+      setMessage("Title field should be filled");
+      return false;
+    }
+    setMessage("");
+    return true;
+  };
 
   useEffect(() => {
     setValue(config?.initialValue || "");
@@ -9,6 +19,9 @@ const CategoryModal = ({ config, onSubmit, onCancel }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (!checkValues()) {
+      return;
+    }
     if (value.trim()) {
       onSubmit(value);
       if (!config.initialValue) setValue("");
@@ -55,6 +68,7 @@ const CategoryModal = ({ config, onSubmit, onCancel }) => {
               </button>
             </div>
           </form>
+          {message && <p className="message">{message}</p>}
         </div>
       </div>
     </div>

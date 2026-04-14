@@ -10,7 +10,10 @@ export const AuthService = {
         firstName,
         lastName,
       });
-
+      if (response.token) {
+        localStorage.setItem("token", response.token);
+        localStorage.setItem("user", JSON.stringify(response.user));
+      }
       return response.data;
     } catch (error) {
       console.error("Error:", error.response?.data || error.message);

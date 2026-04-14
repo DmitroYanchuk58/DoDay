@@ -1,10 +1,12 @@
 ﻿using API_Layer.DTO;
 using Business_Logic_Layer.DTO;
 using Business_Logic_Layer.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API_Layer.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("api/[controller]")]
     public class CategoryController : ControllerBase

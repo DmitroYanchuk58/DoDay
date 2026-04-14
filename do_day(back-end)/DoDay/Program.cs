@@ -2,8 +2,11 @@ using API_Layer.Middleware;
 using Business_Logic_Layer.Services;
 using Business_Logic_Layer.Services.Interfaces;
 using Data_Access_Layer.DatabaseContext;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using Serilog;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -35,6 +38,16 @@ builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<ITaskService, TaskService>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<ICategoryOptionService, CategoryOptionService>();
+
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options => {
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = true,
+            ValidateAudience = true,
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("DoDay_Super_Secret_Security_Key_2026_Secure_Version"))
+        };
+    });
 
 builder.Services.AddCors(options =>
 {
@@ -77,6 +90,9 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.UseAuthentication(); 
+app.UseAuthorization();
 
 app.UseSerilogRequestLogging();
 

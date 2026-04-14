@@ -105,8 +105,9 @@ const CreateTaskOverlay = ({ isOpen, onClose, user, onTaskCreated }) => {
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
               ></textarea>
-              {message && <p className="message">{message}</p>}
             </div>
+
+            {message && <p className="message">{message}</p>}
           </div>
 
           <div className="edit-form-right">

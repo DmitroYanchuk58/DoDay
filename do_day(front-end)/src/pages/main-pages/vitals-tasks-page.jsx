@@ -28,7 +28,7 @@ const VitalTask = ({ user, refreshTasks }) => {
         await refreshTasks();
       }
     } catch (err) {
-      console.error("Помилка оновлення:", err);
+      console.error("Update error:", err);
     }
   };
 
@@ -43,14 +43,19 @@ const VitalTask = ({ user, refreshTasks }) => {
           {tasks.map((task) => (
             <div key={task.id} onClick={() => setSelectedId(task.id)}>
               <TaskCard
-                id={task.id}
-                title={task.name}
-                description={task.description}
+                title={task.name || task.Name}
+                description={task.description || task.Description}
+                date={
+                  task.dateCreated ? task.dateCreated.split("T")[0] : "No date"
+                }
+                priority={"Low"}
+                status={"In progress"}
                 {...task}
                 onDelete={handleDeleteTask}
-                type="compact"
-                isVitalPage={true}
-                className={selectedId === task.id ? "selected" : ""}
+                openEditTask={(e) => {
+                  e.stopPropagation();
+                  onEditClick(task);
+                }}
               />
             </div>
           ))}
@@ -69,14 +74,14 @@ const VitalTask = ({ user, refreshTasks }) => {
               <h2>{selectedTask.name}</h2>
               <div className="details-meta">
                 <p>
-                  Priority:{" "}
-                  <span className="red-text">{selectedTask.priority}</span>
+                  Priority: <span className="red-text">Low</span>
                 </p>
                 <p>
-                  Status:{" "}
-                  <span className="red-text">{selectedTask.status}</span>
+                  Status: <span className="red-text">In progress</span>
                 </p>
-                <p className="gray-text">Created on: {selectedTask.date}</p>
+                <p className="gray-text">
+                  Created on: {selectedTask.dateCreated.split("T")[0]}
+                </p>
               </div>
             </div>
           </div>
