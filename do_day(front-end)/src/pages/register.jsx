@@ -144,7 +144,7 @@ const Register = ({ changeOnMainPage, changeOnLoginPage }) => {
               onChange={(e) => setAgree(e.target.checked)}
             />
 
-            {message && <p className="auth-message">{message}</p>}
+            {message && <p className="message">{message}</p>}
 
             <Button text="Register" type="submit" disabled={!agree} />
           </form>

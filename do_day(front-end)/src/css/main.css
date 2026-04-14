@@ -710,7 +710,7 @@ div.reg-log {
   padding: 20px;
   border: 1px solid #a1a3ab;
   width: 100%;
-  height: calc(100vh - 200px);
+  height: 95%;
   box-sizing: border-box;
 }
 
@@ -1076,7 +1076,7 @@ div.reg-log {
   color: #ff4d4d;
 }
 
-.meta-value-p-low {
+.meta-value.p-low {
   color: #05a301;
 }
 
@@ -1115,6 +1115,8 @@ div.reg-log {
   justify-content: space-around;
   align-items: center;
   gap: 10px;
+  margin-top: auto;
+  margin-bottom: auto;
 }
 
 .status-chart-item {
@@ -2183,6 +2185,7 @@ div.reg-log {
   flex-direction: column;
   align-items: center;
   justify-content: end;
+  height: 90%;
 }
 .edit-overlay .edit-input-group {
   margin-bottom: 20px;
@@ -2308,7 +2311,6 @@ div.reg-log {
 }
 .edit-overlay .upload-dropzone {
   width: 80%;
-  margin-bottom: -10px;
   height: 240px;
   border: 1px solid #cbd5e0;
   border-radius: 12px;
@@ -2523,7 +2525,7 @@ div.reg-log {
   gap: 15px;
 }
 
-.auth-message {
+.message {
   color: red;
   font-size: 18px;
 }

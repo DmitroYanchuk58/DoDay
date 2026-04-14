@@ -10,6 +10,20 @@ const EditTaskOverlay = ({ isOpen, task, onClose, onSave }) => {
     date: "",
     dateCreated: "",
   });
+  const [message, setMessage] = useState("");
+
+  const checkValues = () => {
+    if (!formData.name) {
+      setMessage("Title field should be filled");
+      return false;
+    }
+    if (!formData.description) {
+      setMessage("Description field should be filled");
+      return false;
+    }
+    setMessage("");
+    return true;
+  };
 
   useEffect(() => {
     if (task) {
@@ -37,6 +51,10 @@ const EditTaskOverlay = ({ isOpen, task, onClose, onSave }) => {
 
   const handleUpdate = async (e) => {
     if (e) e.preventDefault();
+
+    if (!checkValues()) {
+      return;
+    }
 
     try {
       await TaskService.updateTask(formData);
@@ -120,6 +138,8 @@ const EditTaskOverlay = ({ isOpen, task, onClose, onSave }) => {
                 onChange={handleChange}
               ></textarea>
             </div>
+
+            {message && <p className="message">{message}</p>}
           </div>
 
           <div className="edit-form-right">

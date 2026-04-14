@@ -77,6 +77,9 @@ const DashboardContent = ({
                 key={task.id || task.Id}
                 title={task.name || task.Name}
                 description={task.description || task.Description}
+                date={task.dateCreated.split("T")[0]}
+                priority={"Low"}
+                status={"In progress"}
                 {...task}
                 onDelete={handleDeleteTask}
                 openEditTask={(e) => {

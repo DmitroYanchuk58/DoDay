@@ -4,17 +4,27 @@ import { TaskService } from "../../apiClient/TaskService";
 const CreateTaskOverlay = ({ isOpen, onClose, user, onTaskCreated }) => {
   const [name, setName] = useState();
   const [description, setDescription] = useState("");
+  const [message, setMessage] = useState("");
 
   if (!isOpen) return null;
 
-  const isNullOrWhiteSpace = (str) => {
-    return !str || str.trim().length === 0;
+  const checkValues = () => {
+    if (!name) {
+      setMessage("Title field should be filled");
+      return false;
+    }
+    if (!description) {
+      setMessage("Description field should be filled");
+      return false;
+    }
+    setMessage("");
+    return true;
   };
 
   const createTask = async (e) => {
     if (e) e.preventDefault();
 
-    if (isNullOrWhiteSpace(name)) {
+    if (!checkValues()) {
       return;
     }
 
@@ -95,6 +105,7 @@ const CreateTaskOverlay = ({ isOpen, onClose, user, onTaskCreated }) => {
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
               ></textarea>
+              {message && <p className="message">{message}</p>}
             </div>
           </div>
 
