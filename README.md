@@ -13,18 +13,18 @@
 <div align="center">
   <h2>Table of Contents</h2>
 </div>
-<p>&nbsp;&nbsp;<a href="#features">Features</a> </p>
 <p>&nbsp;&nbsp;<a href="#tech-stack">Tech Stack</a></p>
-<p>&nbsp;&nbsp;<a href="#getting-started">Getting Started</a></p>
+<p>&nbsp;&nbsp;<a href="#features">Features</a> </p>
 <p>&nbsp;&nbsp;<a href="#architecture">Architecture</a></p>
 <p>&nbsp;&nbsp;<a href="#database">Database</a></p>
+<p>&nbsp;&nbsp;<a href="#getting-started">Getting Started</a></p>
 
 
 <div align="center">
-  <h2>Tech Stack</h2>
+  <h2 id="tech-stack">Tech Stack</h2>
 </div>
 
-<div align="center">
+<div align="center" >
   <h3>Backend</h3>
 </div>
 <ul>
@@ -62,7 +62,7 @@
 </ul>
 
 <div align="center">
-<h2>Features</h2>
+<h2 id="features">Features</h2>
 </div>
 
 1. Identity & Access Management (IAM)
@@ -91,7 +91,7 @@
 </ul>
 
 <div align="center">
-<h2>Architecture</h2>
+<h2 id="architecture">Architecture</h2>
 </div>
 <div align="center"><img width="966" height="526" alt="DoDayArchitecture" src="https://github.com/user-attachments/assets/821a4d1d-4a02-483e-b60c-73a2828da8f8" /></div>
 <div align="center"><h3>Frontend</h3></div>
@@ -105,7 +105,7 @@ The backend is structured into three layers to ensure maintainability and testab
 </ul>
 
 <div align="center">
-<h2>Database</h2>
+<h2 id="database">Database</h2>
 
 <img width="643" height="664" alt="database" src="https://github.com/user-attachments/assets/c8295e21-b8d9-4fde-927d-23d294369df7" />
 </div>
