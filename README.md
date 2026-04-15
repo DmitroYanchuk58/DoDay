@@ -123,10 +123,16 @@ The backend is structured into three layers to ensure maintainability and testab
 <p>&nbsp;&nbsp;To set up the DoDay ecosystem on your local machine, follow these steps:</p>
 <ol>
   <li>Clone the repository</li>
-```
+<pre>
 git clone [https://github.com/yourusername/DoDay.git](https://github.com/yourusername/DoDay.git)
 cd DoDay
-```
-
+</pre>
+  <li>Start Infrastructure</li>
+<pre>
+docker-compose up --build
+</pre>
+  <li>Enjoy</li>
 </ol>
+
+
 
