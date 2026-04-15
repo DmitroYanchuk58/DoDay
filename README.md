@@ -6,16 +6,16 @@
   <img src="https://img.shields.io/badge/Swagger-85EA2D?style=for-the-badge&logo=swagger&logoColor=black" />
 </p>
 <div align="center">
- <h1>DoDay</h1>
+  <img width="761" height="162" alt="DoDay" src="https://github.com/user-attachments/assets/f2cfd5c0-739e-4b5a-b2d8-53cd0e35cf4f" />
 </div>
-<div align="center">DoDay is a high-performance, full-stack task management ecosystem designed to eliminate cognitive load by streamlining daily workflows through dynamic categorization and real-time synchronization.</div>
+
 
 <div align="center">
   <h2>Table of Contents</h2>
 </div>
 <p>&nbsp;&nbsp;<a href="#tech-stack">Tech Stack</a></p>
-<p>&nbsp;&nbsp;<a href="#features">Features</a> </p>
 <p>&nbsp;&nbsp;<a href="#architecture">Architecture</a></p>
+<p>&nbsp;&nbsp;<a href="#features">Features</a> </p>
 <p>&nbsp;&nbsp;<a href="#database">Database</a></p>
 <p>&nbsp;&nbsp;<a href="#getting-started">Getting Started</a></p>
 
@@ -62,6 +62,20 @@
 </ul>
 
 <div align="center">
+<h2 id="architecture">Architecture</h2>
+</div>
+<div align="center"><img width="966" height="526" alt="DoDayArchitecture" src="https://github.com/user-attachments/assets/821a4d1d-4a02-483e-b60c-73a2828da8f8" /></div>
+<div align="center"><h3>Frontend</h3></div>
+The client-side application is built with React, utilizing Pages for the UI logic. All external communication is centralized through Axios, which handles asynchronous HTTP requests and ensures a consistent interface for interacting with the backend API.
+<div align="center"><h3>Backend</h3></div>
+The backend is structured into three layers to ensure maintainability and testability:
+<ul>
+<li>API Layer(Presentation Layer): The entry point for all client requests. It manages routing, middleware, and request/response formatting.</li>
+<li>Business Logic Layer (BLL): The core of the application. It processes business rules and coordinates operations between the API and the data storage.</li>
+<li>Data Access Layer (DAL): Responsible for all interactions with the DoDayDatabase. It abstracts the complexity of SQL queries using Entity Framework Core.</li>
+</ul>
+
+<div align="center">
 <h2 id="features">Features</h2>
 </div>
 
@@ -91,24 +105,17 @@
 </ul>
 
 <div align="center">
-<h2 id="architecture">Architecture</h2>
-</div>
-<div align="center"><img width="966" height="526" alt="DoDayArchitecture" src="https://github.com/user-attachments/assets/821a4d1d-4a02-483e-b60c-73a2828da8f8" /></div>
-<div align="center"><h3>Frontend</h3></div>
-The client-side application is built with React, utilizing Pages for the UI logic. All external communication is centralized through Axios, which handles asynchronous HTTP requests and ensures a consistent interface for interacting with the backend API.
-<div align="center"><h3>Backend</h3></div>
-The backend is structured into three layers to ensure maintainability and testability:
-<ul>
-<li>API Layer(Presentation Layer): The entry point for all client requests. It manages routing, middleware, and request/response formatting.</li>
-<li>Business Logic Layer (BLL): The core of the application. It processes business rules and coordinates operations between the API and the data storage.</li>
-<li>Data Access Layer (DAL): Responsible for all interactions with the DoDayDatabase. It abstracts the complexity of SQL queries using Entity Framework Core.</li>
-</ul>
-
-<div align="center">
 <h2 id="database">Database</h2>
 
 <img width="643" height="664" alt="database" src="https://github.com/user-attachments/assets/c8295e21-b8d9-4fde-927d-23d294369df7" />
 </div>
+&nbsp;&nbsp;The DoDay database utilizes a relational MSSQL structure designed for high data integrity and scalable task management.
+<ul>
+  <li><b>Users & Auth:</b> Centralized storage for user profiles and hashed credentials.</li>
+  <li><b>Relational Logic:</b> A User owns multiple Tasks and Categories, ensuring strict data isolation.</li>
+  <li><b>Dynamic Categorization:</b> Features a CategoryOptions system to allow for flexible, user-defined metadata.</li>
+  <li><b>Security:</b> Implements GUIDs (Globally Unique Identifiers) for all Primary Keys to prevent ID enumeration.</li>
+</ul>
 
 
 
