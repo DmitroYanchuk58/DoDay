@@ -124,7 +124,7 @@ The backend is structured into three layers to ensure maintainability and testab
 <ol>
   <li>Clone the repository</li>
 <pre>
-git clone [https://github.com/yourusername/DoDay.git](https://github.com/yourusername/DoDay.git)
+git clone [[https://github.com/yourusername/DoDay.git](https://github.com/DmitroYanchuk58/DoDay.git)]([https://github.com/yourusername/DoDay.git](https://github.com/DmitroYanchuk58/DoDay.git))
 cd DoDay
 </pre>
   <li>Start Infrastructure</li>
