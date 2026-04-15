@@ -28,29 +28,29 @@
   <h3>Backend</h3>
 </div>
 <ul>
-  <li><b>C# (.NET 9.0)</b> – Robust, type-safe language for enterprise-grade logic.</li>
-  <li><b>ASP.NET Core Web API</b> – High-performance framework for building RESTful services.</li>
-  <li><b>Entity Framework Core</b> – Modern ORM for seamless database interaction and migrations.</li>
-  <li><b>Fluent Validation</b> – Strongly-typed validation rules to ensure data integrity.</li>
-  <li><b>Swagger (OpenAPI)</b> – Interactive documentation and testing interface for API endpoints.</li>
-  <li><b>Serilog & Seq</b> – Structured logging and centralized monitoring for real-time debugging.</li>
+  <li><b>C# (.NET 9.0)</b></li>
+  <li><b>ASP.NET Core Web API</b></li>
+  <li><b>Entity Framework Core</b></li>
+  <li><b>Fluent Validation</b></li>
+  <li><b>Swagger (OpenAPI)</b></li>
+  <li><b>Serilog & Seq</b></li>
 </ul>
 
 <div align="center">
   <h3>Frontend</h3>
 </div>
 <ul>
-  <li><b>React</b> – Component-based library for building a dynamic and responsive UI.</li>
-  <li><b>JavaScript (ES6+)</b> – Core logic for client-side interactivity and state management.</li>
-  <li><b>Axios</b> – Promise-based HTTP client for connecting the frontend to the API.</li>
+  <li><b>React</b></li>
+  <li><b>JavaScript (ES6+)</b></li>
+  <li><b>Axios</b></li>
 </ul>
 
 <div align="center">
   <h3>Database & Infrastructure</h3>
 </div>
 <ul>
-  <li><b>Microsoft SQL Server (MSSQL)</b> – Relational database for structured, reliable data storage.</li>
-  <li><b>Docker</b> – Containerization to ensure the environment remains consistent across development and production.</li>
+  <li><b>Microsoft SQL Server (MSSQL)</b></li>
+  <li><b>Docker</b></li>
 </ul>
 
 <div align="center">
