@@ -97,6 +97,12 @@
 <div align="center"><h3>Frontend</h3></div>
 The client-side application is built with React, utilizing Pages for the UI logic. All external communication is centralized through Axios, which handles asynchronous HTTP requests and ensures a consistent interface for interacting with the backend API.
 <div align="center"><h3>Backend</h3></div>
+The backend is structured into three layers to ensure maintainability and testability:
+<ul>
+<li>API Layer(Presentation Layer): The entry point for all client requests. It manages routing, middleware, and request/response formatting.</li>
+<li>Business Logic Layer (BLL): The core of the application. It processes business rules and coordinates operations between the API and the data storage.</li>
+<li>Data Access Layer (DAL): Responsible for all interactions with the DoDayDatabase. It abstracts the complexity of SQL queries using Entity Framework Core.</li>
+</ul>
 
 <div align="center">
 <h2>Database</h2>
