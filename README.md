@@ -117,6 +117,16 @@ The backend is structured into three layers to ensure maintainability and testab
   <li><b>Security:</b> Implements GUIDs (Globally Unique Identifiers) for all Primary Keys to prevent ID enumeration.</li>
 </ul>
 
+<div align="center">
+<h2 id="getting-started">Getting Started</h2>
+</div>
+<p>&nbsp;&nbsp;To set up the DoDay ecosystem on your local machine, follow these steps:</p>
+<ol>
+  <li>Clone the repository</li>
+```
+git clone [https://github.com/yourusername/DoDay.git](https://github.com/yourusername/DoDay.git)
+cd DoDay
+```
 
-
+</ol>
 
