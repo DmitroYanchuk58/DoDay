@@ -57,8 +57,8 @@
   <h3>Quality Assurance</h3>
 </div>
 <ul>
-  <li><b>xUnit</b> – Industry-standard unit testing framework to ensure code reliability.</li>
-  <li><b>Moq</b> – Used for mocking dependencies during testing.</li>
+  <li><b>xUnit</b></li>
+  <li><b>Moq</b></li>
 </ul>
 
 <div align="center">
