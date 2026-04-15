@@ -21,45 +21,37 @@
 
 
 <div align="center">
-  <h2 id="tech-stack">Tech Stack</h2>
-</div>
+<h2 id="tech-stack">Tech Stack</h2>
 
-<div align="center" >
-  <h3>Backend</h3>
-</div>
-<ul>
-  <li><b>C# (.NET 9.0)</b></li>
-  <li><b>ASP.NET Core Web API</b></li>
-  <li><b>Entity Framework Core</b></li>
-  <li><b>Fluent Validation</b></li>
-  <li><b>Swagger (OpenAPI)</b></li>
-  <li><b>Serilog & Seq</b></li>
-</ul>
+<h3>Backend</h3>
+<p>
+<b>C# (.NET 9.0)</b> •
+<b>ASP.NET Core Web API</b> •
+<b>Entity Framework Core</b> •
+<b>Fluent Validation</b> •
+<b>Swagger</b> •
+<b>Serilog & Seq</b>
+</p>
 
-<div align="center">
-  <h3>Frontend</h3>
-</div>
-<ul>
-  <li><b>React</b></li>
-  <li><b>JavaScript (ES6+)</b></li>
-  <li><b>Axios</b></li>
-</ul>
+<h3>Frontend</h3>
+<p>
+<b>React</b> •
+<b>JavaScript (ES6+)</b> •
+<b>Axios</b>
+</p>
 
-<div align="center">
-  <h3>Database & Infrastructure</h3>
-</div>
-<ul>
-  <li><b>Microsoft SQL Server (MSSQL)</b></li>
-  <li><b>Docker</b></li>
-</ul>
+<h3>Database & Infrastructure</h3>
+<p>
+<b>Microsoft SQL Server</b> •
+<b>Docker</b>
+</p>
 
-<div align="center">
-  <h3>Quality Assurance</h3>
+<h3>Quality Assurance</h3>
+<p>
+<b>xUnit</b> •
+<b>Moq</b>
+</p>
 </div>
-<ul>
-  <li><b>xUnit</b></li>
-  <li><b>Moq</b></li>
-</ul>
 
 <div align="center">
 <h2 id="architecture">Architecture</h2>
