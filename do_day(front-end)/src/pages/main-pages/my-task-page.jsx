@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { TaskService } from "../../apiClient/TaskService";
 import TaskCard from "../components/task-card";
 
-const MyTask = ({ user, refreshTasks }) => {
+const MyTask = ({ user, refreshTasks, onEditClick }) => {
   const [tasks, setTasks] = useState([]);
   const fetchTasks = async () => {
     try {

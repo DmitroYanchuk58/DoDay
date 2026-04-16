@@ -29,6 +29,12 @@ namespace Business_Logic_Layer.Validators
                 .Must(img => img.Length <= 2 * 1024 * 1024)
                 .WithMessage("Image size cannot exceed 2 MB")
                 .When(x => x.Image != null);
+
+            RuleFor(x => x.Status)
+                .IsInEnum().WithMessage("Invalid status value");
+
+            RuleFor(x => x.Priority).
+                IsInEnum().WithMessage("Invalid priority value");
         }
     }
 }

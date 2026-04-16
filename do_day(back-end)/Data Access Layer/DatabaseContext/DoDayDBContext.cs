@@ -61,6 +61,16 @@ namespace Data_Access_Layer.DatabaseContext
                 .IsRequired();
 
             modelBuilder.Entity<Task>()
+                .Property(b => b.Status)
+                .HasMaxLength(100)
+                .IsRequired(false);
+
+            modelBuilder.Entity<Task>()
+                .Property(b => b.Priority)
+                .HasMaxLength(100)
+                .IsRequired(false);
+
+            modelBuilder.Entity<Task>()
                 .Property(b => b.DateCreated)
                 .HasColumnType("date")
                 .IsRequired();

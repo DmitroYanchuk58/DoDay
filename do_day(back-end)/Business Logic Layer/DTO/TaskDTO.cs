@@ -12,20 +12,26 @@ namespace Business_Logic_Layer.DTO
 
         public string? Description { get; set; }
 
+        public Status? Status { get; set; }
+
+        public Priority? Priority { get; set; }
+
         public byte[]? Image { get; set; }
 
         public TaskDTO() { }
 
-        public TaskDTO(Guid id, string name, DateTime dateCreated, string? description, byte[]? image) 
+        public TaskDTO(Guid id, string name, DateTime dateCreated, string? description, byte[]? image, string priority, string status) 
         {
             Id = id;
             Name = name;
             DateCreated = dateCreated;
             Description = description;
             Image = image;
+            Priority = Enum.TryParse(priority, out Priority parsedPriority) ? parsedPriority : null;
+            Status = Enum.TryParse(status, out Status parsedStatus) ? parsedStatus : null;
         }
 
-        public TaskDTO(Task task) : this(task.Id, task.Name, task.DateCreated, task.Description, task.Image)
+        public TaskDTO(Task task) : this(task.Id, task.Name, task.DateCreated, task.Description, task.Image, task.Priority, task.Status)
         {
         }
 
@@ -36,12 +42,30 @@ namespace Business_Logic_Layer.DTO
                     Name ?? "Untitled Task",
                     DateCreated ?? DateTime.Now,
                     Description,
-                    Image
+                    Image,
+                    Status?.ToString(),
+                    Priority?.ToString()
                 )
             {
                 UserId = userId
             };
         }
+    }
 
+    public enum Status 
+    { 
+        NotStarted, 
+        InProgress, 
+        Completed, 
+        OnHold, 
+        Cancelled
+    }
+
+    public enum Priority 
+    { 
+        Low, 
+        Medium, 
+        High, 
+        Urgent
     }
 }

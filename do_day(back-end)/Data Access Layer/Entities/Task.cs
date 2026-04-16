@@ -12,6 +12,10 @@ namespace Data_Access_Layer.Entities
 
         public required DateTime DateCreated { get; set; }
 
+        public string? Status { get; set; }
+
+        public string? Priority { get; set; }
+
         public string? Description { get; set; }
 
         public byte[]? Image {  get; set; }
@@ -25,16 +29,23 @@ namespace Data_Access_Layer.Entities
 
         #region Constructors
         [SetsRequiredMembers]
-        public Task(Guid id, string name, DateTime dateCreated, string? description, byte[]? image)
+        public Task(Guid id, string name, DateTime dateCreated, string? description, byte[]? image, string status, string priority)
         {
             this.Id = id;
             this.Name = name;
             this.DateCreated = dateCreated;
             this.Description = description;
             this.Image = image;
+            this.Status = status;
+            this.Priority = priority;
         }
         [SetsRequiredMembers]
-        public Task(Guid id, string name, DateTime dateCreated) : this(id, name, dateCreated, null, null)
+        public Task(Guid id, string name, DateTime dateCreated) : this(id, name, dateCreated, null, null, null, null)
+        {
+        }
+
+        [SetsRequiredMembers]
+        public Task(Guid id, string name, DateTime dateCreated,string priority, string status) : this(id, name, dateCreated, null, null, status, priority)
         {
         }
         #endregion

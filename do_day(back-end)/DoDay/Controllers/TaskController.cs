@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace API_Layer.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [ApiController]
     [Route("api/[controller]")]
     public class TaskController : ControllerBase

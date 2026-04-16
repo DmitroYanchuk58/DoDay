@@ -143,6 +143,26 @@ namespace Tests.BLL_Tests
         }
 
         [Fact]
+        public async Task CreateTask_ShouldThrowArgumentException_WhenNameIsNullOrWhitespace()
+        {
+            // Arrange
+            using var context = GetDbContext();
+            var taskService = new TaskService(context);
+            var userId = Guid.NewGuid();
+            var taskDto = new TaskDTO
+            {
+                Name = "Some name",
+                Description = "Description",
+                
+            };
+            // Act & Assert
+            var exception = await Assert.ThrowsAsync<ArgumentException>(() =>
+                taskService.CreateTask(taskDto, userId)
+            );
+            Assert.Equal("Task name cannot be null or whitespace.", exception.Message);
+        }
+
+        [Fact]
         public async Task ChangeName_ShouldUpdateTitle_WhenDataIsValid()
         {
             // Arrange
