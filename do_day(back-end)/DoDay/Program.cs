@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Serilog;
+using System.Security.Claims;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -39,15 +40,40 @@ builder.Services.AddScoped<ITaskService, TaskService>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<ICategoryOptionService, CategoryOptionService>();
 
-builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-    .AddJwtBearer(options => {
-        options.TokenValidationParameters = new TokenValidationParameters
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+})
+.AddJwtBearer(options =>
+{
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        NameClaimType = ClaimTypes.NameIdentifier, 
+        RoleClaimType = ClaimTypes.Role,
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidIssuer = "DoDayAPI",
+        ValidateLifetime = true,
+        ValidAudience = "DoDayUsers",
+        ValidateIssuerSigningKey = true,
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("DoDay_Super_Secret_Security_Key_2026_Secure_Version"))
+    };
+    options.Events = new JwtBearerEvents
+    {
+        OnAuthenticationFailed = context =>
         {
-            ValidateIssuer = true,
-            ValidateAudience = true,
-            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("DoDay_Super_Secret_Security_Key_2026_Secure_Version"))
-        };
-    });
+            Console.WriteLine("JWT AUTH FAILED: " + context.Exception.Message);
+            return Task.CompletedTask;
+        },
+        OnTokenValidated = context =>
+        {
+            Console.WriteLine("JWT AUTH SUCCESS for user: " + context.Principal.Identity.Name);
+            return Task.CompletedTask;
+        }
+    };
+});
+
 
 builder.Services.AddCors(options =>
 {
@@ -58,6 +84,12 @@ builder.Services.AddCors(options =>
               .AllowAnyHeader();
     });
 });
+
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.Converters.Add(new System.Text.Json.Serialization.JsonStringEnumConverter());
+    });
 
 Log.Logger = new LoggerConfiguration()
     .MinimumLevel.Information()
@@ -71,6 +103,8 @@ builder.Host.UseSerilog();
 var app = builder.Build();
 
 app.UseCors("AllowReact");
+app.UseAuthentication(); 
+app.UseAuthorization();
 app.UseMiddleware<ExceptionHandlingMiddleware>();
 
 // Configure the HTTP request pipeline.
@@ -87,12 +121,8 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.UseAuthorization();
-
 app.MapControllers();
 
-app.UseAuthentication(); 
-app.UseAuthorization();
 
 app.UseSerilogRequestLogging();
 

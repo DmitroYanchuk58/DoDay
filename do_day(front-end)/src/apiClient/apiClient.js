@@ -10,15 +10,14 @@ const apiClient = axios.create({
 apiClient.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem("token");
+
     if (token) {
-      // Standard JWT format: "Bearer <token>"
-      config.headers.Authorization = `Bearer ${token}`;
+      const cleanToken = token.replace(/"/g, "").trim();
+      config.headers.Authorization = `Bearer ${cleanToken}`;
     }
     return config;
   },
-  (error) => {
-    return Promise.reject(error);
-  },
+  (error) => Promise.reject(error),
 );
 
 export default apiClient;

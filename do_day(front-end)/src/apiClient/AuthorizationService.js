@@ -2,37 +2,33 @@ import apiClient from "./apiClient";
 
 export const AuthService = {
   async register(username, password, email, firstName, lastName) {
-    try {
-      const response = await apiClient.post("/Authorization/Register", {
-        username,
-        password,
-        email,
-        firstName,
-        lastName,
-      });
-      if (response.token) {
-        localStorage.setItem("token", response.token);
-        localStorage.setItem("user", JSON.stringify(response.user));
-      }
-      return response.data;
-    } catch (error) {
-      console.error("Error:", error.response?.data || error.message);
-      throw error;
-    }
-  },
-  async login(email, password) {
-    try {
-      const response = await apiClient.get("/Authorization/Login", {
-        params: {
-          email: email,
-          password: password,
-        },
-      });
+    const response = await apiClient.post("/Authorization/Register", {
+      username,
+      password,
+      email,
+      firstName,
+      lastName,
+    });
 
-      return response.data;
-    } catch (error) {
-      console.error("Error:", error.response?.data || error.message);
-      throw error;
+    if (response.data?.isSuccess) {
+      localStorage.setItem("user", JSON.stringify(response.data.user));
+      localStorage.setItem("token", JSON.stringify(response.data.token));
     }
+    return response.data;
+  },
+
+  async login(email, password) {
+    const response = await apiClient.get("/Authorization/Login", {
+      params: { email, password },
+    });
+
+    if (response.data?.isSuccess) {
+      const { user, token } = response.data;
+
+      localStorage.setItem("user", JSON.stringify(user));
+      localStorage.setItem("token", JSON.stringify(token));
+    }
+
+    return response.data;
   },
 };

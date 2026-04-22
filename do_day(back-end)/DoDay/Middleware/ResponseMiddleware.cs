@@ -20,6 +20,12 @@ namespace API_Layer.Middleware
             try
             {
                 await _next(context);
+                if (context.Response.StatusCode == StatusCodes.Status401Unauthorized)
+                {
+                    _logger.LogWarning("Unauthorized access attempt: {Path} {Method}. User is not authenticated.",
+                        context.Request.Path,
+                        context.Request.Method);
+                }
             }
             catch (Exception exception)
             {
@@ -27,10 +33,11 @@ namespace API_Layer.Middleware
                 {
                     ArgumentNullException or ArgumentException => (StatusCodes.Status400BadRequest, "Bad Request"),
                     KeyNotFoundException => (StatusCodes.Status404NotFound, "Not Found"),
+                    UnauthorizedAccessException => (StatusCodes.Status401Unauthorized, "Unauthorized"), 
                     _ => (StatusCodes.Status500InternalServerError, "Server Error")
                 };
 
-                if(statusCode == StatusCodes.Status500InternalServerError)
+                if (statusCode == StatusCodes.Status500InternalServerError)
                 {
                     _logger.LogError(exception, "An unhandled exception occurred during the request: {Path} {Method}",
                         context.Request.Path,

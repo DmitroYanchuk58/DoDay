@@ -6,9 +6,8 @@ import TaskCategories from "../../main-pages/categories-page";
 import CategoryModal from "../../components/modals/category-modal";
 import ChangeAccountInfoPage from "../../main-pages/change-account-info-page";
 import ChangePassword from "../../main-pages/change-password-page";
-import EditTask from "../../components/edit-task";
 import TaskDetails from "../../components/task-details";
-import CreateTask from "../../components/create-task";
+import TaskOverlay from "../../components/modals/task-overlay";
 
 const PageRenderer = ({
   activeId,
@@ -49,7 +48,9 @@ const PageRenderer = ({
       case 1:
         return renderDashboard();
       case 2:
-        return <VitalTask user={user} refreshTasks={refreshTasks} />;
+        return (
+          <VitalTask user={user} refreshTasks={refreshTasks} tasks={tasks} />
+        );
       case 3:
         return <MyTask user={user} refreshTasks={refreshTasks} />;
       case 4:
@@ -106,16 +107,15 @@ const PageRenderer = ({
         isOpen={uiActions.modals.invite}
         onClose={uiActions.closeInvite}
       />
-      <CreateTask
-        isOpen={uiActions.modals.create}
-        onClose={uiActions.closeCreateTask}
+      <TaskOverlay
+        isOpen={uiActions.modals.create || uiActions.modals.edit}
+        task={uiActions.modals.edit ? uiActions.taskToEdit : null}
         user={user}
-        onTaskCreated={refreshTasks}
-      />
-      <EditTask
-        isOpen={uiActions.modals.edit}
-        task={uiActions.taskToEdit}
-        onClose={uiActions.closeEditTask}
+        onClose={
+          uiActions.modals.edit
+            ? uiActions.closeEditTask
+            : uiActions.closeCreateTask
+        }
         onSave={refreshTasks}
       />
     </>

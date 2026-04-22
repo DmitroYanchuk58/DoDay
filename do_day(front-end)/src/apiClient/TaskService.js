@@ -1,11 +1,12 @@
 import apiClient from "./apiClient";
 
 export const TaskService = {
-  async createTask(idUser, name, description) {
+  async createTask(idUser, name, description, priority, finishDate, image) {
     try {
+      let status = "NotStarted";
       const response = await apiClient.post(
         "/Task/CreateTask",
-        { name, description },
+        { name, description, priority, status, finishDate, image },
         {
           params: {
             idUser,
@@ -71,7 +72,7 @@ export const TaskService = {
 
   async updateTask(task) {
     try {
-      const response = await apiClient.put("/Task/UpdateTask", { task });
+      const response = await apiClient.put("/Task/UpdateTask", task);
 
       return response.data;
     } catch (error) {

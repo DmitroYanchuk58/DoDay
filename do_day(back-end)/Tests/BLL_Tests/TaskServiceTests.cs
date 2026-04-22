@@ -70,7 +70,7 @@ namespace Tests.BLL_Tests
             // Arrange
             using var context = GetDbContext();
             var taskId = Guid.NewGuid();
-            var task = new TaskEntity(taskId, "Title", DateTime.Now, "Description", null);
+            var task = new TaskEntity(taskId, "Title", DateTime.Now, DateTime.Today, "Description", null!);
             context.Tasks.Add(task);
             await context.SaveChangesAsync();
 

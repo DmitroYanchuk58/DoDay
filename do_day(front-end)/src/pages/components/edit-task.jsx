@@ -9,6 +9,8 @@ const EditTaskOverlay = ({ isOpen, task, onClose, onSave }) => {
     priority: "Low",
     date: "",
     dateCreated: "",
+    finishDate: "",
+    status: "",
   });
   const [message, setMessage] = useState("");
 
@@ -27,13 +29,18 @@ const EditTaskOverlay = ({ isOpen, task, onClose, onSave }) => {
 
   useEffect(() => {
     if (task) {
+      const rawDate = task.finishDate || task.FinishDate || "";
+      const cleanDate = rawDate.includes("T") ? rawDate.split("T")[0] : rawDate;
+
       setFormData({
         id: task.id || task.Id,
         name: task.name || task.Name || "",
         description: task.description || task.Description || "",
         priority: task.priority || task.Priority || "Low",
         date: "",
+        finishDate: cleanDate, // Use the cleaned YYYY-MM-DD version here
         dateCreated: task.dateCreated || task.DateCreated || "",
+        status: task.status || "NotStarted",
       });
     }
   }, [task, isOpen]);
@@ -98,15 +105,10 @@ const EditTaskOverlay = ({ isOpen, task, onClose, onSave }) => {
               <div className="date-input-wrapper">
                 <input
                   className="date-input"
-                  type="text"
-                  name="date"
-                  value={formData.date}
+                  type="date"
+                  name="finishDate"
+                  value={formData.finishDate}
                   onChange={handleChange}
-                />
-                <img
-                  src="images/icons/calendar-simple.svg"
-                  alt="calendar"
-                  className="date-icon"
                 />
               </div>
             </div>
@@ -114,15 +116,17 @@ const EditTaskOverlay = ({ isOpen, task, onClose, onSave }) => {
             <div className="edit-input-group">
               <label>Priority</label>
               <div className="priority-radio-group">
-                {["Extreme", "Moderate", "Low"].map((p) => (
+                {["Low", "Medium", "High", "Urgent"].map((p) => (
                   <label key={p} className="priority-option">
                     <span className={`dot ${p.toLowerCase()}`}></span>
                     <span className="priority-text">{p}</span>
                     <input
                       className="priority-box"
                       type="radio"
+                      name="priority"
+                      value={p}
                       checked={formData.priority === p}
-                      onChange={() => handlePriorityChange(p)}
+                      onChange={(e) => handlePriorityChange(e.target.value)}
                     />
                   </label>
                 ))}

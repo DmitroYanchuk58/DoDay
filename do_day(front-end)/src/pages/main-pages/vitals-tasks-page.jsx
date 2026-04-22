@@ -2,60 +2,64 @@ import React, { useState, useEffect } from "react";
 import TaskCard from "../components/task-card";
 import { TaskService } from "../../apiClient/TaskService";
 
-const VitalTask = ({ user, refreshTasks, onEditClick }) => {
-  const [tasks, setTasks] = useState([]);
-
-  const fetchTasks = async () => {
-    try {
-      const data = await TaskService.getTasks(user.id);
-      setTasks(data);
-    } catch (err) {
-      const errorDetail =
-        err.response?.data?.detail || err.message || "Undefined error";
-      console.error("Failed to fetch tasks:", errorDetail);
-    }
-  };
-
-  useEffect(() => {
-    fetchTasks();
-  }, []);
+const VitalTask = ({ user, refreshTasks, onEditClick, tasks }) => {
+  const vitalTasks = (tasks || []).filter(
+    (task) =>
+      (task.priority ?? task.Priority)?.toString().toLowerCase() === "urgent",
+  );
 
   const handleDeleteTask = async (id) => {
     try {
       await TaskService.deleteTask(id);
-      setTasks((prev) => prev.filter((task) => task.id !== id));
       if (refreshTasks) {
         await refreshTasks();
       }
     } catch (err) {
-      console.error("Update error:", err);
+      console.error("Помилка оновлення:", err);
     }
   };
 
-  const [selectedId, setSelectedId] = useState(tasks[0]?.id);
-  const selectedTask = tasks.find((t) => t.id === selectedId);
+  const handleFinishingTask = async (task) => {
+    try {
+      task.status = "Completed";
+      await TaskService.updateTask(task);
+      if (refreshTasks) {
+        await refreshTasks();
+      }
+    } catch (err) {
+      console.error("Помилка оновлення:", err);
+    }
+  };
+
+  const handleVitalTask = async (task) => {
+    try {
+      task.priority = "Low";
+      await TaskService.updateTask(task);
+      if (refreshTasks) {
+        await refreshTasks();
+      }
+    } catch (err) {
+      console.error("Помилка оновлення:", err);
+    }
+  };
+
+  const [selectedId, setSelectedId] = useState(vitalTasks[0]?.id);
+  const selectedTask = vitalTasks.find((t) => t.id === selectedId);
 
   return (
     <div className="task-details-page">
-      <div className="task-sidebar card tasks">
+      <div className="task-sidebar card vitalTasks">
         <h3 className="sidebar-title">Vital Tasks</h3>
         <div className="sidebar-list">
-          {tasks.map((task) => (
+          {vitalTasks.map((task) => (
             <div key={task.id} onClick={() => setSelectedId(task.id)}>
               <TaskCard
-                title={task.name || task.Name}
-                description={task.description || task.Description}
-                date={
-                  task.dateCreated ? task.dateCreated.split("T")[0] : "No date"
-                }
-                priority={"Low"}
-                status={"In progress"}
-                {...task}
+                key={task.id}
+                task={task}
+                onVital={handleVitalTask}
                 onDelete={handleDeleteTask}
-                openEditTask={(e) => {
-                  e.stopPropagation();
-                  onEditClick(task);
-                }}
+                onFinish={handleFinishingTask}
+                openEditTask={(e, t) => onEditClick(t)}
               />
             </div>
           ))}
@@ -74,10 +78,12 @@ const VitalTask = ({ user, refreshTasks, onEditClick }) => {
               <h2>{selectedTask.name}</h2>
               <div className="details-meta">
                 <p>
-                  Priority: <span className="red-text">Low</span>
+                  Priority:{" "}
+                  <span className="red-text">{selectedTask.priority}</span>
                 </p>
                 <p>
-                  Status: <span className="red-text">In progress</span>
+                  Status:{" "}
+                  <span className="red-text">{selectedTask.status}</span>
                 </p>
                 <p className="gray-text">
                   Created on: {selectedTask.dateCreated.split("T")[0]}

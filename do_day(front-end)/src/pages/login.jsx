@@ -37,6 +37,7 @@ const Login = ({ onLogin, changeOnRegisterPage }) => {
     if (!checkValues()) {
       return;
     }
+
     try {
       const response = await AuthService.login(email, password);
 
@@ -49,8 +50,7 @@ const Login = ({ onLogin, changeOnRegisterPage }) => {
         setMessage("Incorrect email or password");
       }
     } catch (err) {
-      const errorMsg = err.response?.data?.message || "User doesn't exist";
-      setMessage(errorMsg);
+      setMessage("Incorrect email or password");
     }
   };
 

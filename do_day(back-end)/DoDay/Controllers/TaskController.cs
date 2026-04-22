@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace API_Layer.Controllers
 {
-    //[Authorize]
+    [Authorize]
     [ApiController]
     [Route("api/[controller]")]
     public class TaskController : ControllerBase
@@ -48,8 +48,23 @@ namespace API_Layer.Controllers
         }
 
         [HttpPut("UpdateTask")]
-        public async Task<IActionResult> UpdateTask(TaskDTO taskDto)
+        public async Task<IActionResult> UpdateTask(TaskForUpdate task)
         {
+            var taskDto = new TaskDTO
+            {
+                Id = task.Id,
+                Name = task.Name,
+                DateCreated = task.DateCreated,
+                FinishDate = task.FinishDate,
+                Description = task.Description,
+                Image = task.Image,
+                Priority = Enum.TryParse<Priority>(task.Priority, out var parsedPriority)
+                           ? parsedPriority
+                           : Priority.Low,
+                Status = Enum.TryParse<Status>(task.Status, out var parsedStatus)
+                         ? parsedStatus
+                         : Status.NotStarted
+            };
             await _service.UpdateTask(taskDto);
             return Ok();
         }

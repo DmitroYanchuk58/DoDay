@@ -1,21 +1,23 @@
 import React, { useState } from "react";
+import taskDefaultImage from "../../images/task-default.png";
 
 const TaskCard = ({
-  id,
-  title,
-  description,
-  priority,
-  status,
-  date,
-  image,
+  task,
   isVitalPage = false,
+  onVital,
+  onFinish,
   onDelete,
   openEditTask,
 }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
+  const { id, name, description, priority, status, dateCreated, image } = task;
+
   const statusClass = status?.toLowerCase().replace(/\s+/g, "-") || "";
   const priorityClass = priority?.toLowerCase() || "";
+  const displayDate = dateCreated?.split("T")[0] ?? "No Date";
+
+  const defaultImage = taskDefaultImage;
 
   return (
     <div className="task-card-container">
@@ -27,7 +29,6 @@ const TaskCard = ({
             <button
               className="three-dots-trigger"
               onClick={(e) => {
-                // ВИПРАВЛЕНО: зупиняємо спливання події, щоб не відкрилися деталі таски
                 e.stopPropagation();
                 setIsMenuOpen(!isMenuOpen);
               }}
@@ -40,20 +41,21 @@ const TaskCard = ({
             {isMenuOpen && (
               <div
                 className="actions-dropdown"
-                // Зупиняємо кліки всередині меню, щоб вони не прокидалися до картки
                 onClick={(e) => e.stopPropagation()}
               >
                 <div
                   className="action-item"
-                  onClick={() => setIsMenuOpen(false)}
+                  onClick={(e) => {
+                    onVital(task);
+                    setIsMenuOpen(false);
+                  }}
                 >
                   {isVitalPage ? "Remove from Vital" : "Vital"}
                 </div>
                 <div
                   className="action-item"
                   onClick={(e) => {
-                    // Передаємо івент, щоб викликати stopPropagation всередині DashboardContent
-                    openEditTask(e);
+                    openEditTask(e, task);
                     setIsMenuOpen(false);
                   }}
                 >
@@ -68,12 +70,17 @@ const TaskCard = ({
                 >
                   Delete
                 </div>
-                <div
-                  className="action-item finish-item"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  Finish
-                </div>
+                {onFinish && (
+                  <div
+                    className="action-item finish-item"
+                    onClick={(e) => {
+                      onFinish(task);
+                      setIsMenuOpen(false);
+                    }}
+                  >
+                    Finish
+                  </div>
+                )}
               </div>
             )}
           </div>
@@ -81,15 +88,28 @@ const TaskCard = ({
 
         <div className="task-card-body">
           <div className="task-text-content">
-            <h3 className="task-main-title">{title}</h3>
-            <p className="task-main-description">{description}</p>
+            <h3 className="task-main-title">{name ?? "Untitled Task"}</h3>
+            <p className="task-main-description">
+              {description ?? "No description"}
+            </p>
           </div>
 
-          {image && (
-            <div className="task-thumbnail-wrapper">
-              <img src={image} alt="task preview" className="task-card-image" />
-            </div>
-          )}
+          <div className="task-thumbnail-wrapper">
+            <img
+              src={
+                image
+                  ? image.startsWith("data:image")
+                    ? image
+                    : `data:image/png;base64,${image}`
+                  : defaultImage
+              }
+              alt="task preview"
+              className="task-card-image"
+              onError={(e) => {
+                e.target.src = defaultImage;
+              }}
+            />
+          </div>
         </div>
 
         <div className="task-card-footer">
@@ -103,7 +123,7 @@ const TaskCard = ({
             <span className={`meta-value s-${statusClass}`}>{status}</span>
           </div>
 
-          <div className="meta-date-stamp">Created on: {date}</div>
+          <div className="meta-date-stamp">Created on: {displayDate}</div>
         </div>
       </div>
     </div>

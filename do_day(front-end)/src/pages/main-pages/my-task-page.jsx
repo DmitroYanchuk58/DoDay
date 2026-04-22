@@ -26,12 +26,35 @@ const MyTask = ({ user, refreshTasks, onEditClick }) => {
   const handleDeleteTask = async (id) => {
     try {
       await TaskService.deleteTask(id);
-      setTasks((prev) => prev.filter((task) => task.id !== id));
       if (refreshTasks) {
         await refreshTasks();
       }
     } catch (err) {
-      console.error("Update error:", err);
+      console.error("Помилка оновлення:", err);
+    }
+  };
+
+  const handleFinishingTask = async (task) => {
+    try {
+      task.status = "Completed";
+      await TaskService.updateTask(task);
+      if (refreshTasks) {
+        await refreshTasks();
+      }
+    } catch (err) {
+      console.error("Помилка оновлення:", err);
+    }
+  };
+
+  const handleVitalTask = async (task) => {
+    try {
+      task.priority = "Low";
+      await TaskService.updateTask(task);
+      if (refreshTasks) {
+        await refreshTasks();
+      }
+    } catch (err) {
+      console.error("Помилка оновлення:", err);
     }
   };
 
@@ -47,19 +70,12 @@ const MyTask = ({ user, refreshTasks, onEditClick }) => {
               style={{ cursor: "pointer" }}
             >
               <TaskCard
-                title={task.name || task.Name}
-                description={task.description || task.Description}
-                date={
-                  task.dateCreated ? task.dateCreated.split("T")[0] : "No date"
-                }
-                priority={"Low"}
-                status={"In progress"}
-                {...task}
+                key={task.id}
+                task={task}
+                onVital={handleVitalTask}
                 onDelete={handleDeleteTask}
-                openEditTask={(e) => {
-                  e.stopPropagation();
-                  onEditClick(task);
-                }}
+                onFinish={handleFinishingTask}
+                openEditTask={(e, t) => onEditClick(t)}
               />
             </div>
           ))}

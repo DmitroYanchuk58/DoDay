@@ -32,7 +32,8 @@ namespace API_Layer.Controllers
             return Ok(new AuthResponse
             {
                 User = createdUser,
-                Token = token
+                Token = token,
+                IsSuccess = true
             });
         }
 
@@ -51,7 +52,8 @@ namespace API_Layer.Controllers
             return Ok(new AuthResponse
             {
                 User = user,
-                Token = token
+                Token = token,
+                IsSuccess = true
             });
         }
 

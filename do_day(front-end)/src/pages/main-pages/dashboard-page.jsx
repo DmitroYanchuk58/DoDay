@@ -12,6 +12,15 @@ const DashboardContent = ({
   tasks,
   refreshTasks,
 }) => {
+  const completedTasks = (tasks || []).filter(
+    (task) =>
+      (task.status ?? task.Status)?.toString().toLowerCase() === "completed",
+  );
+
+  const todoTasks = tasks.filter(
+    (t) => (t.status ?? t.Status)?.toString().toLowerCase() !== "completed",
+  );
+
   const handleDeleteTask = async (id) => {
     try {
       await TaskService.deleteTask(id);
@@ -23,15 +32,29 @@ const DashboardContent = ({
     }
   };
 
-  const todoTasks = tasks.filter((t) => {
-    const status = t.column || t.Column;
-    return status === "todo" || !status;
-  });
+  const handleFinishingTask = async (task) => {
+    try {
+      task.status = "Completed";
+      await TaskService.updateTask(task);
+      if (refreshTasks) {
+        await refreshTasks();
+      }
+    } catch (err) {
+      console.error("Помилка оновлення:", err);
+    }
+  };
 
-  const completedTasks = tasks.filter((t) => {
-    const status = t.column || t.Column;
-    return status === "completed";
-  });
+  const handleVitalTask = async (task) => {
+    try {
+      task.priority = "Urgent";
+      await TaskService.updateTask(task);
+      if (refreshTasks) {
+        await refreshTasks();
+      }
+    } catch (err) {
+      console.error("Помилка оновлення:", err);
+    }
+  };
 
   return (
     <main className="dashboard-main">
@@ -72,22 +95,23 @@ const DashboardContent = ({
           </p>
 
           <div className="task-list">
-            {todoTasks.map((task) => (
-              <TaskCard
-                key={task.id || task.Id}
-                title={task.name || task.Name}
-                description={task.description || task.Description}
-                date={task.dateCreated.split("T")[0]}
-                priority={"Low"}
-                status={"In progress"}
-                {...task}
-                onDelete={handleDeleteTask}
-                openEditTask={(e) => {
-                  e.stopPropagation();
-                  onEditClick(task);
-                }}
-              />
-            ))}
+            {todoTasks.map((task) => {
+              const image =
+                task.image && !task.image.startsWith("data:image")
+                  ? `data:image/png;base64,${task.image}`
+                  : task.image;
+
+              return (
+                <TaskCard
+                  key={task.id}
+                  task={task}
+                  onVital={handleVitalTask}
+                  onDelete={handleDeleteTask}
+                  onFinish={handleFinishingTask}
+                  openEditTask={(e, t) => onEditClick(t)}
+                />
+              );
+            })}
           </div>
         </section>
 
@@ -118,24 +142,29 @@ const DashboardContent = ({
               </div>
             </div>
             <div className="task-list">
-              {completedTasks.map((task) => (
-                <div
-                  key={task.id}
-                  onClick={() => onTaskClick(task)}
-                  style={{ cursor: "pointer" }}
-                >
-                  <TaskCard
+              {completedTasks.map((task) => {
+                const image =
+                  task.image && !task.image.startsWith("data:image")
+                    ? `data:image/png;base64,${task.image}`
+                    : task.image;
+
+                return (
+                  <div
                     key={task.id}
-                    {...task}
-                    type="compact"
-                    onDelete={handleDeleteTask}
-                    openEditTask={(e) => {
-                      e.stopPropagation();
-                      onEditClick(task);
-                    }}
-                  />
-                </div>
-              ))}
+                    onClick={() => onTaskClick(task)}
+                    style={{ cursor: "pointer" }}
+                  >
+                    <TaskCard
+                      key={task.id}
+                      task={task}
+                      onVital={handleVitalTask}
+                      onDelete={handleDeleteTask}
+                      onFinish={handleFinishingTask}
+                      openEditTask={(e, t) => onEditClick(t)}
+                    />
+                  </div>
+                );
+              })}
             </div>
           </div>
         </aside>

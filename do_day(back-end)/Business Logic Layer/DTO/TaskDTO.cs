@@ -10,6 +10,8 @@ namespace Business_Logic_Layer.DTO
 
         public DateTime? DateCreated { get; set; } = DateTime.Now;
 
+        public DateTime? FinishDate { get; set; }
+
         public string? Description { get; set; }
 
         public Status? Status { get; set; }
@@ -20,18 +22,19 @@ namespace Business_Logic_Layer.DTO
 
         public TaskDTO() { }
 
-        public TaskDTO(Guid id, string name, DateTime dateCreated, string? description, byte[]? image, string priority, string status) 
+        public TaskDTO(Guid id, string name, DateTime dateCreated, DateTime? finishDate, string? description, byte[]? image, string priority, string status) 
         {
             Id = id;
             Name = name;
             DateCreated = dateCreated;
+            FinishDate = finishDate;
             Description = description;
             Image = image;
             Priority = Enum.TryParse(priority, out Priority parsedPriority) ? parsedPriority : null;
             Status = Enum.TryParse(status, out Status parsedStatus) ? parsedStatus : null;
         }
 
-        public TaskDTO(Task task) : this(task.Id, task.Name, task.DateCreated, task.Description, task.Image, task.Priority, task.Status)
+        public TaskDTO(Task task) : this(task.Id, task.Name, task.DateCreated,task.FinishDate, task.Description, task.Image, task.Priority, task.Status)
         {
         }
 
@@ -41,6 +44,7 @@ namespace Business_Logic_Layer.DTO
                     Id ?? Guid.NewGuid(),
                     Name ?? "Untitled Task",
                     DateCreated ?? DateTime.Now,
+                    FinishDate,
                     Description,
                     Image,
                     Status?.ToString(),
